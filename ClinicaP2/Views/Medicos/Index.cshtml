@@ -1,0 +1,77 @@
+﻿@model IEnumerable<ClinicaP2.Models.Medico>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="bg-info">Lista Medicos</h2>
+
+<p class="btn btn-default">
+    @Html.ActionLink("Registrar Medico", "Create")
+</p>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.NomTra)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ApeTra)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Genero)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DniTra)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CorreoTra)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EstaTra)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Especialidad.NombEspe)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MODULO.name)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.NomTra)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ApeTra)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Genero)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DniTra)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CorreoTra)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EstaTra)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Especialidad.NombEspe)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MODULO.name)
+        </td>
+        <td>
+            <button class="btn btn-primary" style="background:#ffffff">@Html.ActionLink("Editar", "Edit", new { id = item.Codmed }) </button>
+
+         <button class="btn btn-danger">@Html.ActionLink("Eliminar", "Delete", new { id = item.Codmed })</button>
+        </td>
+    </tr>
+}
+
+</table>

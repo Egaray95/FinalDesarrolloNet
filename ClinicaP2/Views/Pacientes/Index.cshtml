@@ -1,0 +1,79 @@
+﻿@model IEnumerable<ClinicaP2.Models.Paciente>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="bg-info">Lista Pacientes</h2>
+
+<p class="btn btn-default">
+    @Html.ActionLink("Registrar Paciente", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Codigo
+        </th>
+        <th>
+            Nombres
+        </th>
+        <th>
+            Apellidos
+        </th>
+        <th>
+            Telefono
+        </th>
+        <th>
+            Dni
+        </th>
+        <th>
+            Genero
+        </th>
+        <th>
+            Estado
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    string sex = "";
+    if (item.Genero.Equals("1"))
+    {
+        sex = "Masculino";
+    }
+    else
+    {
+        sex = "Femenino";
+    }
+    <tr>
+        <td>
+            @item.CodPac
+        </td>
+        <td>
+           @item.NomPac
+        </td>
+        <td>
+            @item.ApePac
+        </td>
+        <td>
+            @item.TelePac
+        </td>
+        <td>
+            @item.DniPac
+        </td>
+        <td>
+            @sex
+        </td>
+        <td>
+            @item.EstaPac
+        </td>
+        <td>
+            <p class="btn btn-success" > @Html.ActionLink("Editar", "Edit", new { id = item.CodPac }) </p>
+           
+            <p class="btn btn-danger"> @Html.ActionLink("Eliminar", "Delete", new { id = item.CodPac })</p>
+        </td>
+    </tr>
+}
+
+</table>

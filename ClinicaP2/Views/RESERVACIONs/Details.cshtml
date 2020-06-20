@@ -1,0 +1,75 @@
+﻿@model ClinicaP2.Models.RESERVACION
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>RESERVACION</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Fecha)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fecha)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.precio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.precio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ESTADO.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ESTADO.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Medico.CodEspe)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Medico.CodEspe)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Paciente.NomPac)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Paciente.NomPac)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PAYMET.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PAYMET.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.USUARIOS.Usuario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.USUARIOS.Usuario)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.CodReserva }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

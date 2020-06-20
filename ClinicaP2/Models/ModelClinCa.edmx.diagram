@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f8e9ae492e1c4cb99409bc7561b210d4" Name="Diagram1">
+        <EntityTypeShape EntityType="bdclinicModel.Especialidad" Width="1.5" PointX="0.75" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="bdclinicModel.ESTADO" Width="1.5" PointX="3" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="bdclinicModel.Medico" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="bdclinicModel.MODULO" Width="1.5" PointX="0.75" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="bdclinicModel.Paciente" Width="1.5" PointX="5.875" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="bdclinicModel.PAYMET" Width="1.5" PointX="8.25" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="bdclinicModel.RESERVACION" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="bdclinicModel.sysdiagrams" Width="1.5" PointX="11.25" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="bdclinicModel.USUARIOS" Width="1.5" PointX="9.375" PointY="2.25" IsExpanded="true" />
+        <AssociationConnector Association="bdclinicModel.FK__Medico__CodEspe__1920BF5C" ManuallyRouted="false" />
+        <AssociationConnector Association="bdclinicModel.FK__RESERVACI__Codes__20C1E124" ManuallyRouted="false" />
+        <AssociationConnector Association="bdclinicModel.FK__Medico__Codmod__182C9B23" ManuallyRouted="false" />
+        <AssociationConnector Association="bdclinicModel.FK__RESERVACI__Codme__22AA2996" ManuallyRouted="false" />
+        <AssociationConnector Association="bdclinicModel.FK__RESERVACI__CodPa__21B6055D" ManuallyRouted="false" />
+        <AssociationConnector Association="bdclinicModel.FK__RESERVACI__CodUs__1FCDBCEB" ManuallyRouted="false" />
+        <AssociationConnector Association="bdclinicModel.FK__RESERVACI__CodUs__239E4DCF" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
