@@ -162,9 +162,6 @@
     <Compile Include="Models\RESERVACION.cs">
       <DependentUpon>ModelClinCa.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\sysdiagrams.cs">
-      <DependentUpon>ModelClinCa.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\USUARIOS.cs">
       <DependentUpon>ModelClinCa.tt</DependentUpon>
     </Compile>

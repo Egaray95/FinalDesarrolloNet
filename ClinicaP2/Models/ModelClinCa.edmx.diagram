@@ -12,7 +12,6 @@
         <EntityTypeShape EntityType="bdclinicModel.Paciente" Width="1.5" PointX="5.875" PointY="5.875" IsExpanded="true" />
         <EntityTypeShape EntityType="bdclinicModel.PAYMET" Width="1.5" PointX="8.25" PointY="5.125" IsExpanded="true" />
         <EntityTypeShape EntityType="bdclinicModel.RESERVACION" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="bdclinicModel.sysdiagrams" Width="1.5" PointX="11.25" PointY="5.5" IsExpanded="true" />
         <EntityTypeShape EntityType="bdclinicModel.USUARIOS" Width="1.5" PointX="9.375" PointY="2.25" IsExpanded="true" />
         <AssociationConnector Association="bdclinicModel.FK__Medico__CodEspe__1920BF5C" ManuallyRouted="false" />
         <AssociationConnector Association="bdclinicModel.FK__RESERVACI__Codes__20C1E124" ManuallyRouted="false" />
