@@ -90,7 +90,7 @@ namespace ClinicaP2.Controllers
             ViewBag.Codestado = new SelectList(db.ESTADO, "Codestado", "Name", rESERVACION.Codestado);
             ViewBag.Codmed = new SelectList(db.Medico, "Codmed", "CodEspe", rESERVACION.Codmed);
             ViewBag.CodPac = new SelectList(db.Paciente, "CodPac", "NomPac", rESERVACION.CodPac);
-            ViewBag.CodPay = new SelectList(db.PAYMET, "CodPay", "Name", rESERVACION.CodPay);
+            ViewBag.CodPay = new SelectList(db.PAYMET, "CodPay", "Name", rESERVACION.CodPay); 
             ViewBag.CodUser = new SelectList(db.USUARIOS, "CodUser", "Usuario", rESERVACION.CodUser);
             return View(rESERVACION);
         }
