@@ -10,14 +10,17 @@
 namespace ClinicaP2.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class sysdiagrams
+    public partial class LISTARESERVA_Result
     {
-        public string name { get; set; }
-        public int principal_id { get; set; }
-        public int diagram_id { get; set; }
-        public Nullable<int> version { get; set; }
-        public byte[] definition { get; set; }
+        public string CodReserva { get; set; }
+        public Nullable<System.DateTime> FECHA { get; set; }
+        public string Paciente { get; set; }
+        public string NombEspe { get; set; }
+        public string Doctor { get; set; }
+        public Nullable<double> PRECIO { get; set; }
+        public string Name { get; set; }
+        public string Name1 { get; set; }
+        public string Descripcion { get; set; }
     }
 }

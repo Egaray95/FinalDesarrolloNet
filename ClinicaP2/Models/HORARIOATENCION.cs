@@ -12,12 +12,15 @@ namespace ClinicaP2.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class sysdiagrams
+    public partial class HORARIOATENCION
     {
-        public string name { get; set; }
-        public int principal_id { get; set; }
-        public int diagram_id { get; set; }
-        public Nullable<int> version { get; set; }
-        public byte[] definition { get; set; }
+        public string ID_HORARIOTENCION { get; set; }
+        public string CODMED { get; set; }
+        public string ID_HORA { get; set; }
+        public Nullable<System.DateTime> FECHACITA { get; set; }
+        public string ESTADO { get; set; }
+    
+        public virtual Medico Medico { get; set; }
+        public virtual HORAS HORAS { get; set; }
     }
 }

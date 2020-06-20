@@ -132,6 +132,15 @@
     <Compile Include="Models\ESTADO.cs">
       <DependentUpon>ModelClinCa.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\HORARIOATENCION.cs">
+      <DependentUpon>ModelClinCa.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HORAS.cs">
+      <DependentUpon>ModelClinCa.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LISTARESERVA_Result.cs">
+      <DependentUpon>ModelClinCa.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Medico.cs">
       <DependentUpon>ModelClinCa.tt</DependentUpon>
     </Compile>

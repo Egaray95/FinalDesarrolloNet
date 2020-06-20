@@ -12,19 +12,18 @@ namespace ClinicaP2.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Especialidad
+    public partial class HORAS
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Especialidad()
+        public HORAS()
         {
-            this.Medico = new HashSet<Medico>();
+            this.HORARIOATENCION = new HashSet<HORARIOATENCION>();
         }
     
-        public string CodEspe { get; set; }
-        public string NombEspe { get; set; }
-        public string EstaEspe { get; set; }
+        public string ID_HORA { get; set; }
+        public string HORA { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Medico> Medico { get; set; }
+        public virtual ICollection<HORARIOATENCION> HORARIOATENCION { get; set; }
     }
 }
