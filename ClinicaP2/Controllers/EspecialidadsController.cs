@@ -46,12 +46,13 @@ namespace ClinicaP2.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "CodEspe,NombEspe,EstaEspe")] Especialidad especialidad)
+        public ActionResult Create(Especialidad especialidad)
         {
             if (ModelState.IsValid)
             {
-                db.Especialidad.Add(especialidad);
-                db.SaveChanges();
+                //db.Especialidad.Add(especialidad);
+                //db.SaveChanges();
+                db.spadiEsp(especialidad.NombEspe, especialidad.EstaEspe);
                 return RedirectToAction("Index");
             }
 

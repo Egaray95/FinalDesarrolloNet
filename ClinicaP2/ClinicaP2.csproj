@@ -171,9 +171,6 @@
     <Compile Include="Models\RESERVACION.cs">
       <DependentUpon>ModelClinCa.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\sysdiagrams.cs">
-      <DependentUpon>ModelClinCa.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\USUARIOS.cs">
       <DependentUpon>ModelClinCa.tt</DependentUpon>
     </Compile>
@@ -230,7 +227,9 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
