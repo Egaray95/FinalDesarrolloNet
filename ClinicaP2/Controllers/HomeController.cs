@@ -15,7 +15,7 @@ namespace ClinicaP2.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page. mensaje para commit probando";
+            ViewBag.Message = "Your application description page. mensaje para commit probando cumpa";
 
             return View();
         }
