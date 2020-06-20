@@ -10,17 +10,17 @@
 namespace ClinicaP2.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class HORARIOATENCION
+    public partial class getmedporid_Result
     {
-        public string ID_HORARIOTENCION { get; set; }
-        public string CODMED { get; set; }
-        public string ID_HORA { get; set; }
-        public Nullable<System.DateTime> FECHACITA { get; set; }
-        public string ESTADO { get; set; }
-    
-        public virtual Medico Medico { get; set; }
-        public virtual HORAS HORAS { get; set; }
+        public string Codmed { get; set; }
+        public string CodEspe { get; set; }
+        public string NomTra { get; set; }
+        public string ApeTra { get; set; }
+        public string Genero { get; set; }
+        public string DniTra { get; set; }
+        public string CorreoTra { get; set; }
+        public string EstaTra { get; set; }
+        public string Codmod { get; set; }
     }
 }

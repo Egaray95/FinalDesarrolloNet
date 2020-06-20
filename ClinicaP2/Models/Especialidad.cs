@@ -9,7 +9,6 @@
 
 namespace ClinicaP2.Models
 {
-    using System.ComponentModel.DataAnnotations;
     using System;
     using System.Collections.Generic;
     
@@ -22,17 +21,7 @@ namespace ClinicaP2.Models
         }
     
         public string CodEspe { get; set; }
-
-        [Required(ErrorMessage = "dato obligatorio")]
-        [RegularExpression("[A-Za-z ñÑ]+", ErrorMessage = "Solo Letras o Espacios")]
-        [StringLength(30, MinimumLength = 3, ErrorMessage = "minimo 3 caracteres")]
-
         public string NombEspe { get; set; }
-
-
-        [Required(ErrorMessage = "dato obligatorio")]
-        [RegularExpression("[A-Za-zñÑ]+", ErrorMessage = "Solo Letras")]
-        [StringLength(12, MinimumLength = 6, ErrorMessage = "minimo 6 caracteres")]
         public string EstaEspe { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

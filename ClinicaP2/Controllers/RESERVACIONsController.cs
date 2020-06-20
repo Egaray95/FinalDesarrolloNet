@@ -13,7 +13,7 @@ namespace ClinicaP2.Controllers
 {
     public class RESERVACIONsController : Controller
     {
-        private bdclinicEntities db = new bdclinicEntities();
+        private bdclinicEntities1 db = new bdclinicEntities1();
         private List<SelectListItem> listaespecialidad;
 
         // GET: RESERVACIONs

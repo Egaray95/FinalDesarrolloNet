@@ -9,7 +9,6 @@
 
 namespace ClinicaP2.Models
 {
-    using System.ComponentModel.DataAnnotations;
     using System;
     using System.Collections.Generic;
     
@@ -18,47 +17,25 @@ namespace ClinicaP2.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Medico()
         {
-            this.RESERVACION = new HashSet<RESERVACION>();
             this.HORARIOATENCION = new HashSet<HORARIOATENCION>();
+            this.RESERVACION = new HashSet<RESERVACION>();
         }
     
         public string Codmed { get; set; }
         public string CodEspe { get; set; }
-
-        [Required(ErrorMessage = "dato obligatorio")]
-        [RegularExpression("[A-Za-z ñÑ]+", ErrorMessage = "Solo Letras o Espacios")]
-        [StringLength(30, MinimumLength = 3, ErrorMessage = "minimo 3 caracteres")]
         public string NomTra { get; set; }
-
-        [Required(ErrorMessage = "dato obligatorio")]
-        [RegularExpression("[A-Za-z ñÑ]+", ErrorMessage = "Solo Letras o Espacios")]
-        [StringLength(30, MinimumLength = 3, ErrorMessage = "minimo 3 caracteres")]
-
         public string ApeTra { get; set; }
-
-        [Required(ErrorMessage = "Seleccione")]
         public string Genero { get; set; }
-
-        [Required(ErrorMessage = "dato obligatorio")]
-        [RegularExpression("[0-9]+", ErrorMessage = "Solo numeros")]
-        [StringLength(8, MinimumLength = 8, ErrorMessage = "min y max 8 digitos")]
         public string DniTra { get; set; }
-
-
-        [Required(ErrorMessage = "dato obligatorio")]
-        [RegularExpression("[A-Za-z0-9@.ñÑ]+", ErrorMessage = "Solo Letras y caracteres especiales(@.)")]
-        [StringLength(30, MinimumLength = 6, ErrorMessage = "minimo 6 caracteres")]
         public string CorreoTra { get; set; }
-
-        [Required(ErrorMessage = "Seleccione")]
         public string EstaTra { get; set; }
         public string Codmod { get; set; }
     
         public virtual Especialidad Especialidad { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<HORARIOATENCION> HORARIOATENCION { get; set; }
         public virtual MODULO MODULO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RESERVACION> RESERVACION { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<HORARIOATENCION> HORARIOATENCION { get; set; }
     }
 }

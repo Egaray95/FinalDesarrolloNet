@@ -15,10 +15,10 @@ namespace ClinicaP2.Models
     using System.Data.Entity.Core.Objects;
     using System.Linq;
     
-    public partial class bdclinicEntities : DbContext
+    public partial class bdclinicEntities1 : DbContext
     {
-        public bdclinicEntities()
-            : base("name=bdclinicEntities")
+        public bdclinicEntities1()
+            : base("name=bdclinicEntities1")
         {
         }
     
@@ -29,14 +29,28 @@ namespace ClinicaP2.Models
     
         public virtual DbSet<Especialidad> Especialidad { get; set; }
         public virtual DbSet<ESTADO> ESTADO { get; set; }
+        public virtual DbSet<HORARIOATENCION> HORARIOATENCION { get; set; }
+        public virtual DbSet<HORAS> HORAS { get; set; }
         public virtual DbSet<Medico> Medico { get; set; }
         public virtual DbSet<MODULO> MODULO { get; set; }
         public virtual DbSet<Paciente> Paciente { get; set; }
         public virtual DbSet<PAYMET> PAYMET { get; set; }
         public virtual DbSet<RESERVACION> RESERVACION { get; set; }
         public virtual DbSet<USUARIOS> USUARIOS { get; set; }
-        public virtual DbSet<HORARIOATENCION> HORARIOATENCION { get; set; }
-        public virtual DbSet<HORAS> HORAS { get; set; }
+    
+        public virtual ObjectResult<getmedporid_Result> getmedporid(string idmedi)
+        {
+            var idmediParameter = idmedi != null ?
+                new ObjectParameter("idmedi", idmedi) :
+                new ObjectParameter("idmedi", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getmedporid_Result>("getmedporid", idmediParameter);
+        }
+    
+        public virtual ObjectResult<LISTARESERVA_Result> LISTARESERVA()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<LISTARESERVA_Result>("LISTARESERVA");
+        }
     
         public virtual int SP_ADIMEDICO(string cODESPE, string nOMTRA, string aPETRA, string gENERO, string dNITRA, string cORREOTRA, string eSTATRA, string cODMOD)
         {
@@ -102,11 +116,6 @@ namespace ClinicaP2.Models
                 new ObjectParameter("ESTAPAC", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_ADIPACIENTES", nOMPACParameter, aPEPACParameter, tELEPACParameter, dNIPACParameter, gENEROParameter, eSTAPACParameter);
-        }
-    
-        public virtual ObjectResult<LISTARESERVA_Result> LISTARESERVA()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<LISTARESERVA_Result>("LISTARESERVA");
         }
     
         public virtual int SP_ADIRSERVAS(Nullable<System.DateTime> fECHA, string cODPAC, string cODMED, Nullable<double> pRECIO, string cODPAY, string cODESTADO, string cODUSER)

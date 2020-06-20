@@ -207,6 +207,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="getmedporid" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idmedi" Type="char" Mode="In" />
+        </Function>
         <Function Name="LISTARESERVA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="SP_ADIMEDICO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="CODESPE" Type="char" Mode="In" />
@@ -298,7 +301,7 @@
           <Property Name="CodEspe" Type="String" MaxLength="5" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="NombEspe" Type="String" MaxLength="30" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="EstaEspe" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Medico" Relationship="Self.FK__Medico__CodEspe__1920BF5C" FromRole="Especialidad" ToRole="Medico" />
+          <NavigationProperty Name="Medico" Relationship="Self.FK__Medico__CodEspe__403A8C7D" FromRole="Especialidad" ToRole="Medico" />
         </EntityType>
         <EntityType Name="ESTADO">
           <Key>
@@ -306,7 +309,27 @@
           </Key>
           <Property Name="Codestado" Type="String" MaxLength="5" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="RESERVACION" Relationship="Self.FK__RESERVACI__Codes__20C1E124" FromRole="ESTADO" ToRole="RESERVACION" />
+          <NavigationProperty Name="RESERVACION" Relationship="Self.FK__RESERVACI__Codes__47DBAE45" FromRole="ESTADO" ToRole="RESERVACION" />
+        </EntityType>
+        <EntityType Name="HORARIOATENCION">
+          <Key>
+            <PropertyRef Name="ID_HORARIOTENCION" />
+          </Key>
+          <Property Name="ID_HORARIOTENCION" Type="String" MaxLength="5" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="CODMED" Type="String" MaxLength="5" FixedLength="true" Unicode="false" />
+          <Property Name="ID_HORA" Type="String" MaxLength="5" FixedLength="true" Unicode="false" />
+          <Property Name="FECHACITA" Type="DateTime" Precision="0" />
+          <Property Name="ESTADO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Medico" Relationship="Self.FK__HORARIOAT__CODME__5EBF139D" FromRole="HORARIOATENCION" ToRole="Medico" />
+          <NavigationProperty Name="HORAS" Relationship="Self.FK__HORARIOAT__ID_HO__5FB337D6" FromRole="HORARIOATENCION" ToRole="HORAS" />
+        </EntityType>
+        <EntityType Name="HORAS">
+          <Key>
+            <PropertyRef Name="ID_HORA" />
+          </Key>
+          <Property Name="ID_HORA" Type="String" MaxLength="5" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="HORA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="HORARIOATENCION" Relationship="Self.FK__HORARIOAT__ID_HO__5FB337D6" FromRole="HORAS" ToRole="HORARIOATENCION" />
         </EntityType>
         <EntityType Name="Medico">
           <Key>
@@ -321,9 +344,10 @@
           <Property Name="CorreoTra" Type="String" MaxLength="25" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="EstaTra" Type="String" MaxLength="15" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="Codmod" Type="String" MaxLength="5" FixedLength="true" Unicode="false" />
-          <NavigationProperty Name="Especialidad" Relationship="Self.FK__Medico__CodEspe__1920BF5C" FromRole="Medico" ToRole="Especialidad" />
-          <NavigationProperty Name="MODULO" Relationship="Self.FK__Medico__Codmod__182C9B23" FromRole="Medico" ToRole="MODULO" />
-          <NavigationProperty Name="RESERVACION" Relationship="Self.FK__RESERVACI__Codme__22AA2996" FromRole="Medico" ToRole="RESERVACION" />
+          <NavigationProperty Name="Especialidad" Relationship="Self.FK__Medico__CodEspe__403A8C7D" FromRole="Medico" ToRole="Especialidad" />
+          <NavigationProperty Name="HORARIOATENCION" Relationship="Self.FK__HORARIOAT__CODME__5EBF139D" FromRole="Medico" ToRole="HORARIOATENCION" />
+          <NavigationProperty Name="MODULO" Relationship="Self.FK__Medico__Codmod__3F466844" FromRole="Medico" ToRole="MODULO" />
+          <NavigationProperty Name="RESERVACION" Relationship="Self.FK__RESERVACI__Codme__49C3F6B7" FromRole="Medico" ToRole="RESERVACION" />
         </EntityType>
         <EntityType Name="MODULO">
           <Key>
@@ -331,7 +355,7 @@
           </Key>
           <Property Name="Codmod" Type="String" MaxLength="5" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Medico" Relationship="Self.FK__Medico__Codmod__182C9B23" FromRole="MODULO" ToRole="Medico" />
+          <NavigationProperty Name="Medico" Relationship="Self.FK__Medico__Codmod__3F466844" FromRole="MODULO" ToRole="Medico" />
         </EntityType>
         <EntityType Name="Paciente">
           <Key>
@@ -344,7 +368,7 @@
           <Property Name="DniPac" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="Genero" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="EstaPac" Type="String" MaxLength="15" FixedLength="true" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="RESERVACION" Relationship="Self.FK__RESERVACI__CodPa__21B6055D" FromRole="Paciente" ToRole="RESERVACION" />
+          <NavigationProperty Name="RESERVACION" Relationship="Self.FK__RESERVACI__CodPa__48CFD27E" FromRole="Paciente" ToRole="RESERVACION" />
         </EntityType>
         <EntityType Name="PAYMET">
           <Key>
@@ -352,7 +376,7 @@
           </Key>
           <Property Name="CodPay" Type="String" MaxLength="5" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="RESERVACION" Relationship="Self.FK__RESERVACI__CodUs__1FCDBCEB" FromRole="PAYMET" ToRole="RESERVACION" />
+          <NavigationProperty Name="RESERVACION" Relationship="Self.FK__RESERVACI__CodUs__46E78A0C" FromRole="PAYMET" ToRole="RESERVACION" />
         </EntityType>
         <EntityType Name="RESERVACION">
           <Key>
@@ -366,11 +390,11 @@
           <Property Name="CodPay" Type="String" MaxLength="5" FixedLength="true" Unicode="false" />
           <Property Name="Codestado" Type="String" MaxLength="5" FixedLength="true" Unicode="false" />
           <Property Name="CodUser" Type="String" MaxLength="5" FixedLength="true" Unicode="false" />
-          <NavigationProperty Name="ESTADO" Relationship="Self.FK__RESERVACI__Codes__20C1E124" FromRole="RESERVACION" ToRole="ESTADO" />
-          <NavigationProperty Name="Medico" Relationship="Self.FK__RESERVACI__Codme__22AA2996" FromRole="RESERVACION" ToRole="Medico" />
-          <NavigationProperty Name="Paciente" Relationship="Self.FK__RESERVACI__CodPa__21B6055D" FromRole="RESERVACION" ToRole="Paciente" />
-          <NavigationProperty Name="PAYMET" Relationship="Self.FK__RESERVACI__CodUs__1FCDBCEB" FromRole="RESERVACION" ToRole="PAYMET" />
-          <NavigationProperty Name="USUARIOS" Relationship="Self.FK__RESERVACI__CodUs__239E4DCF" FromRole="RESERVACION" ToRole="USUARIOS" />
+          <NavigationProperty Name="ESTADO" Relationship="Self.FK__RESERVACI__Codes__47DBAE45" FromRole="RESERVACION" ToRole="ESTADO" />
+          <NavigationProperty Name="Medico" Relationship="Self.FK__RESERVACI__Codme__49C3F6B7" FromRole="RESERVACION" ToRole="Medico" />
+          <NavigationProperty Name="Paciente" Relationship="Self.FK__RESERVACI__CodPa__48CFD27E" FromRole="RESERVACION" ToRole="Paciente" />
+          <NavigationProperty Name="PAYMET" Relationship="Self.FK__RESERVACI__CodUs__46E78A0C" FromRole="RESERVACION" ToRole="PAYMET" />
+          <NavigationProperty Name="USUARIOS" Relationship="Self.FK__RESERVACI__CodUs__6FE99F9F" FromRole="RESERVACION" ToRole="USUARIOS" />
         </EntityType>
         <EntityType Name="USUARIOS">
           <Key>
@@ -380,9 +404,9 @@
           <Property Name="Usuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="contraseña" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="RESERVACION" Relationship="Self.FK__RESERVACI__CodUs__239E4DCF" FromRole="USUARIOS" ToRole="RESERVACION" />
+          <NavigationProperty Name="RESERVACION" Relationship="Self.FK__RESERVACI__CodUs__6FE99F9F" FromRole="USUARIOS" ToRole="RESERVACION" />
         </EntityType>
-        <Association Name="FK__Medico__CodEspe__1920BF5C">
+        <Association Name="FK__Medico__CodEspe__403A8C7D">
           <End Role="Especialidad" Type="Self.Especialidad" Multiplicity="1" />
           <End Role="Medico" Type="Self.Medico" Multiplicity="*" />
           <ReferentialConstraint>
@@ -394,7 +418,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__RESERVACI__Codes__20C1E124">
+        <Association Name="FK__RESERVACI__Codes__47DBAE45">
           <End Role="ESTADO" Type="Self.ESTADO" Multiplicity="0..1" />
           <End Role="RESERVACION" Type="Self.RESERVACION" Multiplicity="*" />
           <ReferentialConstraint>
@@ -406,7 +430,31 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Medico__Codmod__182C9B23">
+        <Association Name="FK__HORARIOAT__CODME__5EBF139D">
+          <End Role="Medico" Type="Self.Medico" Multiplicity="0..1" />
+          <End Role="HORARIOATENCION" Type="Self.HORARIOATENCION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Medico">
+              <PropertyRef Name="Codmed" />
+            </Principal>
+            <Dependent Role="HORARIOATENCION">
+              <PropertyRef Name="CODMED" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__HORARIOAT__ID_HO__5FB337D6">
+          <End Role="HORAS" Type="Self.HORAS" Multiplicity="0..1" />
+          <End Role="HORARIOATENCION" Type="Self.HORARIOATENCION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HORAS">
+              <PropertyRef Name="ID_HORA" />
+            </Principal>
+            <Dependent Role="HORARIOATENCION">
+              <PropertyRef Name="ID_HORA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Medico__Codmod__3F466844">
           <End Role="MODULO" Type="Self.MODULO" Multiplicity="0..1" />
           <End Role="Medico" Type="Self.Medico" Multiplicity="*" />
           <ReferentialConstraint>
@@ -418,7 +466,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__RESERVACI__Codme__22AA2996">
+        <Association Name="FK__RESERVACI__Codme__49C3F6B7">
           <End Role="Medico" Type="Self.Medico" Multiplicity="0..1" />
           <End Role="RESERVACION" Type="Self.RESERVACION" Multiplicity="*" />
           <ReferentialConstraint>
@@ -430,7 +478,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__RESERVACI__CodPa__21B6055D">
+        <Association Name="FK__RESERVACI__CodPa__48CFD27E">
           <End Role="Paciente" Type="Self.Paciente" Multiplicity="0..1" />
           <End Role="RESERVACION" Type="Self.RESERVACION" Multiplicity="*" />
           <ReferentialConstraint>
@@ -442,7 +490,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__RESERVACI__CodUs__1FCDBCEB">
+        <Association Name="FK__RESERVACI__CodUs__46E78A0C">
           <End Role="PAYMET" Type="Self.PAYMET" Multiplicity="0..1" />
           <End Role="RESERVACION" Type="Self.RESERVACION" Multiplicity="*" />
           <ReferentialConstraint>
@@ -454,7 +502,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__RESERVACI__CodUs__239E4DCF">
+        <Association Name="FK__RESERVACI__CodUs__6FE99F9F">
           <End Role="USUARIOS" Type="Self.USUARIOS" Multiplicity="0..1" />
           <End Role="RESERVACION" Type="Self.RESERVACION" Multiplicity="*" />
           <ReferentialConstraint>
@@ -466,43 +514,57 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="bdclinicEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="bdclinicEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Especialidad" EntityType="Self.Especialidad" />
           <EntitySet Name="ESTADO" EntityType="Self.ESTADO" />
+          <EntitySet Name="HORARIOATENCION" EntityType="Self.HORARIOATENCION" />
+          <EntitySet Name="HORAS" EntityType="Self.HORAS" />
           <EntitySet Name="Medico" EntityType="Self.Medico" />
           <EntitySet Name="MODULO" EntityType="Self.MODULO" />
           <EntitySet Name="Paciente" EntityType="Self.Paciente" />
           <EntitySet Name="PAYMET" EntityType="Self.PAYMET" />
           <EntitySet Name="RESERVACION" EntityType="Self.RESERVACION" />
           <EntitySet Name="USUARIOS" EntityType="Self.USUARIOS" />
-          <AssociationSet Name="FK__Medico__CodEspe__1920BF5C" Association="Self.FK__Medico__CodEspe__1920BF5C">
+          <AssociationSet Name="FK__Medico__CodEspe__403A8C7D" Association="Self.FK__Medico__CodEspe__403A8C7D">
             <End Role="Especialidad" EntitySet="Especialidad" />
             <End Role="Medico" EntitySet="Medico" />
           </AssociationSet>
-          <AssociationSet Name="FK__RESERVACI__Codes__20C1E124" Association="Self.FK__RESERVACI__Codes__20C1E124">
+          <AssociationSet Name="FK__RESERVACI__Codes__47DBAE45" Association="Self.FK__RESERVACI__Codes__47DBAE45">
             <End Role="ESTADO" EntitySet="ESTADO" />
             <End Role="RESERVACION" EntitySet="RESERVACION" />
           </AssociationSet>
-          <AssociationSet Name="FK__Medico__Codmod__182C9B23" Association="Self.FK__Medico__Codmod__182C9B23">
+          <AssociationSet Name="FK__HORARIOAT__CODME__5EBF139D" Association="Self.FK__HORARIOAT__CODME__5EBF139D">
+            <End Role="Medico" EntitySet="Medico" />
+            <End Role="HORARIOATENCION" EntitySet="HORARIOATENCION" />
+          </AssociationSet>
+          <AssociationSet Name="FK__HORARIOAT__ID_HO__5FB337D6" Association="Self.FK__HORARIOAT__ID_HO__5FB337D6">
+            <End Role="HORAS" EntitySet="HORAS" />
+            <End Role="HORARIOATENCION" EntitySet="HORARIOATENCION" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Medico__Codmod__3F466844" Association="Self.FK__Medico__Codmod__3F466844">
             <End Role="MODULO" EntitySet="MODULO" />
             <End Role="Medico" EntitySet="Medico" />
           </AssociationSet>
-          <AssociationSet Name="FK__RESERVACI__Codme__22AA2996" Association="Self.FK__RESERVACI__Codme__22AA2996">
+          <AssociationSet Name="FK__RESERVACI__Codme__49C3F6B7" Association="Self.FK__RESERVACI__Codme__49C3F6B7">
             <End Role="Medico" EntitySet="Medico" />
             <End Role="RESERVACION" EntitySet="RESERVACION" />
           </AssociationSet>
-          <AssociationSet Name="FK__RESERVACI__CodPa__21B6055D" Association="Self.FK__RESERVACI__CodPa__21B6055D">
+          <AssociationSet Name="FK__RESERVACI__CodPa__48CFD27E" Association="Self.FK__RESERVACI__CodPa__48CFD27E">
             <End Role="Paciente" EntitySet="Paciente" />
             <End Role="RESERVACION" EntitySet="RESERVACION" />
           </AssociationSet>
-          <AssociationSet Name="FK__RESERVACI__CodUs__1FCDBCEB" Association="Self.FK__RESERVACI__CodUs__1FCDBCEB">
+          <AssociationSet Name="FK__RESERVACI__CodUs__46E78A0C" Association="Self.FK__RESERVACI__CodUs__46E78A0C">
             <End Role="PAYMET" EntitySet="PAYMET" />
             <End Role="RESERVACION" EntitySet="RESERVACION" />
           </AssociationSet>
-          <AssociationSet Name="FK__RESERVACI__CodUs__239E4DCF" Association="Self.FK__RESERVACI__CodUs__239E4DCF">
+          <AssociationSet Name="FK__RESERVACI__CodUs__6FE99F9F" Association="Self.FK__RESERVACI__CodUs__6FE99F9F">
             <End Role="USUARIOS" EntitySet="USUARIOS" />
             <End Role="RESERVACION" EntitySet="RESERVACION" />
           </AssociationSet>
+          <FunctionImport Name="getmedporid" ReturnType="Collection(bdclinicModel.getmedporid_Result)">
+          <Parameter Name="idmedi" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="LISTARESERVA" ReturnType="Collection(bdclinicModel.LISTARESERVA_Result)" />
           <FunctionImport Name="SP_ADIMEDICO">
             <Parameter Name="CODESPE" Mode="In" Type="String" />
             <Parameter Name="NOMTRA" Mode="In" Type="String" />
@@ -521,17 +583,6 @@
             <Parameter Name="GENERO" Mode="In" Type="String" />
             <Parameter Name="ESTAPAC" Mode="In" Type="String" />
           </FunctionImport>
-          <EntitySet Name="HORARIOATENCION" EntityType="bdclinicModel.HORARIOATENCION" />
-          <EntitySet Name="HORAS" EntityType="bdclinicModel.HORAS" />
-          <AssociationSet Name="FK__HORARIOAT__CODME__5EBF139D" Association="bdclinicModel.FK__HORARIOAT__CODME__5EBF139D">
-            <End Role="Medico" EntitySet="Medico" />
-            <End Role="HORARIOATENCION" EntitySet="HORARIOATENCION" />
-          </AssociationSet>
-          <AssociationSet Name="FK__HORARIOAT__ID_HO__5FB337D6" Association="bdclinicModel.FK__HORARIOAT__ID_HO__5FB337D6">
-            <End Role="HORAS" EntitySet="HORAS" />
-            <End Role="HORARIOATENCION" EntitySet="HORARIOATENCION" />
-          </AssociationSet>
-          <FunctionImport Name="LISTARESERVA" ReturnType="Collection(bdclinicModel.LISTARESERVA_Result)" />
           <FunctionImport Name="SP_ADIRSERVAS">
             <Parameter Name="FECHA" Mode="In" Type="DateTime" />
             <Parameter Name="CODPAC" Mode="In" Type="String" />
@@ -541,51 +592,22 @@
             <Parameter Name="CODESTADO" Mode="In" Type="String" />
             <Parameter Name="CODUSER" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="spadiEsp">
+            <Parameter Name="nom" Mode="In" Type="String" />
+            <Parameter Name="estado" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
-        <EntityType Name="HORARIOATENCION">
-          <Key>
-            <PropertyRef Name="ID_HORARIOTENCION" />
-          </Key>
-          <Property Name="ID_HORARIOTENCION" Type="String" Nullable="false" MaxLength="5" FixedLength="true" Unicode="false" />
-          <Property Name="CODMED" Type="String" MaxLength="5" FixedLength="true" Unicode="false" />
-          <Property Name="ID_HORA" Type="String" MaxLength="5" FixedLength="true" Unicode="false" />
-          <Property Name="FECHACITA" Type="DateTime" Precision="0" />
-          <Property Name="ESTADO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Medico" Relationship="bdclinicModel.FK__HORARIOAT__CODME__5EBF139D" FromRole="HORARIOATENCION" ToRole="Medico" />
-          <NavigationProperty Name="HORAS" Relationship="bdclinicModel.FK__HORARIOAT__ID_HO__5FB337D6" FromRole="HORARIOATENCION" ToRole="HORAS" />
-        </EntityType>
-        <EntityType Name="HORAS">
-          <Key>
-            <PropertyRef Name="ID_HORA" />
-          </Key>
-          <Property Name="ID_HORA" Type="String" Nullable="false" MaxLength="5" FixedLength="true" Unicode="false" />
-          <Property Name="HORA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="HORARIOATENCION" Relationship="bdclinicModel.FK__HORARIOAT__ID_HO__5FB337D6" FromRole="HORAS" ToRole="HORARIOATENCION" />
-        </EntityType>
-        <Association Name="FK__HORARIOAT__CODME__5EBF139D">
-          <End Type="bdclinicModel.Medico" Role="Medico" Multiplicity="0..1" />
-          <End Type="bdclinicModel.HORARIOATENCION" Role="HORARIOATENCION" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Medico">
-              <PropertyRef Name="Codmed" />
-            </Principal>
-            <Dependent Role="HORARIOATENCION">
-              <PropertyRef Name="CODMED" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__HORARIOAT__ID_HO__5FB337D6">
-          <End Type="bdclinicModel.HORAS" Role="HORAS" Multiplicity="0..1" />
-          <End Type="bdclinicModel.HORARIOATENCION" Role="HORARIOATENCION" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="HORAS">
-              <PropertyRef Name="ID_HORA" />
-            </Principal>
-            <Dependent Role="HORARIOATENCION">
-              <PropertyRef Name="ID_HORA" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
+        <ComplexType Name="getmedporid_Result">
+          <Property Type="String" Name="Codmed" Nullable="false" MaxLength="5" />
+          <Property Type="String" Name="CodEspe" Nullable="false" MaxLength="5" />
+          <Property Type="String" Name="NomTra" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="ApeTra" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="Genero" Nullable="true" MaxLength="1" />
+          <Property Type="String" Name="DniTra" Nullable="false" MaxLength="8" />
+          <Property Type="String" Name="CorreoTra" Nullable="false" MaxLength="25" />
+          <Property Type="String" Name="EstaTra" Nullable="false" MaxLength="15" />
+          <Property Type="String" Name="Codmod" Nullable="true" MaxLength="5" />
+        </ComplexType>
         <ComplexType Name="LISTARESERVA_Result">
           <Property Type="String" Name="CodReserva" Nullable="false" MaxLength="5" />
           <Property Type="DateTime" Name="FECHA" Nullable="true" Precision="23" />
@@ -602,7 +624,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="bdclinicModelStoreContainer" CdmEntityContainer="bdclinicEntities">
+        <EntityContainerMapping StorageEntityContainer="bdclinicModelStoreContainer" CdmEntityContainer="bdclinicEntities1">
           <EntitySetMapping Name="Especialidad">
             <EntityTypeMapping TypeName="bdclinicModel.Especialidad">
               <MappingFragment StoreEntitySet="Especialidad">
@@ -617,6 +639,25 @@
               <MappingFragment StoreEntitySet="ESTADO">
                 <ScalarProperty Name="Codestado" ColumnName="Codestado" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HORARIOATENCION">
+            <EntityTypeMapping TypeName="bdclinicModel.HORARIOATENCION">
+              <MappingFragment StoreEntitySet="HORARIOATENCION">
+                <ScalarProperty Name="ID_HORARIOTENCION" ColumnName="ID_HORARIOTENCION" />
+                <ScalarProperty Name="CODMED" ColumnName="CODMED" />
+                <ScalarProperty Name="ID_HORA" ColumnName="ID_HORA" />
+                <ScalarProperty Name="FECHACITA" ColumnName="FECHACITA" />
+                <ScalarProperty Name="ESTADO" ColumnName="ESTADO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HORAS">
+            <EntityTypeMapping TypeName="bdclinicModel.HORAS">
+              <MappingFragment StoreEntitySet="HORAS">
+                <ScalarProperty Name="ID_HORA" ColumnName="ID_HORA" />
+                <ScalarProperty Name="HORA" ColumnName="HORA" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -688,27 +729,21 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="SP_ADIMEDICO" FunctionName="bdclinicModel.Store.SP_ADIMEDICO" />
-          <FunctionImportMapping FunctionImportName="SP_ADIPACIENTES" FunctionName="bdclinicModel.Store.SP_ADIPACIENTES" />
-          <EntitySetMapping Name="HORARIOATENCION">
-            <EntityTypeMapping TypeName="bdclinicModel.HORARIOATENCION">
-              <MappingFragment StoreEntitySet="HORARIOATENCION">
-                <ScalarProperty Name="ESTADO" ColumnName="ESTADO" />
-                <ScalarProperty Name="FECHACITA" ColumnName="FECHACITA" />
-                <ScalarProperty Name="ID_HORA" ColumnName="ID_HORA" />
-                <ScalarProperty Name="CODMED" ColumnName="CODMED" />
-                <ScalarProperty Name="ID_HORARIOTENCION" ColumnName="ID_HORARIOTENCION" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="HORAS">
-            <EntityTypeMapping TypeName="bdclinicModel.HORAS">
-              <MappingFragment StoreEntitySet="HORAS">
-                <ScalarProperty Name="HORA" ColumnName="HORA" />
-                <ScalarProperty Name="ID_HORA" ColumnName="ID_HORA" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="getmedporid" FunctionName="bdclinicModel.Store.getmedporid">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="bdclinicModel.getmedporid_Result">
+                <ScalarProperty Name="Codmed" ColumnName="Codmed" />
+                <ScalarProperty Name="CodEspe" ColumnName="CodEspe" />
+                <ScalarProperty Name="NomTra" ColumnName="NomTra" />
+                <ScalarProperty Name="ApeTra" ColumnName="ApeTra" />
+                <ScalarProperty Name="Genero" ColumnName="Genero" />
+                <ScalarProperty Name="DniTra" ColumnName="DniTra" />
+                <ScalarProperty Name="CorreoTra" ColumnName="CorreoTra" />
+                <ScalarProperty Name="EstaTra" ColumnName="EstaTra" />
+                <ScalarProperty Name="Codmod" ColumnName="Codmod" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="LISTARESERVA" FunctionName="bdclinicModel.Store.LISTARESERVA">
             <ResultMapping>
               <ComplexTypeMapping TypeName="bdclinicModel.LISTARESERVA_Result">
@@ -724,7 +759,10 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_ADIMEDICO" FunctionName="bdclinicModel.Store.SP_ADIMEDICO" />
+          <FunctionImportMapping FunctionImportName="SP_ADIPACIENTES" FunctionName="bdclinicModel.Store.SP_ADIPACIENTES" />
           <FunctionImportMapping FunctionImportName="SP_ADIRSERVAS" FunctionName="bdclinicModel.Store.SP_ADIRSERVAS" />
+          <FunctionImportMapping FunctionImportName="spadiEsp" FunctionName="bdclinicModel.Store.spadiEsp" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -742,7 +780,7 @@
         <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
-        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->

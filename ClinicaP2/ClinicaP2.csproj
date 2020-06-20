@@ -123,60 +123,63 @@
     <Compile Include="Controllers\MedicosController.cs" />
     <Compile Include="Controllers\PacientesController.cs" />
     <Compile Include="Controllers\RESERVACIONsController.cs" />
+    <Compile Include="Models\Especialidad.cs">
+      <DependentUpon>ModelClinicaUTP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ESTADO.cs">
+      <DependentUpon>ModelClinicaUTP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\getmedporid_Result.cs">
+      <DependentUpon>ModelClinicaUTP.tt</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Especialidad.cs">
-      <DependentUpon>ModelClinCa.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ESTADO.cs">
-      <DependentUpon>ModelClinCa.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\HORARIOATENCION.cs">
-      <DependentUpon>ModelClinCa.tt</DependentUpon>
+      <DependentUpon>ModelClinicaUTP.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\HORAS.cs">
-      <DependentUpon>ModelClinCa.tt</DependentUpon>
+      <DependentUpon>ModelClinicaUTP.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\LISTARESERVA_Result.cs">
-      <DependentUpon>ModelClinCa.tt</DependentUpon>
+      <DependentUpon>ModelClinicaUTP.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Medico.cs">
-      <DependentUpon>ModelClinCa.tt</DependentUpon>
+      <DependentUpon>ModelClinicaUTP.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ModelClinCa.Context.cs">
+    <Compile Include="Models\ModelClinicaUTP.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ModelClinCa.Context.tt</DependentUpon>
+      <DependentUpon>ModelClinicaUTP.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ModelClinCa.cs">
+    <Compile Include="Models\ModelClinicaUTP.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ModelClinCa.tt</DependentUpon>
+      <DependentUpon>ModelClinicaUTP.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ModelClinCa.Designer.cs">
+    <Compile Include="Models\ModelClinicaUTP.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ModelClinCa.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\MODULO.cs">
-      <DependentUpon>ModelClinCa.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Paciente.cs">
-      <DependentUpon>ModelClinCa.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\PAYMET.cs">
-      <DependentUpon>ModelClinCa.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\RESERVACION.cs">
-      <DependentUpon>ModelClinCa.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\USUARIOS.cs">
-      <DependentUpon>ModelClinCa.tt</DependentUpon>
+      <DependentUpon>ModelClinicaUTP.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\ViewModel\EspecialiViewmodel.cs" />
     <Compile Include="Models\ViewModel\ViewGenero.cs" />
+    <Compile Include="Models\MODULO.cs">
+      <DependentUpon>ModelClinicaUTP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Paciente.cs">
+      <DependentUpon>ModelClinicaUTP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PAYMET.cs">
+      <DependentUpon>ModelClinicaUTP.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Models\RESERVACION.cs">
+      <DependentUpon>ModelClinicaUTP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\USUARIOS.cs">
+      <DependentUpon>ModelClinicaUTP.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -189,23 +192,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Models\ModelClinCa.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ModelClinCa.Context.cs</LastGenOutput>
-      <DependentUpon>ModelClinCa.edmx</DependentUpon>
-    </Content>
-    <Content Include="Models\ModelClinCa.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ModelClinCa.edmx</DependentUpon>
-      <LastGenOutput>ModelClinCa.cs</LastGenOutput>
-    </Content>
-    <EntityDeploy Include="Models\ModelClinCa.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ModelClinCa.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\ModelClinCa.edmx.diagram">
-      <DependentUpon>ModelClinCa.edmx</DependentUpon>
-    </Content>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
@@ -214,7 +200,24 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <EntityDeploy Include="Models\ModelClinicaUTP.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ModelClinicaUTP.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\ModelClinicaUTP.edmx.diagram">
+      <DependentUpon>ModelClinicaUTP.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Models\ModelClinicaUTP.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ModelClinicaUTP.edmx</DependentUpon>
+      <LastGenOutput>ModelClinicaUTP.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\ModelClinicaUTP.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ModelClinicaUTP.edmx</DependentUpon>
+      <LastGenOutput>ModelClinicaUTP.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />

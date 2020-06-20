@@ -9,7 +9,6 @@
 
 namespace ClinicaP2.Models
 {
-    using System.ComponentModel.DataAnnotations;
     using System;
     using System.Collections.Generic;
     
@@ -22,34 +21,11 @@ namespace ClinicaP2.Models
         }
     
         public string CodPac { get; set; }
-
-
-        [Required(ErrorMessage = "dato obligatorio")]
-        [RegularExpression("[A-Za-z ñÑ]+", ErrorMessage = "Solo Letras o Espacios")]
-        [StringLength(30, MinimumLength = 3, ErrorMessage = "minimo 3 caracteres")]
         public string NomPac { get; set; }
-
-
-        [Required(ErrorMessage = "dato obligatorio")]
-        [RegularExpression("[A-Za-z ñÑ]+", ErrorMessage = "Solo Letras o Espacios")]
-        [StringLength(30, MinimumLength = 3, ErrorMessage = "minimo 3 caracteres")]
         public string ApePac { get; set; }
-
-
-        [Required(ErrorMessage = "dato obligatorio")]
-        [RegularExpression("[0-9]+", ErrorMessage = "Solo numeros")]
-        [StringLength(9, MinimumLength = 7, ErrorMessage = "min 7 digitos")]
         public string TelePac { get; set; }
-
-        [Required(ErrorMessage = "dato obligatorio")]
-        [RegularExpression("[0-9]+", ErrorMessage = "Solo numeros")]
-        [StringLength(8, MinimumLength = 8, ErrorMessage = "min y max 8 digitos")]
         public string DniPac { get; set; }
-
-        [Required(ErrorMessage = "Seleccione")]
         public string Genero { get; set; }
-
-        [Required(ErrorMessage = "Seleccione")]
         public string EstaPac { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

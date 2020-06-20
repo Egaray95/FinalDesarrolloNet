@@ -12,7 +12,7 @@ namespace ClinicaP2.Controllers
 {
     public class PacientesController : Controller
     {
-        private bdclinicEntities db = new bdclinicEntities();
+        private bdclinicEntities1 db = new bdclinicEntities1();
 
         // GET: Pacientes
         public ActionResult Index()
