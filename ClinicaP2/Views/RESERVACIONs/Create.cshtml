@@ -1,29 +1,27 @@
 ﻿@model ClinicaP2.Models.RESERVACION
 
+
 @{
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    List<SelectListItem> lst = (List<SelectListItem>)ViewBag.lstespe;
+    List<SelectListItem> lst2 = (List<SelectListItem>)ViewBag.lstme;
+    //List<ClinicaP2.Models.ViewModel.EspecialiViewmodel> lst1 = (List<ClinicaP2.Models.ViewModel.EspecialiViewmodel>)ViewBag.listaepe;
+
 }
 
-<h2>Create</h2>
+<h2 class="bg-info">Nueva Cita medica</h2>
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>RESERVACION</h4>
         <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.CodReserva, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.CodReserva, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.CodReserva, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
+        @*CONTROL FECHA*@
         <div class="form-group">
             @Html.LabelFor(model => model.Fecha, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -31,22 +29,56 @@
                 @Html.ValidationMessageFor(model => model.Fecha, "", new { @class = "text-danger" })
             </div>
         </div>
-
+        @*CONTROL PACIENTE*@
         <div class="form-group">
-            @Html.LabelFor(model => model.CodPac, "CodPac", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.CodPac, "Paciente", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("CodPac", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.CodPac, "", new { @class = "text-danger" })
+
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Codmed, "Codmed", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("Codmed", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Codmed, "", new { @class = "text-danger" })
+
+        <div class="panel panel-primary ">
+            <div class="panel-heading">
+                Busqueda de Medicos por Especialidad
+            </div>
+            <div class="panel-body">
+
+                @* Div para colocar en una linea los controles/IMPLEMENTACION DE AJAX  *@
+
+                @{
+                    Html.RenderAction("_SearchPartial", "RESERVACIONs");
+                }
+                <script>
+                $(document).ready(function () {
+                    $("#ddespecialidad").change(function () {
+                        $.get("/RESERVACIONs/GetTerritoriesList", { CodEspe: $("#ddespecialidad").val() }, function (data) {
+                            // VACIAMOS EL DropDownList
+                            $("#ddmedicos").empty();
+                            // AÑADIMOS UN NUEVO label CON EL NOMBRE DEL ELEMENTO SELECCIONADO
+                            $("#ddmedicos").append("<option value> -- Seleccionar Medicos de " + $("#ddmedicos option:selected").text() + " --</option>")
+                            // CONSTRUIMOS EL DropDownList A PARTIR DEL RESULTADO Json (data)
+                            $.each(data, function (index, row) {
+                                $("#ddmedicos").append("<option value='" + row.codmed + "'>" + row.NomTra + "</option>")
+                            });
+                        });
+                    });
+                });
+                </script>
+
+
+
             </div>
         </div>
+        @* CONTROL ESPECIALIDAD Y MEDICO *@
+
+
+
+
+
+        @* asfasfasf *@
+
 
         <div class="form-group">
             @Html.LabelFor(model => model.precio, htmlAttributes: new { @class = "control-label col-md-2" })
