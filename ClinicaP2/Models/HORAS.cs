@@ -12,29 +12,17 @@ namespace ClinicaP2.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Medico
+    public partial class HORAS
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Medico()
+        public HORAS()
         {
-            this.RESERVACION = new HashSet<RESERVACION>();
             this.HORARIOATENCION = new HashSet<HORARIOATENCION>();
         }
     
-        public string Codmed { get; set; }
-        public string CodEspe { get; set; }
-        public string NomTra { get; set; }
-        public string ApeTra { get; set; }
-        public string Genero { get; set; }
-        public string DniTra { get; set; }
-        public string CorreoTra { get; set; }
-        public string EstaTra { get; set; }
-        public string Codmod { get; set; }
+        public string ID_HORA { get; set; }
+        public string HORA { get; set; }
     
-        public virtual Especialidad Especialidad { get; set; }
-        public virtual MODULO MODULO { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<RESERVACION> RESERVACION { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HORARIOATENCION> HORARIOATENCION { get; set; }
     }

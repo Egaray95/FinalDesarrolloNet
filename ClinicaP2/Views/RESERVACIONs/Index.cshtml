@@ -1,79 +1,81 @@
 ﻿@model IEnumerable<ClinicaP2.Models.RESERVACION>
 
-@{
-    ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+    @{
+        ViewBag.Title = "Index";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
 
-<h2 class="bg-info">Reservar Cita Medica</h2>
+    <h2 class="bg-info">Reservar Cita Medica</h2>
 
-<p class="btn  btn-default">
-    @Html.ActionLink("Registrar Cita", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            Codigo
-        </th>
-        <th>
-           Fecha Cita
-        </th>
-        <th>
-        Paciente
-        </th>
-        <th>
-           Medico
-        </th>
-        <th>
-          Precio
-        </th>
-        <th>
-          Estado de pago
-        </th>
-        <th>
-         Estado de Cita:
-        </th>
-        <th>
-           Usuario
-        </th>
-        <th></th>
-    </tr>
+    <p class="btn  btn-default">
+        @Html.ActionLink("Registrar Cita", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                Codigo
+            </th>
+            <th>
+                Fecha Cita
+            </th>
+            <th>
+                Paciente
+            </th>
+            <th>
+                Precio
+            </th>
+            <th>
+                Estado de Pago
+            </th>
+            <th>
+                Estado de Cita
+            </th>
+            <th>
+                Registrado por:
+            </th>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @item.CodReserva
-        </td>
-        <td>
-            @item.Fecha
-        </td>
-        <td>
-            @item.Paciente.NomPac
-        </td>
-        <td>
-            @item.Medico.NomTra
-        </td>
-        @*<td>
-            @item.Medico.CodEspe
-        </td>*@
-        <td>
-            @item.precio
-        </td>
-        <td>
-            @item.PAYMET.Name
-        </td>
-        <td>
-            @item.ESTADO.Name
-        </td>
-        <td>
-            @item.USUARIOS.Descripcion
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.CodReserva }) |
-            @Html.ActionLink("Details", "Details", new { id = item.CodReserva }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.CodReserva })
-        </td>
-    </tr>
-}
+            <th></th>
+        </tr>
 
-</table>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.CodReserva
+                </td>
+                <td>
+                    @item.Fecha
+                </td>
+                <td>
+                    @item.Paciente.NomPac @item.Paciente.ApePac
+                </td>
+                @*<td>
+                        @item.Medico.NomTra  @item.Medico.ApeTra
+                    </td>*@
+                @*<td>
+                        @item.Medico.Especialidad.NombEspe
+                    </td>*@
+                @*<td>
+                        @item.Medico.CodEspe
+                    </td>*@
+                <td>
+                    @item.precio
+                </td>
+                <td>
+                    @item.PAYMET.Name
+                </td>
+                <td>
+                    @item.ESTADO.Name
+                </td>
+                <td>
+                    @item.USUARIOS.Descripcion
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.CodReserva }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.CodReserva }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.CodReserva })
+                </td>
+            </tr>
+        }
+
+    </table>

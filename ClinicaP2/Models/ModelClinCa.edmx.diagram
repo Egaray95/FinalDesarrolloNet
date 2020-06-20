@@ -21,6 +21,10 @@
         <AssociationConnector Association="bdclinicModel.FK__RESERVACI__CodPa__21B6055D" ManuallyRouted="false" />
         <AssociationConnector Association="bdclinicModel.FK__RESERVACI__CodUs__1FCDBCEB" ManuallyRouted="false" />
         <AssociationConnector Association="bdclinicModel.FK__RESERVACI__CodUs__239E4DCF" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="bdclinicModel.HORARIOATENCION" Width="1.5" PointX="8.25" PointY="0.75" />
+        <EntityTypeShape EntityType="bdclinicModel.HORAS" Width="1.5" PointX="6" PointY="12.125" />
+        <AssociationConnector Association="bdclinicModel.FK__HORARIOAT__CODME__38996AB5" />
+        <AssociationConnector Association="bdclinicModel.FK__HORARIOAT__ID_HO__398D8EEE" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
