@@ -255,6 +255,7 @@
     <Content Include="Views\RESERVACIONs\Details.cshtml" />
     <Content Include="Views\RESERVACIONs\Edit.cshtml" />
     <Content Include="Views\RESERVACIONs\Index.cshtml" />
+    <Content Include="Views\Shared\_SearchPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
