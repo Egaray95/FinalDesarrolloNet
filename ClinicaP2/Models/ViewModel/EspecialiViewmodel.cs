@@ -7,7 +7,7 @@ namespace ClinicaP2.Models.ViewModel
 {
     public class EspecialiViewmodel
     {
-        public string CodEspe{ get; set; }
-        public string NomEspe { get; set; }
-}
+        public string CodEsp { get; set; }
+        public string Codmod { get; set; }
+    }
 }

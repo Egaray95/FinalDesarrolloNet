@@ -1,0 +1,33 @@
+﻿
+@model  ClinicaP2.Models.ViewModel.EspecialiViewmodel
+
+<div class="form-group">
+
+    @if (ViewBag.listaepe != null)
+    {
+        @Html.LabelFor(x => x.CodEsp, "Especialidad", new { @class = "control-label col-md-2" })
+        @Html.DropDownListFor(model => model.CodEsp, ViewBag.listaepe as SelectList, " --Selecionar Especialidad", new { @class = "form-control" })
+
+    }
+</div>
+<div class="form-group">
+    @Html.LabelFor(x => x.CodEsp, "Medicos", new { @class = "control-label col-md-2" })
+    @Html.DropDownListFor(model => model.Codmod, new SelectList(" "), "Selecciona medico", new { @class = "form-control" })
+</div>
+
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#CodEsp").change(function () {
+            $.get("/RESERVACIONs/GetMedicos", { CodEspe: $("#CodEsp").val() }, function (data) {
+                $("#Codmod").empty();
+                $.each(data, function (index, row) {
+                    $("#Codmod").append("<option value='" + row.Codmod + "'>" + row.NomTra + "</option>")
+
+                });
+            });
+        });
+    });
+
+</script>
+

@@ -35,6 +35,8 @@ namespace ClinicaP2.Models
         public virtual DbSet<PAYMET> PAYMET { get; set; }
         public virtual DbSet<RESERVACION> RESERVACION { get; set; }
         public virtual DbSet<USUARIOS> USUARIOS { get; set; }
+        public virtual DbSet<HORARIOATENCION> HORARIOATENCION { get; set; }
+        public virtual DbSet<HORAS> HORAS { get; set; }
     
         public virtual int SP_ADIMEDICO(string cODESPE, string nOMTRA, string aPETRA, string gENERO, string dNITRA, string cORREOTRA, string eSTATRA, string cODMOD)
         {
@@ -100,6 +102,44 @@ namespace ClinicaP2.Models
                 new ObjectParameter("ESTAPAC", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_ADIPACIENTES", nOMPACParameter, aPEPACParameter, tELEPACParameter, dNIPACParameter, gENEROParameter, eSTAPACParameter);
+        }
+    
+        public virtual ObjectResult<LISTARESERVA_Result> LISTARESERVA()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<LISTARESERVA_Result>("LISTARESERVA");
+        }
+    
+        public virtual int SP_ADIRSERVAS(Nullable<System.DateTime> fECHA, string cODPAC, string cODMED, Nullable<double> pRECIO, string cODPAY, string cODESTADO, string cODUSER)
+        {
+            var fECHAParameter = fECHA.HasValue ?
+                new ObjectParameter("FECHA", fECHA) :
+                new ObjectParameter("FECHA", typeof(System.DateTime));
+    
+            var cODPACParameter = cODPAC != null ?
+                new ObjectParameter("CODPAC", cODPAC) :
+                new ObjectParameter("CODPAC", typeof(string));
+    
+            var cODMEDParameter = cODMED != null ?
+                new ObjectParameter("CODMED", cODMED) :
+                new ObjectParameter("CODMED", typeof(string));
+    
+            var pRECIOParameter = pRECIO.HasValue ?
+                new ObjectParameter("PRECIO", pRECIO) :
+                new ObjectParameter("PRECIO", typeof(double));
+    
+            var cODPAYParameter = cODPAY != null ?
+                new ObjectParameter("CODPAY", cODPAY) :
+                new ObjectParameter("CODPAY", typeof(string));
+    
+            var cODESTADOParameter = cODESTADO != null ?
+                new ObjectParameter("CODESTADO", cODESTADO) :
+                new ObjectParameter("CODESTADO", typeof(string));
+    
+            var cODUSERParameter = cODUSER != null ?
+                new ObjectParameter("CODUSER", cODUSER) :
+                new ObjectParameter("CODUSER", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_ADIRSERVAS", fECHAParameter, cODPACParameter, cODMEDParameter, pRECIOParameter, cODPAYParameter, cODESTADOParameter, cODUSERParameter);
         }
     
         public virtual int spadiEsp(string nom, string estado)

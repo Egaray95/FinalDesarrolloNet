@@ -19,6 +19,7 @@ namespace ClinicaP2.Models
         public Medico()
         {
             this.RESERVACION = new HashSet<RESERVACION>();
+            this.HORARIOATENCION = new HashSet<HORARIOATENCION>();
         }
     
         public string Codmed { get; set; }
@@ -57,5 +58,7 @@ namespace ClinicaP2.Models
         public virtual MODULO MODULO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RESERVACION> RESERVACION { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<HORARIOATENCION> HORARIOATENCION { get; set; }
     }
 }

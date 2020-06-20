@@ -7,19 +7,24 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ClinicaP2.Models;
+using ClinicaP2.Models.ViewModel;
 
 namespace ClinicaP2.Controllers
 {
     public class RESERVACIONsController : Controller
     {
         private bdclinicEntities db = new bdclinicEntities();
+        private List<SelectListItem> listaespecialidad;
 
         // GET: RESERVACIONs
         public ActionResult Index()
         {
+
             var rESERVACION = db.RESERVACION.Include(r => r.ESTADO).Include(r => r.Medico).Include(r => r.Paciente).Include(r => r.PAYMET).Include(r => r.USUARIOS);
             return View(rESERVACION.ToList());
         }
+
+
 
         // GET: RESERVACIONs/Details/5
         public ActionResult Details(string id)
@@ -37,34 +42,55 @@ namespace ClinicaP2.Controllers
         }
 
         // GET: RESERVACIONs/Create
+        /*VISTA PARCIAL*/
+        public ActionResult _SearchPartial()
+        {
+            List<Especialidad> listaepe = db.Especialidad.ToList();
+            ViewBag.listaepe = new SelectList(listaepe, "CodEspe", "NombEspe");
+
+            return PartialView();
+        }
         public ActionResult Create()
         {
             ViewBag.Codestado = new SelectList(db.ESTADO, "Codestado", "Name");
-            ViewBag.Codmed = new SelectList(db.Medico, "Codmed", "CodEspe");
+            ViewBag.Codmed = new SelectList(db.Medico, "Codmed", "NomTra");
             ViewBag.CodPac = new SelectList(db.Paciente, "CodPac", "NomPac");
             ViewBag.CodPay = new SelectList(db.PAYMET, "CodPay", "Name");
             ViewBag.CodUser = new SelectList(db.USUARIOS, "CodUser", "Usuario");
             return View();
         }
+        /* CREAMOS UNA ACCION QUE DEVUELVE UNA ESTRUCTURA JSON EN FUNCION A ESPECIALIDAD*/
+        public JsonResult GetMedicos(string CodEspe)
+        {
+            db.Configuration.ProxyCreationEnabled = false;
+            List<Medico> smedico = db.Medico.Where(x => x.CodEspe == CodEspe).ToList();
+            return Json(smedico, JsonRequestBehavior.AllowGet);
+
+
+        }
+
+
 
         // POST: RESERVACIONs/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "CodReserva,Fecha,CodPac,Codmed,precio,CodPay,Codestado,CodUser")] RESERVACION rESERVACION)
+        public ActionResult Create(RESERVACION rESERVACION)
         {
             if (ModelState.IsValid)
             {
-                db.RESERVACION.Add(rESERVACION);
-                db.SaveChanges();
+                //db.RESERVACION.Add(rESERVACION);
+                //db.SaveChanges();
+                db.SP_ADIRSERVAS(rESERVACION.Fecha, rESERVACION.CodPac, rESERVACION.Codmed, rESERVACION.precio, rESERVACION.CodPay, rESERVACION.Codestado, rESERVACION.CodUser);
+
                 return RedirectToAction("Index");
             }
 
             ViewBag.Codestado = new SelectList(db.ESTADO, "Codestado", "Name", rESERVACION.Codestado);
             ViewBag.Codmed = new SelectList(db.Medico, "Codmed", "CodEspe", rESERVACION.Codmed);
             ViewBag.CodPac = new SelectList(db.Paciente, "CodPac", "NomPac", rESERVACION.CodPac);
-            ViewBag.CodPay = new SelectList(db.PAYMET, "CodPay", "Name", rESERVACION.CodPay);
+            ViewBag.CodPay = new SelectList(db.PAYMET, "CodPay", "Name", rESERVACION.CodPay); 
             ViewBag.CodUser = new SelectList(db.USUARIOS, "CodUser", "Usuario", rESERVACION.CodUser);
             return View(rESERVACION);
         }
