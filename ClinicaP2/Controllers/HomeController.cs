@@ -18,6 +18,8 @@ namespace ClinicaP2.Controllers
             ViewBag.Message = "Your application description page. mensaje para commit probando cumpa desde maquina de edy";
 
             var hola = "hola a todos";            
+            var v = "edy tu papi";
+
             return View();
         }
 
