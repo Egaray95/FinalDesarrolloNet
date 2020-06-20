@@ -15,7 +15,7 @@ namespace ClinicaP2.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page. mensaje para commit probando cumpa";
+            ViewBag.Message = "Your application description page. mensaje para commit probando cumpa desde maquina de edy";
 
             return View();
         }
