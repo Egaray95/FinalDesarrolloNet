@@ -14,13 +14,14 @@ namespace ClinicaP2.Controllers
     public class RESERVACIONsController : Controller
     {
         private bdclinicEntities1 db = new bdclinicEntities1();
-        private List<SelectListItem> listaespecialidad;
+      
 
         // GET: RESERVACIONs
         public ActionResult Index()
         {
 
-            var rESERVACION = db.RESERVACION.Include(r => r.ESTADO).Include(r => r.Medico).Include(r => r.Paciente).Include(r => r.PAYMET).Include(r => r.USUARIOS);
+            var rESERVACION = db.RESERVACION.Include(r => r.ESTADO).Include
+                (r => r.Medico).Include(r => r.Paciente).Include(r => r.PAYMET).Include(r => r.USUARIOS);
             return View(rESERVACION.ToList());
         }
 
@@ -69,8 +70,6 @@ namespace ClinicaP2.Controllers
 
         }
 
-
-
         // POST: RESERVACIONs/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -82,7 +81,8 @@ namespace ClinicaP2.Controllers
             {
                 //db.RESERVACION.Add(rESERVACION);
                 //db.SaveChanges();
-                db.SP_ADIRSERVAS(rESERVACION.Fecha, rESERVACION.CodPac, rESERVACION.Codmed, rESERVACION.precio, rESERVACION.CodPay, rESERVACION.Codestado, rESERVACION.CodUser);
+                db.SP_ADIRSERVAS(rESERVACION.Fecha, rESERVACION.CodPac, rESERVACION.Codmed,
+                    rESERVACION.precio, rESERVACION.CodPay, rESERVACION.Codestado, rESERVACION.CodUser);
 
                 return RedirectToAction("Index");
             }

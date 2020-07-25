@@ -52,7 +52,9 @@ namespace ClinicaP2.Controllers
             {
                 //db.Paciente.Add(paciente);
                 //db.SaveChanges();
-                db.SP_ADIPACIENTES(paciente.NomPac, paciente.ApePac, paciente.TelePac, paciente.DniPac, paciente.Genero, paciente.EstaPac);
+                db.SP_ADIPACIENTES(paciente.NomPac, paciente.ApePac,
+                    paciente.TelePac, paciente.DniPac, paciente.Genero, 
+                    paciente.EstaPac);
                 return RedirectToAction("Index");
             }
 

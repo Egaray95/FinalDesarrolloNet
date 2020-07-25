@@ -57,7 +57,11 @@ namespace ClinicaP2.Controllers
             if (ModelState.IsValid)
             {
                 
-                db.SP_ADIMEDICO(medico.CodEspe, medico.NomTra, medico.ApeTra, medico.Genero,medico.DniTra, medico.CorreoTra, medico.EstaTra, medico.Codmod);
+                db.SP_ADIMEDICO(medico.CodEspe,
+                    medico.NomTra, medico.ApeTra,
+                    medico.Genero,medico.DniTra,
+                    medico.CorreoTra, medico.EstaTra, 
+                    medico.Codmod);
                 return RedirectToAction("Index");
             }
 

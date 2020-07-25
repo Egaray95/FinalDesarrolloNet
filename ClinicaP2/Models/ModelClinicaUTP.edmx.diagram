@@ -13,7 +13,7 @@
         <EntityTypeShape EntityType="bdclinicModel.MODULO" Width="1.5" PointX="0.75" PointY="1.75" IsExpanded="true" />
         <EntityTypeShape EntityType="bdclinicModel.Paciente" Width="1.5" PointX="6" PointY="10.25" IsExpanded="true" />
         <EntityTypeShape EntityType="bdclinicModel.PAYMET" Width="1.5" PointX="6" PointY="13.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="bdclinicModel.RESERVACION" Width="1.5" PointX="8.25" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="bdclinicModel.RESERVACION" Width="1.5" PointX="7.25" PointY="2.125" IsExpanded="true" />
         <EntityTypeShape EntityType="bdclinicModel.USUARIOS" Width="1.5" PointX="6" PointY="15.875" IsExpanded="true" />
         <AssociationConnector Association="bdclinicModel.FK__Medico__CodEspe__403A8C7D" ManuallyRouted="false" />
         <AssociationConnector Association="bdclinicModel.FK__RESERVACI__Codes__47DBAE45" ManuallyRouted="false" />
