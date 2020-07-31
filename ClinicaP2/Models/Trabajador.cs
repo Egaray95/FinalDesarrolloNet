@@ -12,20 +12,27 @@ namespace ClinicaP2.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class USUARIOS
+    public partial class Trabajador
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public USUARIOS()
+        public Trabajador()
         {
-            this.RESERVACION = new HashSet<RESERVACION>();
+            this.Consulta = new HashSet<Consulta>();
         }
     
-        public string CodUser { get; set; }
-        public string Usuario { get; set; }
-        public string contraseña { get; set; }
-        public string Descripcion { get; set; }
+        public int TraCodigo { get; set; }
+        public Nullable<int> PerCodigo { get; set; }
+        public Nullable<int> EspCodigo { get; set; }
+        public Nullable<int> TipCodigo { get; set; }
+        public Nullable<int> TraHorasTrabajo { get; set; }
+        public Nullable<int> TraEstado { get; set; }
+        public string TraUsuario { get; set; }
+        public string TraContrasena { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<RESERVACION> RESERVACION { get; set; }
+        public virtual ICollection<Consulta> Consulta { get; set; }
+        public virtual Especialidad Especialidad { get; set; }
+        public virtual Persona Persona { get; set; }
+        public virtual TipoTrabajador TipoTrabajador { get; set; }
     }
 }

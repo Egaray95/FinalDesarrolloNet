@@ -7,34 +7,54 @@
 
 <h2 class="bg-info">Lista de Especialidades</h2>
 
-<p class="btn btn-default">
-    @Html.ActionLink("Registrar Especialidad", "Create")
-</p>
+
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.NombEspe)
+            @Html.DisplayNameFor(model => model.EspEspecialidad)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.EstaEspe)
+            @Html.DisplayNameFor(model => model.EspEstado)
+        </th>
+        <th>
+            Costo
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+@{ 
+
+    string estado = "";
+
+
+    foreach (var item in Model)
+    {
+
+        if (item.EspEstado==1)
+        {
+            estado = "ACTIVO";
+        }
+        else
+        {
+            estado = "INACTIVO";
+        }
+
+
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.NombEspe)
+            @Html.DisplayFor(modelItem => item.EspEspecialidad)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.EstaEspe)
+           @estado
         </td>
-        <td>
-            <button class="btn btn-success">@Html.ActionLink("Editar", "Edit", new { id = item.CodEspe }) </button>
 
-            <button class="btn btn-danger">@Html.ActionLink("Eliminar", "Delete", new { id = item.CodEspe })</button>
+        <td>
+            @item.EspPrecio
+        </td>
+        <td>
+            <button class="btn btn-danger">@Html.ActionLink("Eliminar", "Delete", new { id = item.EspCodigo })</button>
         </td>
     </tr>
-}
-
+        }
+    }
 </table>

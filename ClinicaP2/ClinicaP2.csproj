@@ -123,63 +123,63 @@
     <Compile Include="Controllers\MedicosController.cs" />
     <Compile Include="Controllers\PacientesController.cs" />
     <Compile Include="Controllers\RESERVACIONsController.cs" />
+    <Compile Include="Models\ConfigButton.cs">
+      <DependentUpon>ModelClinicaUTPmejorado.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ConfigMenu.cs">
+      <DependentUpon>ModelClinicaUTPmejorado.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Consulta.cs">
+      <DependentUpon>ModelClinicaUTPmejorado.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Especialidad.cs">
-      <DependentUpon>ModelClinicaUTP.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ESTADO.cs">
-      <DependentUpon>ModelClinicaUTP.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\getmedporid_Result.cs">
-      <DependentUpon>ModelClinicaUTP.tt</DependentUpon>
+      <DependentUpon>ModelClinicaUTPmejorado.tt</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\HORARIOATENCION.cs">
-      <DependentUpon>ModelClinicaUTP.tt</DependentUpon>
+    <Compile Include="Models\HistClinico.cs">
+      <DependentUpon>ModelClinicaUTPmejorado.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\HORAS.cs">
-      <DependentUpon>ModelClinicaUTP.tt</DependentUpon>
+    <Compile Include="Models\ListarConsultasPorMedico_Result.cs">
+      <DependentUpon>ModelClinicaUTPmejorado.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\LISTARESERVA_Result.cs">
-      <DependentUpon>ModelClinicaUTP.tt</DependentUpon>
+    <Compile Include="Models\ListarMedicos_Result.cs">
+      <DependentUpon>ModelClinicaUTPmejorado.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Medico.cs">
-      <DependentUpon>ModelClinicaUTP.tt</DependentUpon>
+    <Compile Include="Models\ListButton_Result.cs">
+      <DependentUpon>ModelClinicaUTPmejorado.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ModelClinicaUTP.Context.cs">
+    <Compile Include="Models\ModelClinicaUTPmejorado.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ModelClinicaUTP.Context.tt</DependentUpon>
+      <DependentUpon>ModelClinicaUTPmejorado.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ModelClinicaUTP.cs">
+    <Compile Include="Models\ModelClinicaUTPmejorado.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ModelClinicaUTP.tt</DependentUpon>
+      <DependentUpon>ModelClinicaUTPmejorado.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ModelClinicaUTP.Designer.cs">
+    <Compile Include="Models\ModelClinicaUTPmejorado.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ModelClinicaUTP.edmx</DependentUpon>
+      <DependentUpon>ModelClinicaUTPmejorado.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Persona.cs">
+      <DependentUpon>ModelClinicaUTPmejorado.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TipoTrabajador.cs">
+      <DependentUpon>ModelClinicaUTPmejorado.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Trabajador.cs">
+      <DependentUpon>ModelClinicaUTPmejorado.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ViewModel\EspecialiViewmodel.cs" />
     <Compile Include="Models\ViewModel\ViewGenero.cs" />
-    <Compile Include="Models\MODULO.cs">
-      <DependentUpon>ModelClinicaUTP.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Paciente.cs">
-      <DependentUpon>ModelClinicaUTP.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\PAYMET.cs">
-      <DependentUpon>ModelClinicaUTP.tt</DependentUpon>
+      <DependentUpon>ModelClinicaUTPmejorado.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Models\RESERVACION.cs">
-      <DependentUpon>ModelClinicaUTP.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\USUARIOS.cs">
-      <DependentUpon>ModelClinicaUTP.tt</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -187,6 +187,10 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\css\styles.css" />
+    <Content Include="Content\Images\cardiología.jpg" />
+    <Content Include="Content\Images\Dermatología.jpg" />
+    <Content Include="Content\Images\medico general.jpg" />
+    <Content Include="Content\Images\odontología.jpg" />
     <Content Include="Content\js\scripts.js" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -200,23 +204,23 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
-    <EntityDeploy Include="Models\ModelClinicaUTP.edmx">
+    <EntityDeploy Include="Models\ModelClinicaUTPmejorado.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ModelClinicaUTP.Designer.cs</LastGenOutput>
+      <LastGenOutput>ModelClinicaUTPmejorado.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\ModelClinicaUTP.edmx.diagram">
-      <DependentUpon>ModelClinicaUTP.edmx</DependentUpon>
+    <Content Include="Models\ModelClinicaUTPmejorado.edmx.diagram">
+      <DependentUpon>ModelClinicaUTPmejorado.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
-    <Content Include="Models\ModelClinicaUTP.Context.tt">
+    <Content Include="Models\ModelClinicaUTPmejorado.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ModelClinicaUTP.edmx</DependentUpon>
-      <LastGenOutput>ModelClinicaUTP.Context.cs</LastGenOutput>
+      <DependentUpon>ModelClinicaUTPmejorado.edmx</DependentUpon>
+      <LastGenOutput>ModelClinicaUTPmejorado.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\ModelClinicaUTP.tt">
+    <Content Include="Models\ModelClinicaUTPmejorado.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ModelClinicaUTP.edmx</DependentUpon>
-      <LastGenOutput>ModelClinicaUTP.cs</LastGenOutput>
+      <DependentUpon>ModelClinicaUTPmejorado.edmx</DependentUpon>
+      <LastGenOutput>ModelClinicaUTPmejorado.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -267,6 +271,8 @@
     <Content Include="Views\RESERVACIONs\Edit.cshtml" />
     <Content Include="Views\RESERVACIONs\Index.cshtml" />
     <Content Include="Views\Shared\_SearchPartial.cshtml" />
+    <Content Include="Views\Especialidads\ListMedicosporesp.cshtml" />
+    <Content Include="Views\Especialidads\LisEspecialidadtoDoctor.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

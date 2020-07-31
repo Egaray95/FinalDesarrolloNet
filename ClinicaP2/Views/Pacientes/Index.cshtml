@@ -7,9 +7,7 @@
 
 <h2 class="bg-info">Lista Pacientes</h2>
 
-<p class="btn btn-default">
-    @Html.ActionLink("Registrar Paciente", "Create")
-</p>
+
 <table class="table">
     <tr>
         <th>
@@ -38,7 +36,8 @@
 
 @foreach (var item in Model) {
     string sex = "";
-    if (item.Genero.Equals("1"))
+    string esta = "";
+    if (item.Persona.PerGenero)
     {
         sex = "Masculino";
     }
@@ -46,32 +45,42 @@
     {
         sex = "Femenino";
     }
+    if (item.PacEstado==1)
+    {
+        esta = "Activo";
+    }
+    else
+    {
+        esta = "Inactivo";
+    }
+
+
     <tr>
         <td>
-            @item.CodPac
+            @item.PerCodigo
         </td>
         <td>
-           @item.NomPac
+           @item.Persona.PerNombre
         </td>
         <td>
-            @item.ApePac
+            @item.Persona.PerApellido
         </td>
         <td>
-            @item.TelePac
+            @item.Persona.PerTelefono
         </td>
         <td>
-            @item.DniPac
+            @item.Persona.PerDni
         </td>
         <td>
             @sex
         </td>
         <td>
-            @item.EstaPac
+            @esta
         </td>
         <td>
-            <p class="btn btn-success" > @Html.ActionLink("Editar", "Edit", new { id = item.CodPac }) </p>
+            <p class="btn btn-success" > @Html.ActionLink("Editar", "Edit", new { id = item.PerCodigo }) </p>
            
-            <p class="btn btn-danger"> @Html.ActionLink("Eliminar", "Delete", new { id = item.CodPac })</p>
+            <p class="btn btn-danger"> @Html.ActionLink("Eliminar", "Delete", new { id = item.PerCodigo })</p>
         </td>
     </tr>
 }

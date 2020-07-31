@@ -12,18 +12,22 @@ namespace ClinicaP2.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class ESTADO
+    public partial class ConfigButton
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public ESTADO()
+        public ConfigButton()
         {
-            this.RESERVACION = new HashSet<RESERVACION>();
+            this.ConfigMenu = new HashSet<ConfigMenu>();
         }
     
-        public string Codestado { get; set; }
-        public string Name { get; set; }
+        public int ConfButId { get; set; }
+        public string ConfButName { get; set; }
+        public Nullable<int> ConfButEstado { get; set; }
+        public Nullable<int> ConfPadre { get; set; }
+        public string ConfFuncion { get; set; }
+        public string ConfControlador { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<RESERVACION> RESERVACION { get; set; }
+        public virtual ICollection<ConfigMenu> ConfigMenu { get; set; }
     }
 }

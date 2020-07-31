@@ -11,16 +11,15 @@ namespace ClinicaP2.Models
 {
     using System;
     
-    public partial class getmedporid_Result
+    public partial class ListButton_Result
     {
-        public string Codmed { get; set; }
-        public string CodEspe { get; set; }
-        public string NomTra { get; set; }
-        public string ApeTra { get; set; }
-        public string Genero { get; set; }
-        public string DniTra { get; set; }
-        public string CorreoTra { get; set; }
-        public string EstaTra { get; set; }
-        public string Codmod { get; set; }
+        public int ConfId { get; set; }
+        public Nullable<int> ConfTipTrabaja { get; set; }
+        public Nullable<int> ConfButton { get; set; }
+        public Nullable<int> ConfEstado { get; set; }
+        public int ConfButId { get; set; }
+        public string ConfButName { get; set; }
+        public Nullable<int> ConfButEstado { get; set; }
+        public Nullable<int> ConfPadre { get; set; }
     }
 }

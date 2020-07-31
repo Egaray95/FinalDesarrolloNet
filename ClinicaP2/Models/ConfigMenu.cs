@@ -12,15 +12,14 @@ namespace ClinicaP2.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class HORARIOATENCION
+    public partial class ConfigMenu
     {
-        public string ID_HORARIOTENCION { get; set; }
-        public string CODMED { get; set; }
-        public string ID_HORA { get; set; }
-        public Nullable<System.DateTime> FECHACITA { get; set; }
-        public string ESTADO { get; set; }
+        public int ConfId { get; set; }
+        public Nullable<int> ConfTipTrabaja { get; set; }
+        public Nullable<int> ConfButton { get; set; }
+        public Nullable<int> ConfEstado { get; set; }
     
-        public virtual Medico Medico { get; set; }
-        public virtual HORAS HORAS { get; set; }
+        public virtual ConfigButton ConfigButton { get; set; }
+        public virtual TipoTrabajador TipoTrabajador { get; set; }
     }
 }

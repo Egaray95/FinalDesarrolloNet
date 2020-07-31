@@ -10,17 +10,18 @@
 namespace ClinicaP2.Models
 {
     using System;
+    using System.Collections.Generic;
     
-    public partial class LISTARESERVA_Result
+    public partial class HistClinico
     {
-        public string CodReserva { get; set; }
-        public Nullable<System.DateTime> FECHA { get; set; }
-        public string Paciente { get; set; }
-        public string NombEspe { get; set; }
-        public string Doctor { get; set; }
-        public Nullable<double> PRECIO { get; set; }
-        public string Name { get; set; }
-        public string Name1 { get; set; }
-        public string Descripcion { get; set; }
+        public int HistCodigo { get; set; }
+        public Nullable<int> CodConsulta { get; set; }
+        public Nullable<int> HistEstado { get; set; }
+        public string Histsintomas { get; set; }
+        public string HistTratamiento { get; set; }
+        public string HistExamenes { get; set; }
+        public string HistObservaciones { get; set; }
+    
+        public virtual Consulta Consulta { get; set; }
     }
 }

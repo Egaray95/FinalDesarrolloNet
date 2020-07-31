@@ -17,14 +17,15 @@ namespace ClinicaP2.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Especialidad()
         {
-            this.Medico = new HashSet<Medico>();
+            this.Trabajador = new HashSet<Trabajador>();
         }
     
-        public string CodEspe { get; set; }
-        public string NombEspe { get; set; }
-        public string EstaEspe { get; set; }
+        public int EspCodigo { get; set; }
+        public string EspEspecialidad { get; set; }
+        public Nullable<int> EspEstado { get; set; }
+        public Nullable<double> EspPrecio { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Medico> Medico { get; set; }
+        public virtual ICollection<Trabajador> Trabajador { get; set; }
     }
 }

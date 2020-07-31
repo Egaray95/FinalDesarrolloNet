@@ -30,17 +30,17 @@ namespace ClinicaP2.Controllers
             return View();
         }
 
-        public void login(string usurname, string contrasena)
+        public ActionResult login(string usurname, string contrasena)
         {
 
 
             if (usurname == null)
             {
-                ViewBag.Message = "";
+                ViewBag.Message = "dato nulo";
 
             }
 
-
+            return View();
 
         }
     }

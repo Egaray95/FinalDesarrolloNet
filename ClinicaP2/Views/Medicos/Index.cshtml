@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ClinicaP2.Models.Medico>
+﻿@model IEnumerable<ClinicaP2.Models.Trabajador>
 
 @{
     ViewBag.Title = "Index";
@@ -7,71 +7,102 @@
 
 <h2 class="bg-info">Lista Medicos</h2>
 
-<p class="btn btn-default">
-    @Html.ActionLink("Registrar Medico", "Create")
-</p>
 
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.NomTra)
+            Nombres
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ApeTra)
+            Apellidos
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Genero)
+            Género
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.DniTra)
+            DNI
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CorreoTra)
+            Correo
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.EstaTra)
+            Estado
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Especialidad.NombEspe)
+            Especialidad
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.MODULO.name)
+            Teléfono
+        </th>
+        <th>
+            horas a la semana
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+@{
+
+    foreach (var item in Model) {
+
+        string sex = "";
+        string est = "";
+        if (item.Persona.PerGenero)
+        {
+            sex = "Masculino";
+        }
+        else
+        {
+            sex = "Femenino";
+        }
+
+        if (item.TraEstado==1)
+        {
+            est = "Activo";
+        }
+        else
+        {
+            est = "Inactivo";
+        }
+
+
+
+
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.NomTra)
+            @Html.DisplayFor(modelItem => item.Persona.PerNombre)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.ApeTra)
+            @Html.DisplayFor(modelItem => item.Persona.PerApellido)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Genero)
+            @sex
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.DniTra)
+            @Html.DisplayFor(modelItem => item.Persona.PerDni)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.CorreoTra)
+            @Html.DisplayFor(modelItem => item.Persona.PerCorreo)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.EstaTra)
+            @est
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Especialidad.NombEspe)
+            @Html.DisplayFor(modelItem => item.Especialidad.EspEspecialidad)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.MODULO.name)
+            @Html.DisplayFor(modelItem => item.Persona.PerTelefono)
         </td>
         <td>
-            <button class="btn btn-primary" style="background:#ffffff">@Html.ActionLink("Editar", "Edit", new { id = item.Codmed }) </button>
+            @Html.DisplayFor(modelItem => item.TraHorasTrabajo)
+        </td>
 
-         <button class="btn btn-danger">@Html.ActionLink("Eliminar", "Delete", new { id = item.Codmed })</button>
+        <td>
+            <button class="btn btn-primary" style="background:#ffffff">@Html.ActionLink("Editar", "Edit", new { id = item.TraCodigo }) </button>
+
+            <button class="btn btn-danger">@Html.ActionLink("Eliminar", "Delete", new { id = item.TraCodigo })</button>
         </td>
     </tr>
-}
+        }
+    }
 
 </table>

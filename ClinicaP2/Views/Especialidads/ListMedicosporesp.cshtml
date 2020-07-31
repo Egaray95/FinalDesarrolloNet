@@ -1,0 +1,56 @@
+﻿@model IEnumerable<ClinicaP2.Models.Trabajador>
+
+@{
+    ViewBag.Title = "ListMedicosporesp";
+}
+
+<h2>Lista de trabajadores de especialidad</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TraHorasTrabajo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TraEstado)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.Especialidad.EspEspecialidad)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Persona.PerNombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TipoTrabajador.TipTipo)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.TraHorasTrabajo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TraEstado)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Especialidad.EspEspecialidad)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Persona.PerNombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TipoTrabajador.TipTipo)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.TraCodigo }) |
+            @Html.ActionLink("Details", "Details", new { id=item.TraCodigo }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.TraCodigo })
+        </td>
+    </tr>
+}
+
+</table>

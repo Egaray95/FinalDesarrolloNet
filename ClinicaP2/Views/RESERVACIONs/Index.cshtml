@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ClinicaP2.Models.RESERVACION>
+﻿@model IEnumerable<ClinicaP2.Models.Consulta>
 
     @{
         ViewBag.Title = "Index";
@@ -7,9 +7,6 @@
 
     <h2 class="bg-info">Reservar Cita Medica</h2>
 
-    <p class="btn  btn-default">
-        @Html.ActionLink("Registrar Cita", "Create")
-    </p>
     <table class="table">
         <tr>
             <th>
@@ -30,24 +27,32 @@
             <th>
                 Estado de Cita
             </th>
-            <th>
-                Registrado por:
-            </th>
+    
 
             <th></th>
         </tr>
 
         @foreach (var item in Model)
         {
+            string estado = "";
+
+            switch (item.ConsEstado)
+            {
+                case 1: estado = "Pendiente"; break;
+                case 2: estado = "Atendido"; break;
+                case 3: estado = "anulado"; break;
+
+            }
+
             <tr>
                 <td>
-                    @item.CodReserva
+                    @item.ConsCodigo
                 </td>
                 <td>
-                    @item.Fecha
+                    @item.ConsFecha
                 </td>
                 <td>
-                    @item.Paciente.NomPac @item.Paciente.ApePac
+                    @item.Paciente.Persona.PerNombre  @item.Paciente.Persona.PerApellido
                 </td>
                 @*<td>
                         @item.Medico.NomTra  @item.Medico.ApeTra
@@ -59,21 +64,19 @@
                         @item.Medico.CodEspe
                     </td>*@
                 <td>
-                    @item.precio
+                    @item.Trabajador.Especialidad.EspPrecio
                 </td>
                 <td>
-                    @item.PAYMET.Name
+                  PAGADO
                 </td>
                 <td>
-                    @item.ESTADO.Name
+                    @estado
                 </td>
+
                 <td>
-                    @item.USUARIOS.Descripcion
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.CodReserva }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.CodReserva }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.CodReserva })
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ConsCodigo }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.ConsCodigo }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ConsCodigo })
                 </td>
             </tr>
         }

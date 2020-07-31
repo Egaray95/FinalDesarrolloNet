@@ -43,59 +43,63 @@
             <div class="sidebar_inner">
                 <ul class="principal">
 
-                    <li>
-                        <a href="#">
-                            <span class="icon"><i class="fas fa-chess"></i></span>
-                            <span class="text">Medicos</span>
 
-                            <ul>
+                    @{
 
 
-                                @Html.ActionLink("Medicos", "Index", "Medicos")
+                        ClinicaP2.Models.BDCLINICAEntities bd = new ClinicaP2.Models.BDCLINICAEntities();
 
-                            </ul>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <span class="icon"><i class="fas fa-chess"></i></span>
-                            <span class="text">Especialidad</span>
 
-                            <ul>
-                                @* "Nombre al control","Nombre como se declara el controlador","Nombre de la carpeta" *@
-                                @Html.ActionLink("Especialidad", "Index", "Especialidads")
-                            
 
-                            </ul>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <span class="icon"><i class="fas fa-chess"></i></span>
-                            <span class="text">Pacientes</span>
+                        var query = from u in bd.ConfigMenu
+                                    join ur in bd.ConfigButton on u.ConfButton equals ur.ConfButId
+                                    where u.ConfTipTrabaja == 1 && ur.ConfPadre == null
 
-                            <ul>
-                                @* "Nombre al control","Nombre como se declara el controlador","Nombre de la carpeta" *@
-                                @Html.ActionLink("Pacientes", "Index", "Pacientes")
-                                @Html.ActionLink("Buscar", "About", "Home")
-                               
+                                    select new 
+                                    {
+                                        nombre= ur.ConfButName,
+                                        codigopadre =ur.ConfButId
+                                    };
 
-                            </ul>
-                        </a>
-                    </li>
+                        foreach (var item in query)
+                        {
 
-                    <li>
-                        <a href="#">
-                            <span class="icon"><i class="fas fa-chess"></i></span>
-                            <span class="text">Citas</span>
 
-                            <ul>
-                                @Html.ActionLink("Reservar Cita", "Index", "RESERVACIONs")
-                               
 
-                            </ul>
-                        </a>
-                    </li>
+
+
+                            <li>
+                                                    <a href="#">
+                                                        <span class="icon"><i class="fas fa-chess"></i></span>
+                                                        <span class="text">@item.nombre</span>
+
+                                                        @{
+
+                                                            var listahijos = from a in bd.ConfigButton where a.ConfPadre == item.codigopadre select a;
+
+                                                            foreach (var item2 in listahijos)
+                                                            {
+                                                                <ul>
+
+
+                                                                    @Html.ActionLink(item2.ConfButName, item2.ConfFuncion, item2.ConfControlador)
+
+                                                                </ul>
+                                                            }
+                                                        }
+
+
+                                                    </a>
+                            </li>
+
+
+                        }
+
+
+
+                    }
+
+
                 </ul>
             </div>
         </div>

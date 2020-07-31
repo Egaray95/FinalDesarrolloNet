@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ec9b4dcd8e394befbfa65bbeb8c129a7" Name="Diagram1">
+        <EntityTypeShape EntityType="BDCLINICAModel.Consulta" Width="1.5" PointX="5.25" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDCLINICAModel.Especialidad" Width="1.5" PointX="0.75" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDCLINICAModel.HistClinico" Width="1.5" PointX="7.5" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDCLINICAModel.Paciente" Width="1.5" PointX="3" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDCLINICAModel.Persona" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDCLINICAModel.TipoTrabajador" Width="1.5" PointX="0.75" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDCLINICAModel.Trabajador" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="BDCLINICAModel.FK_Consulta_Paciente" ManuallyRouted="false" />
+        <AssociationConnector Association="BDCLINICAModel.FK_Consulta_Trabajador" ManuallyRouted="false" />
+        <AssociationConnector Association="BDCLINICAModel.FK_HistClinico_Consulta" ManuallyRouted="false" />
+        <AssociationConnector Association="BDCLINICAModel.FK_Trabajador_Especialidad" ManuallyRouted="false" />
+        <AssociationConnector Association="BDCLINICAModel.FK_Paciente_Persona" ManuallyRouted="false" />
+        <AssociationConnector Association="BDCLINICAModel.FK_Trabajador_Persona" ManuallyRouted="false" />
+        <AssociationConnector Association="BDCLINICAModel.FK_Trabajador_TipoTrabajador" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="BDCLINICAModel.ConfigButton" Width="1.5" PointX="5.375" PointY="0.75" />
+        <EntityTypeShape EntityType="BDCLINICAModel.ConfigMenu" Width="1.5" PointX="7.375" PointY="0.75" />
+        <AssociationConnector Association="BDCLINICAModel.FK_ConfigMenu_ConfigButton" />
+        <AssociationConnector Association="BDCLINICAModel.FK_ConfigMenu_TipoTrabajador" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

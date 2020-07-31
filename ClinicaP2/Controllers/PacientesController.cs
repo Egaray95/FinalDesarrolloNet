@@ -12,7 +12,7 @@ namespace ClinicaP2.Controllers
 {
     public class PacientesController : Controller
     {
-        private bdclinicEntities1 db = new bdclinicEntities1();
+        private BDCLINICAEntities db = new BDCLINICAEntities();
 
         // GET: Pacientes
         public ActionResult Index()
@@ -48,17 +48,32 @@ namespace ClinicaP2.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create( Paciente paciente)
         {
-            if (ModelState.IsValid)
+            try
             {
-                //db.Paciente.Add(paciente);
-                //db.SaveChanges();
-                db.SP_ADIPACIENTES(paciente.NomPac, paciente.ApePac,
-                    paciente.TelePac, paciente.DniPac, paciente.Genero, 
-                    paciente.EstaPac);
+
+            db.insertPaciente(paciente.Persona.PerNombre,
+                paciente.Persona.PerApellido,
+                paciente.Persona.PerDni, 
+                paciente.Persona.PerRuc,
+                paciente.Persona.PerTelefono,
+                paciente.Persona.PerCorreo,
+                paciente.Persona.PerGenero,
+                paciente.PacFechaNacimiento);
+                  
+   
+
                 return RedirectToAction("Index");
             }
+            catch (Exception)
+            {
 
-            return View(paciente);
+                return HttpNotFound();
+            }
+
+
+          
+
+            // return View(paciente);
         }
 
         // GET: Pacientes/Edit/5

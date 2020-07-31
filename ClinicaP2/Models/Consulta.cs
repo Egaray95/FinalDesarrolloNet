@@ -12,18 +12,23 @@ namespace ClinicaP2.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class HORAS
+    public partial class Consulta
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public HORAS()
+        public Consulta()
         {
-            this.HORARIOATENCION = new HashSet<HORARIOATENCION>();
+            this.HistClinico = new HashSet<HistClinico>();
         }
     
-        public string ID_HORA { get; set; }
-        public string HORA { get; set; }
+        public int ConsCodigo { get; set; }
+        public Nullable<int> CodPaciente { get; set; }
+        public Nullable<int> CodTrabajador { get; set; }
+        public Nullable<int> ConsEstado { get; set; }
+        public Nullable<System.DateTime> ConsFecha { get; set; }
     
+        public virtual Paciente Paciente { get; set; }
+        public virtual Trabajador Trabajador { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<HORARIOATENCION> HORARIOATENCION { get; set; }
+        public virtual ICollection<HistClinico> HistClinico { get; set; }
     }
 }

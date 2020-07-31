@@ -1,0 +1,862 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="BDCLINICAModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ConfigButton">
+          <Key>
+            <PropertyRef Name="ConfButId" />
+          </Key>
+          <Property Name="ConfButId" Type="int" Nullable="false" />
+          <Property Name="ConfButName" Type="varchar" MaxLength="100" />
+          <Property Name="ConfButEstado" Type="int" />
+          <Property Name="ConfPadre" Type="int" />
+          <Property Name="ConfFuncion" Type="varchar" MaxLength="100" />
+          <Property Name="ConfControlador" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="ConfigMenu">
+          <Key>
+            <PropertyRef Name="ConfId" />
+          </Key>
+          <Property Name="ConfId" Type="int" Nullable="false" />
+          <Property Name="ConfTipTrabaja" Type="int" />
+          <Property Name="ConfButton" Type="int" />
+          <Property Name="ConfEstado" Type="int" />
+        </EntityType>
+        <EntityType Name="Consulta">
+          <Key>
+            <PropertyRef Name="ConsCodigo" />
+          </Key>
+          <Property Name="ConsCodigo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CodPaciente" Type="int" />
+          <Property Name="CodTrabajador" Type="int" />
+          <Property Name="ConsEstado" Type="int" />
+          <Property Name="ConsFecha" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Especialidad">
+          <Key>
+            <PropertyRef Name="EspCodigo" />
+          </Key>
+          <Property Name="EspCodigo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EspEspecialidad" Type="varchar" MaxLength="50" />
+          <Property Name="EspEstado" Type="int" />
+          <Property Name="EspPrecio" Type="float" />
+        </EntityType>
+        <EntityType Name="HistClinico">
+          <Key>
+            <PropertyRef Name="HistCodigo" />
+          </Key>
+          <Property Name="HistCodigo" Type="int" Nullable="false" />
+          <Property Name="CodConsulta" Type="int" />
+          <Property Name="HistEstado" Type="int" />
+          <Property Name="Histsintomas" Type="varchar" MaxLength="400" />
+          <Property Name="HistTratamiento" Type="varchar" MaxLength="400" />
+          <Property Name="HistExamenes" Type="varchar" MaxLength="400" />
+          <Property Name="HistObservaciones" Type="varchar" MaxLength="400" />
+        </EntityType>
+        <EntityType Name="Paciente">
+          <Key>
+            <PropertyRef Name="PacCodigo" />
+          </Key>
+          <Property Name="PacCodigo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PerCodigo" Type="int" />
+          <Property Name="PacFechaNacimiento" Type="date" />
+          <Property Name="PacEstado" Type="int" />
+        </EntityType>
+        <EntityType Name="Persona">
+          <Key>
+            <PropertyRef Name="PerCodigo" />
+          </Key>
+          <Property Name="PerCodigo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PerNombre" Type="varchar" MaxLength="50" />
+          <Property Name="PerApellido" Type="varchar" MaxLength="50" />
+          <Property Name="PerDni" Type="char" MaxLength="8" />
+          <Property Name="PerRuc" Type="char" MaxLength="15" />
+          <Property Name="PerTelefono" Type="char" MaxLength="9" />
+          <Property Name="PerCorreo" Type="varchar" MaxLength="50" />
+          <Property Name="PerGenero" Type="bit" />
+          <Property Name="PerEstado" Type="int" />
+        </EntityType>
+        <EntityType Name="TipoTrabajador">
+          <Key>
+            <PropertyRef Name="TipCodigo" />
+          </Key>
+          <Property Name="TipCodigo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TipTipo" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Trabajador">
+          <Key>
+            <PropertyRef Name="TraCodigo" />
+          </Key>
+          <Property Name="TraCodigo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PerCodigo" Type="int" />
+          <Property Name="EspCodigo" Type="int" />
+          <Property Name="TipCodigo" Type="int" />
+          <Property Name="TraHorasTrabajo" Type="int" />
+          <Property Name="TraEstado" Type="int" />
+          <Property Name="TraUsuario" Type="varchar" MaxLength="50" />
+          <Property Name="TraContrasena" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_ConfigMenu_ConfigButton">
+          <End Role="ConfigButton" Type="Self.ConfigButton" Multiplicity="0..1" />
+          <End Role="ConfigMenu" Type="Self.ConfigMenu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ConfigButton">
+              <PropertyRef Name="ConfButId" />
+            </Principal>
+            <Dependent Role="ConfigMenu">
+              <PropertyRef Name="ConfTipTrabaja" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ConfigMenu_TipoTrabajador">
+          <End Role="TipoTrabajador" Type="Self.TipoTrabajador" Multiplicity="0..1" />
+          <End Role="ConfigMenu" Type="Self.ConfigMenu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoTrabajador">
+              <PropertyRef Name="TipCodigo" />
+            </Principal>
+            <Dependent Role="ConfigMenu">
+              <PropertyRef Name="ConfTipTrabaja" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Consulta_Paciente">
+          <End Role="Paciente" Type="Self.Paciente" Multiplicity="0..1" />
+          <End Role="Consulta" Type="Self.Consulta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Paciente">
+              <PropertyRef Name="PacCodigo" />
+            </Principal>
+            <Dependent Role="Consulta">
+              <PropertyRef Name="CodPaciente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Consulta_Trabajador">
+          <End Role="Trabajador" Type="Self.Trabajador" Multiplicity="0..1" />
+          <End Role="Consulta" Type="Self.Consulta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Trabajador">
+              <PropertyRef Name="TraCodigo" />
+            </Principal>
+            <Dependent Role="Consulta">
+              <PropertyRef Name="CodTrabajador" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HistClinico_Consulta">
+          <End Role="Consulta" Type="Self.Consulta" Multiplicity="0..1" />
+          <End Role="HistClinico" Type="Self.HistClinico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Consulta">
+              <PropertyRef Name="ConsCodigo" />
+            </Principal>
+            <Dependent Role="HistClinico">
+              <PropertyRef Name="CodConsulta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Paciente_Persona">
+          <End Role="Persona" Type="Self.Persona" Multiplicity="0..1" />
+          <End Role="Paciente" Type="Self.Paciente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persona">
+              <PropertyRef Name="PerCodigo" />
+            </Principal>
+            <Dependent Role="Paciente">
+              <PropertyRef Name="PerCodigo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Trabajador_Especialidad">
+          <End Role="Especialidad" Type="Self.Especialidad" Multiplicity="0..1" />
+          <End Role="Trabajador" Type="Self.Trabajador" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Especialidad">
+              <PropertyRef Name="EspCodigo" />
+            </Principal>
+            <Dependent Role="Trabajador">
+              <PropertyRef Name="EspCodigo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Trabajador_Persona">
+          <End Role="Persona" Type="Self.Persona" Multiplicity="0..1" />
+          <End Role="Trabajador" Type="Self.Trabajador" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persona">
+              <PropertyRef Name="PerCodigo" />
+            </Principal>
+            <Dependent Role="Trabajador">
+              <PropertyRef Name="PerCodigo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Trabajador_TipoTrabajador">
+          <End Role="TipoTrabajador" Type="Self.TipoTrabajador" Multiplicity="0..1" />
+          <End Role="Trabajador" Type="Self.Trabajador" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoTrabajador">
+              <PropertyRef Name="TipCodigo" />
+            </Principal>
+            <Dependent Role="Trabajador">
+              <PropertyRef Name="TipCodigo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="InsertConsulta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="codpaciente" Type="int" Mode="In" />
+          <Parameter Name="codtrabajador" Type="int" Mode="In" />
+          <Parameter Name="fechaconsulta" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="InsertEspecialidad" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="esepecialidad" Type="varchar" Mode="In" />
+          <Parameter Name="esprecio" Type="float" Mode="In" />
+        </Function>
+        <Function Name="insertPaciente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="nombre" Type="varchar" Mode="In" />
+          <Parameter Name="apellido" Type="varchar" Mode="In" />
+          <Parameter Name="dni" Type="char" Mode="In" />
+          <Parameter Name="ruc" Type="char" Mode="In" />
+          <Parameter Name="telefono" Type="char" Mode="In" />
+          <Parameter Name="correo" Type="varchar" Mode="In" />
+          <Parameter Name="genero" Type="bit" Mode="In" />
+          <Parameter Name="fechana" Type="date" Mode="In" />
+        </Function>
+        <Function Name="InsertTrabajador" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="nombre" Type="varchar" Mode="In" />
+          <Parameter Name="apellido" Type="varchar" Mode="In" />
+          <Parameter Name="dni" Type="char" Mode="In" />
+          <Parameter Name="ruc" Type="char" Mode="In" />
+          <Parameter Name="telefono" Type="char" Mode="In" />
+          <Parameter Name="correo" Type="varchar" Mode="In" />
+          <Parameter Name="genero" Type="bit" Mode="In" />
+          <Parameter Name="especialidad" Type="int" Mode="In" />
+          <Parameter Name="trahoras" Type="int" Mode="In" />
+          <Parameter Name="trausuario" Type="varchar" Mode="In" />
+          <Parameter Name="tracontrasena" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="ListarConsultasPorMedico" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="codMedico" Type="int" Mode="In" />
+          <Parameter Name="estadoconsulta" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ListarMedicos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="ListButton" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tipTrabajador" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="BDCLINICAModelStoreContainer">
+          <EntitySet Name="ConfigButton" EntityType="Self.ConfigButton" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ConfigMenu" EntityType="Self.ConfigMenu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Consulta" EntityType="Self.Consulta" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Especialidad" EntityType="Self.Especialidad" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HistClinico" EntityType="Self.HistClinico" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Paciente" EntityType="Self.Paciente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Persona" EntityType="Self.Persona" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoTrabajador" EntityType="Self.TipoTrabajador" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Trabajador" EntityType="Self.Trabajador" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_ConfigMenu_ConfigButton" Association="Self.FK_ConfigMenu_ConfigButton">
+            <End Role="ConfigButton" EntitySet="ConfigButton" />
+            <End Role="ConfigMenu" EntitySet="ConfigMenu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ConfigMenu_TipoTrabajador" Association="Self.FK_ConfigMenu_TipoTrabajador">
+            <End Role="TipoTrabajador" EntitySet="TipoTrabajador" />
+            <End Role="ConfigMenu" EntitySet="ConfigMenu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Consulta_Paciente" Association="Self.FK_Consulta_Paciente">
+            <End Role="Paciente" EntitySet="Paciente" />
+            <End Role="Consulta" EntitySet="Consulta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Consulta_Trabajador" Association="Self.FK_Consulta_Trabajador">
+            <End Role="Trabajador" EntitySet="Trabajador" />
+            <End Role="Consulta" EntitySet="Consulta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HistClinico_Consulta" Association="Self.FK_HistClinico_Consulta">
+            <End Role="Consulta" EntitySet="Consulta" />
+            <End Role="HistClinico" EntitySet="HistClinico" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Paciente_Persona" Association="Self.FK_Paciente_Persona">
+            <End Role="Persona" EntitySet="Persona" />
+            <End Role="Paciente" EntitySet="Paciente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Trabajador_Especialidad" Association="Self.FK_Trabajador_Especialidad">
+            <End Role="Especialidad" EntitySet="Especialidad" />
+            <End Role="Trabajador" EntitySet="Trabajador" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Trabajador_Persona" Association="Self.FK_Trabajador_Persona">
+            <End Role="Persona" EntitySet="Persona" />
+            <End Role="Trabajador" EntitySet="Trabajador" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Trabajador_TipoTrabajador" Association="Self.FK_Trabajador_TipoTrabajador">
+            <End Role="TipoTrabajador" EntitySet="TipoTrabajador" />
+            <End Role="Trabajador" EntitySet="Trabajador" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BDCLINICAModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Consulta">
+          <Key>
+            <PropertyRef Name="ConsCodigo" />
+          </Key>
+          <Property Name="ConsCodigo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CodPaciente" Type="Int32" />
+          <Property Name="CodTrabajador" Type="Int32" />
+          <Property Name="ConsEstado" Type="Int32" />
+          <Property Name="ConsFecha" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Paciente" Relationship="Self.FK_Consulta_Paciente" FromRole="Consulta" ToRole="Paciente" />
+          <NavigationProperty Name="Trabajador" Relationship="Self.FK_Consulta_Trabajador" FromRole="Consulta" ToRole="Trabajador" />
+          <NavigationProperty Name="HistClinico" Relationship="Self.FK_HistClinico_Consulta" FromRole="Consulta" ToRole="HistClinico" />
+        </EntityType>
+        <EntityType Name="Especialidad">
+          <Key>
+            <PropertyRef Name="EspCodigo" />
+          </Key>
+          <Property Name="EspCodigo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EspEspecialidad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EspEstado" Type="Int32" />
+          <Property Name="EspPrecio" Type="Double" />
+          <NavigationProperty Name="Trabajador" Relationship="Self.FK_Trabajador_Especialidad" FromRole="Especialidad" ToRole="Trabajador" />
+        </EntityType>
+        <EntityType Name="HistClinico">
+          <Key>
+            <PropertyRef Name="HistCodigo" />
+          </Key>
+          <Property Name="HistCodigo" Type="Int32" Nullable="false" />
+          <Property Name="CodConsulta" Type="Int32" />
+          <Property Name="HistEstado" Type="Int32" />
+          <Property Name="Histsintomas" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
+          <Property Name="HistTratamiento" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
+          <Property Name="HistExamenes" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
+          <Property Name="HistObservaciones" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Consulta" Relationship="Self.FK_HistClinico_Consulta" FromRole="HistClinico" ToRole="Consulta" />
+        </EntityType>
+        <EntityType Name="Paciente">
+          <Key>
+            <PropertyRef Name="PacCodigo" />
+          </Key>
+          <Property Name="PacCodigo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PerCodigo" Type="Int32" />
+          <Property Name="PacFechaNacimiento" Type="DateTime" Precision="0" />
+          <Property Name="PacEstado" Type="Int32" />
+          <NavigationProperty Name="Consulta" Relationship="Self.FK_Consulta_Paciente" FromRole="Paciente" ToRole="Consulta" />
+          <NavigationProperty Name="Persona" Relationship="Self.FK_Paciente_Persona" FromRole="Paciente" ToRole="Persona" />
+        </EntityType>
+        <EntityType Name="Persona">
+          <Key>
+            <PropertyRef Name="PerCodigo" />
+          </Key>
+          <Property Name="PerCodigo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PerNombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PerApellido" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PerDni" Type="String" MaxLength="8" FixedLength="true" Unicode="false" />
+          <Property Name="PerRuc" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
+          <Property Name="PerTelefono" Type="String" MaxLength="9" FixedLength="true" Unicode="false" />
+          <Property Name="PerCorreo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Paciente" Relationship="Self.FK_Paciente_Persona" FromRole="Persona" ToRole="Paciente" />
+          <NavigationProperty Name="Trabajador" Relationship="Self.FK_Trabajador_Persona" FromRole="Persona" ToRole="Trabajador" />
+          <Property Name="PerGenero" Type="Boolean" />
+          <Property Name="PerEstado" Type="Int32" />
+        </EntityType>
+        <EntityType Name="TipoTrabajador">
+          <Key>
+            <PropertyRef Name="TipCodigo" />
+          </Key>
+          <Property Name="TipCodigo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TipTipo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Trabajador" Relationship="Self.FK_Trabajador_TipoTrabajador" FromRole="TipoTrabajador" ToRole="Trabajador" />
+          <NavigationProperty Name="ConfigMenu" Relationship="BDCLINICAModel.FK_ConfigMenu_TipoTrabajador" FromRole="TipoTrabajador" ToRole="ConfigMenu" />
+        </EntityType>
+        <EntityType Name="Trabajador">
+          <Key>
+            <PropertyRef Name="TraCodigo" />
+          </Key>
+          <Property Name="TraCodigo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PerCodigo" Type="Int32" />
+          <Property Name="EspCodigo" Type="Int32" />
+          <Property Name="TipCodigo" Type="Int32" />
+          <Property Name="TraHorasTrabajo" Type="Int32" />
+          <Property Name="TraEstado" Type="Int32" />
+          <Property Name="TraUsuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TraContrasena" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Consulta" Relationship="Self.FK_Consulta_Trabajador" FromRole="Trabajador" ToRole="Consulta" />
+          <NavigationProperty Name="Especialidad" Relationship="Self.FK_Trabajador_Especialidad" FromRole="Trabajador" ToRole="Especialidad" />
+          <NavigationProperty Name="Persona" Relationship="Self.FK_Trabajador_Persona" FromRole="Trabajador" ToRole="Persona" />
+          <NavigationProperty Name="TipoTrabajador" Relationship="Self.FK_Trabajador_TipoTrabajador" FromRole="Trabajador" ToRole="TipoTrabajador" />
+        </EntityType>
+        <Association Name="FK_Consulta_Paciente">
+          <End Role="Paciente" Type="Self.Paciente" Multiplicity="0..1" />
+          <End Role="Consulta" Type="Self.Consulta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Paciente">
+              <PropertyRef Name="PacCodigo" />
+            </Principal>
+            <Dependent Role="Consulta">
+              <PropertyRef Name="CodPaciente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Consulta_Trabajador">
+          <End Role="Trabajador" Type="Self.Trabajador" Multiplicity="0..1" />
+          <End Role="Consulta" Type="Self.Consulta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Trabajador">
+              <PropertyRef Name="TraCodigo" />
+            </Principal>
+            <Dependent Role="Consulta">
+              <PropertyRef Name="CodTrabajador" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HistClinico_Consulta">
+          <End Role="Consulta" Type="Self.Consulta" Multiplicity="0..1" />
+          <End Role="HistClinico" Type="Self.HistClinico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Consulta">
+              <PropertyRef Name="ConsCodigo" />
+            </Principal>
+            <Dependent Role="HistClinico">
+              <PropertyRef Name="CodConsulta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Trabajador_Especialidad">
+          <End Role="Especialidad" Type="Self.Especialidad" Multiplicity="0..1" />
+          <End Role="Trabajador" Type="Self.Trabajador" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Especialidad">
+              <PropertyRef Name="EspCodigo" />
+            </Principal>
+            <Dependent Role="Trabajador">
+              <PropertyRef Name="EspCodigo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Paciente_Persona">
+          <End Role="Persona" Type="Self.Persona" Multiplicity="0..1" />
+          <End Role="Paciente" Type="Self.Paciente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persona">
+              <PropertyRef Name="PerCodigo" />
+            </Principal>
+            <Dependent Role="Paciente">
+              <PropertyRef Name="PerCodigo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Trabajador_Persona">
+          <End Role="Persona" Type="Self.Persona" Multiplicity="0..1" />
+          <End Role="Trabajador" Type="Self.Trabajador" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persona">
+              <PropertyRef Name="PerCodigo" />
+            </Principal>
+            <Dependent Role="Trabajador">
+              <PropertyRef Name="PerCodigo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Trabajador_TipoTrabajador">
+          <End Role="TipoTrabajador" Type="Self.TipoTrabajador" Multiplicity="0..1" />
+          <End Role="Trabajador" Type="Self.Trabajador" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoTrabajador">
+              <PropertyRef Name="TipCodigo" />
+            </Principal>
+            <Dependent Role="Trabajador">
+              <PropertyRef Name="TipCodigo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BDCLINICAEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Consulta" EntityType="Self.Consulta" />
+          <EntitySet Name="Especialidad" EntityType="Self.Especialidad" />
+          <EntitySet Name="HistClinico" EntityType="Self.HistClinico" />
+          <EntitySet Name="Paciente" EntityType="Self.Paciente" />
+          <EntitySet Name="Persona" EntityType="Self.Persona" />
+          <EntitySet Name="TipoTrabajador" EntityType="Self.TipoTrabajador" />
+          <EntitySet Name="Trabajador" EntityType="Self.Trabajador" />
+          <AssociationSet Name="FK_Consulta_Paciente" Association="Self.FK_Consulta_Paciente">
+            <End Role="Paciente" EntitySet="Paciente" />
+            <End Role="Consulta" EntitySet="Consulta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Consulta_Trabajador" Association="Self.FK_Consulta_Trabajador">
+            <End Role="Trabajador" EntitySet="Trabajador" />
+            <End Role="Consulta" EntitySet="Consulta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HistClinico_Consulta" Association="Self.FK_HistClinico_Consulta">
+            <End Role="Consulta" EntitySet="Consulta" />
+            <End Role="HistClinico" EntitySet="HistClinico" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Trabajador_Especialidad" Association="Self.FK_Trabajador_Especialidad">
+            <End Role="Especialidad" EntitySet="Especialidad" />
+            <End Role="Trabajador" EntitySet="Trabajador" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Paciente_Persona" Association="Self.FK_Paciente_Persona">
+            <End Role="Persona" EntitySet="Persona" />
+            <End Role="Paciente" EntitySet="Paciente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Trabajador_Persona" Association="Self.FK_Trabajador_Persona">
+            <End Role="Persona" EntitySet="Persona" />
+            <End Role="Trabajador" EntitySet="Trabajador" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Trabajador_TipoTrabajador" Association="Self.FK_Trabajador_TipoTrabajador">
+            <End Role="TipoTrabajador" EntitySet="TipoTrabajador" />
+            <End Role="Trabajador" EntitySet="Trabajador" />
+          </AssociationSet>
+          <FunctionImport Name="InsertConsulta">
+            <Parameter Name="codpaciente" Mode="In" Type="Int32" />
+            <Parameter Name="codtrabajador" Mode="In" Type="Int32" />
+            <Parameter Name="fechaconsulta" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="InsertEspecialidad">
+            <Parameter Name="esepecialidad" Mode="In" Type="String" />
+            <Parameter Name="esprecio" Mode="In" Type="Double" />
+          </FunctionImport>
+          <FunctionImport Name="insertPaciente">
+            <Parameter Name="nombre" Mode="In" Type="String" />
+            <Parameter Name="apellido" Mode="In" Type="String" />
+            <Parameter Name="dni" Mode="In" Type="String" />
+            <Parameter Name="ruc" Mode="In" Type="String" />
+            <Parameter Name="telefono" Mode="In" Type="String" />
+            <Parameter Name="correo" Mode="In" Type="String" />
+            <Parameter Name="genero" Mode="In" Type="Boolean" />
+            <Parameter Name="fechana" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="InsertTrabajador">
+            <Parameter Name="nombre" Mode="In" Type="String" />
+            <Parameter Name="apellido" Mode="In" Type="String" />
+            <Parameter Name="dni" Mode="In" Type="String" />
+            <Parameter Name="ruc" Mode="In" Type="String" />
+            <Parameter Name="telefono" Mode="In" Type="String" />
+            <Parameter Name="correo" Mode="In" Type="String" />
+            <Parameter Name="genero" Mode="In" Type="Boolean" />
+            <Parameter Name="especialidad" Mode="In" Type="Int32" />
+            <Parameter Name="trahoras" Mode="In" Type="Int32" />
+            <Parameter Name="trausuario" Mode="In" Type="String" />
+            <Parameter Name="tracontrasena" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ListarMedicos" ReturnType="Collection(BDCLINICAModel.ListarMedicos_Result)" />
+          <FunctionImport Name="ListarConsultasPorMedico" ReturnType="Collection(BDCLINICAModel.ListarConsultasPorMedico_Result)">
+            <Parameter Name="codMedico" Mode="In" Type="Int32" />
+            <Parameter Name="estadoconsulta" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="ConfigButton" EntityType="BDCLINICAModel.ConfigButton" />
+          <EntitySet Name="ConfigMenu" EntityType="BDCLINICAModel.ConfigMenu" />
+          <FunctionImport Name="ListButton" ReturnType="Collection(BDCLINICAModel.ListButton_Result)">
+          <Parameter Name="tipTrabajador" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <AssociationSet Name="FK_ConfigMenu_ConfigButton" Association="BDCLINICAModel.FK_ConfigMenu_ConfigButton">
+            <End Role="ConfigButton" EntitySet="ConfigButton" />
+            <End Role="ConfigMenu" EntitySet="ConfigMenu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ConfigMenu_TipoTrabajador" Association="BDCLINICAModel.FK_ConfigMenu_TipoTrabajador">
+            <End Role="TipoTrabajador" EntitySet="TipoTrabajador" />
+            <End Role="ConfigMenu" EntitySet="ConfigMenu" />
+          </AssociationSet>
+        </EntityContainer>
+        <ComplexType Name="ListarMedicos_Result">
+          <Property Type="Int32" Name="TraCodigo" Nullable="false" />
+          <Property Type="Int32" Name="PerCodigo" Nullable="true" />
+          <Property Type="Int32" Name="EspCodigo" Nullable="true" />
+          <Property Type="Int32" Name="TipCodigo" Nullable="true" />
+          <Property Type="Int32" Name="TraHorasTrabajo" Nullable="true" />
+          <Property Type="Int32" Name="TraEstado" Nullable="true" />
+          <Property Type="String" Name="TraUsuario" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="TraContrasena" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="EspCodigo1" Nullable="false" />
+          <Property Type="String" Name="EspEspecialidad" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="EspEstado" Nullable="true" />
+          <Property Type="Double" Name="EspPrecio" Nullable="true" />
+          <Property Type="Int32" Name="PerCodigo1" Nullable="false" />
+          <Property Type="String" Name="PerNombre" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="PerApellido" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="PerDni" Nullable="true" MaxLength="8" />
+          <Property Type="String" Name="PerRuc" Nullable="true" MaxLength="15" />
+          <Property Type="String" Name="PerTelefono" Nullable="true" MaxLength="9" />
+          <Property Type="String" Name="PerCorreo" Nullable="true" MaxLength="50" />
+          <Property Type="Boolean" Name="PerGenero" Nullable="true" />
+          <Property Type="Int32" Name="PerEstado" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="ListarConsultasPorMedico_Result">
+          <Property Type="Int32" Name="ConsCodigo" Nullable="false" />
+          <Property Type="Int32" Name="CodPaciente" Nullable="true" />
+          <Property Type="Int32" Name="CodTrabajador" Nullable="true" />
+          <Property Type="Int32" Name="ConsEstado" Nullable="true" />
+          <Property Type="DateTime" Name="ConsFecha" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="PacCodigo" Nullable="false" />
+          <Property Type="Int32" Name="PerCodigo" Nullable="true" />
+          <Property Type="DateTime" Name="PacFechaNacimiento" Nullable="true" />
+          <Property Type="Int32" Name="PacEstado" Nullable="true" />
+          <Property Type="Int32" Name="PerCodigo1" Nullable="false" />
+          <Property Type="String" Name="PerNombre" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="PerApellido" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="PerDni" Nullable="true" MaxLength="8" />
+          <Property Type="String" Name="PerRuc" Nullable="true" MaxLength="15" />
+          <Property Type="String" Name="PerTelefono" Nullable="true" MaxLength="9" />
+          <Property Type="String" Name="PerCorreo" Nullable="true" MaxLength="50" />
+          <Property Type="Boolean" Name="PerGenero" Nullable="true" />
+          <Property Type="Int32" Name="PerEstado" Nullable="true" />
+        </ComplexType>
+        <EntityType Name="ConfigButton">
+          <Key>
+            <PropertyRef Name="ConfButId" />
+          </Key>
+          <Property Name="ConfButId" Type="Int32" Nullable="false" />
+          <Property Name="ConfButName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ConfButEstado" Type="Int32" />
+          <Property Name="ConfPadre" Type="Int32" />
+          <NavigationProperty Name="ConfigMenu" Relationship="BDCLINICAModel.FK_ConfigMenu_ConfigButton" FromRole="ConfigButton" ToRole="ConfigMenu" />
+          <Property Name="ConfFuncion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ConfControlador" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="ConfigMenu">
+          <Key>
+            <PropertyRef Name="ConfId" />
+          </Key>
+          <Property Name="ConfId" Type="Int32" Nullable="false" />
+          <Property Name="ConfTipTrabaja" Type="Int32" />
+          <Property Name="ConfButton" Type="Int32" />
+          <Property Name="ConfEstado" Type="Int32" />
+          <NavigationProperty Name="ConfigButton" Relationship="BDCLINICAModel.FK_ConfigMenu_ConfigButton" FromRole="ConfigMenu" ToRole="ConfigButton" />
+          <NavigationProperty Name="TipoTrabajador" Relationship="BDCLINICAModel.FK_ConfigMenu_TipoTrabajador" FromRole="ConfigMenu" ToRole="TipoTrabajador" />
+        </EntityType>
+        <ComplexType Name="ListButton_Result">
+          <Property Type="Int32" Name="ConfId" Nullable="false" />
+          <Property Type="Int32" Name="ConfTipTrabaja" Nullable="true" />
+          <Property Type="Int32" Name="ConfButton" Nullable="true" />
+          <Property Type="Int32" Name="ConfEstado" Nullable="true" />
+          <Property Type="Int32" Name="ConfButId" Nullable="false" />
+          <Property Type="String" Name="ConfButName" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="ConfButEstado" Nullable="true" />
+          <Property Type="Int32" Name="ConfPadre" Nullable="true" />
+        </ComplexType>
+        <Association Name="FK_ConfigMenu_ConfigButton">
+          <End Type="BDCLINICAModel.ConfigButton" Role="ConfigButton" Multiplicity="0..1" />
+          <End Type="BDCLINICAModel.ConfigMenu" Role="ConfigMenu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ConfigButton">
+              <PropertyRef Name="ConfButId" />
+            </Principal>
+            <Dependent Role="ConfigMenu">
+              <PropertyRef Name="ConfTipTrabaja" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ConfigMenu_TipoTrabajador">
+          <End Type="BDCLINICAModel.TipoTrabajador" Role="TipoTrabajador" Multiplicity="0..1" />
+          <End Type="BDCLINICAModel.ConfigMenu" Role="ConfigMenu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoTrabajador">
+              <PropertyRef Name="TipCodigo" />
+            </Principal>
+            <Dependent Role="ConfigMenu">
+              <PropertyRef Name="ConfTipTrabaja" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BDCLINICAModelStoreContainer" CdmEntityContainer="BDCLINICAEntities">
+          <EntitySetMapping Name="Consulta">
+            <EntityTypeMapping TypeName="BDCLINICAModel.Consulta">
+              <MappingFragment StoreEntitySet="Consulta">
+                <ScalarProperty Name="ConsCodigo" ColumnName="ConsCodigo" />
+                <ScalarProperty Name="CodPaciente" ColumnName="CodPaciente" />
+                <ScalarProperty Name="CodTrabajador" ColumnName="CodTrabajador" />
+                <ScalarProperty Name="ConsEstado" ColumnName="ConsEstado" />
+                <ScalarProperty Name="ConsFecha" ColumnName="ConsFecha" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Especialidad">
+            <EntityTypeMapping TypeName="BDCLINICAModel.Especialidad">
+              <MappingFragment StoreEntitySet="Especialidad">
+                <ScalarProperty Name="EspCodigo" ColumnName="EspCodigo" />
+                <ScalarProperty Name="EspEspecialidad" ColumnName="EspEspecialidad" />
+                <ScalarProperty Name="EspEstado" ColumnName="EspEstado" />
+                <ScalarProperty Name="EspPrecio" ColumnName="EspPrecio" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HistClinico">
+            <EntityTypeMapping TypeName="BDCLINICAModel.HistClinico">
+              <MappingFragment StoreEntitySet="HistClinico">
+                <ScalarProperty Name="HistCodigo" ColumnName="HistCodigo" />
+                <ScalarProperty Name="CodConsulta" ColumnName="CodConsulta" />
+                <ScalarProperty Name="HistEstado" ColumnName="HistEstado" />
+                <ScalarProperty Name="Histsintomas" ColumnName="Histsintomas" />
+                <ScalarProperty Name="HistTratamiento" ColumnName="HistTratamiento" />
+                <ScalarProperty Name="HistExamenes" ColumnName="HistExamenes" />
+                <ScalarProperty Name="HistObservaciones" ColumnName="HistObservaciones" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Paciente">
+            <EntityTypeMapping TypeName="BDCLINICAModel.Paciente">
+              <MappingFragment StoreEntitySet="Paciente">
+                <ScalarProperty Name="PacCodigo" ColumnName="PacCodigo" />
+                <ScalarProperty Name="PerCodigo" ColumnName="PerCodigo" />
+                <ScalarProperty Name="PacFechaNacimiento" ColumnName="PacFechaNacimiento" />
+                <ScalarProperty Name="PacEstado" ColumnName="PacEstado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Persona">
+            <EntityTypeMapping TypeName="BDCLINICAModel.Persona">
+              <MappingFragment StoreEntitySet="Persona">
+                <ScalarProperty Name="PerEstado" ColumnName="PerEstado" />
+                <ScalarProperty Name="PerGenero" ColumnName="PerGenero" />
+                <ScalarProperty Name="PerCodigo" ColumnName="PerCodigo" />
+                <ScalarProperty Name="PerNombre" ColumnName="PerNombre" />
+                <ScalarProperty Name="PerApellido" ColumnName="PerApellido" />
+                <ScalarProperty Name="PerDni" ColumnName="PerDni" />
+                <ScalarProperty Name="PerRuc" ColumnName="PerRuc" />
+                <ScalarProperty Name="PerTelefono" ColumnName="PerTelefono" />
+                <ScalarProperty Name="PerCorreo" ColumnName="PerCorreo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoTrabajador">
+            <EntityTypeMapping TypeName="BDCLINICAModel.TipoTrabajador">
+              <MappingFragment StoreEntitySet="TipoTrabajador">
+                <ScalarProperty Name="TipCodigo" ColumnName="TipCodigo" />
+                <ScalarProperty Name="TipTipo" ColumnName="TipTipo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Trabajador">
+            <EntityTypeMapping TypeName="BDCLINICAModel.Trabajador">
+              <MappingFragment StoreEntitySet="Trabajador">
+                <ScalarProperty Name="TraCodigo" ColumnName="TraCodigo" />
+                <ScalarProperty Name="PerCodigo" ColumnName="PerCodigo" />
+                <ScalarProperty Name="EspCodigo" ColumnName="EspCodigo" />
+                <ScalarProperty Name="TipCodigo" ColumnName="TipCodigo" />
+                <ScalarProperty Name="TraHorasTrabajo" ColumnName="TraHorasTrabajo" />
+                <ScalarProperty Name="TraEstado" ColumnName="TraEstado" />
+                <ScalarProperty Name="TraUsuario" ColumnName="TraUsuario" />
+                <ScalarProperty Name="TraContrasena" ColumnName="TraContrasena" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="InsertConsulta" FunctionName="BDCLINICAModel.Store.InsertConsulta" />
+          <FunctionImportMapping FunctionImportName="InsertEspecialidad" FunctionName="BDCLINICAModel.Store.InsertEspecialidad" />
+          <FunctionImportMapping FunctionImportName="insertPaciente" FunctionName="BDCLINICAModel.Store.insertPaciente" />
+          <FunctionImportMapping FunctionImportName="InsertTrabajador" FunctionName="BDCLINICAModel.Store.InsertTrabajador" />
+          <FunctionImportMapping FunctionImportName="ListarMedicos" FunctionName="BDCLINICAModel.Store.ListarMedicos">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BDCLINICAModel.ListarMedicos_Result">
+                <ScalarProperty Name="TraCodigo" ColumnName="TraCodigo" />
+                <ScalarProperty Name="PerCodigo" ColumnName="PerCodigo" />
+                <ScalarProperty Name="EspCodigo" ColumnName="EspCodigo" />
+                <ScalarProperty Name="TipCodigo" ColumnName="TipCodigo" />
+                <ScalarProperty Name="TraHorasTrabajo" ColumnName="TraHorasTrabajo" />
+                <ScalarProperty Name="TraEstado" ColumnName="TraEstado" />
+                <ScalarProperty Name="TraUsuario" ColumnName="TraUsuario" />
+                <ScalarProperty Name="TraContrasena" ColumnName="TraContrasena" />
+                <ScalarProperty Name="EspCodigo1" ColumnName="EspCodigo1" />
+                <ScalarProperty Name="EspEspecialidad" ColumnName="EspEspecialidad" />
+                <ScalarProperty Name="EspEstado" ColumnName="EspEstado" />
+                <ScalarProperty Name="EspPrecio" ColumnName="EspPrecio" />
+                <ScalarProperty Name="PerCodigo1" ColumnName="PerCodigo1" />
+                <ScalarProperty Name="PerNombre" ColumnName="PerNombre" />
+                <ScalarProperty Name="PerApellido" ColumnName="PerApellido" />
+                <ScalarProperty Name="PerDni" ColumnName="PerDni" />
+                <ScalarProperty Name="PerRuc" ColumnName="PerRuc" />
+                <ScalarProperty Name="PerTelefono" ColumnName="PerTelefono" />
+                <ScalarProperty Name="PerCorreo" ColumnName="PerCorreo" />
+                <ScalarProperty Name="PerGenero" ColumnName="PerGenero" />
+                <ScalarProperty Name="PerEstado" ColumnName="PerEstado" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ListarConsultasPorMedico" FunctionName="BDCLINICAModel.Store.ListarConsultasPorMedico">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BDCLINICAModel.ListarConsultasPorMedico_Result">
+                <ScalarProperty Name="ConsCodigo" ColumnName="ConsCodigo" />
+                <ScalarProperty Name="CodPaciente" ColumnName="CodPaciente" />
+                <ScalarProperty Name="CodTrabajador" ColumnName="CodTrabajador" />
+                <ScalarProperty Name="ConsEstado" ColumnName="ConsEstado" />
+                <ScalarProperty Name="ConsFecha" ColumnName="ConsFecha" />
+                <ScalarProperty Name="PacCodigo" ColumnName="PacCodigo" />
+                <ScalarProperty Name="PerCodigo" ColumnName="PerCodigo" />
+                <ScalarProperty Name="PacFechaNacimiento" ColumnName="PacFechaNacimiento" />
+                <ScalarProperty Name="PacEstado" ColumnName="PacEstado" />
+                <ScalarProperty Name="PerCodigo1" ColumnName="PerCodigo1" />
+                <ScalarProperty Name="PerNombre" ColumnName="PerNombre" />
+                <ScalarProperty Name="PerApellido" ColumnName="PerApellido" />
+                <ScalarProperty Name="PerDni" ColumnName="PerDni" />
+                <ScalarProperty Name="PerRuc" ColumnName="PerRuc" />
+                <ScalarProperty Name="PerTelefono" ColumnName="PerTelefono" />
+                <ScalarProperty Name="PerCorreo" ColumnName="PerCorreo" />
+                <ScalarProperty Name="PerGenero" ColumnName="PerGenero" />
+                <ScalarProperty Name="PerEstado" ColumnName="PerEstado" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="ConfigButton">
+            <EntityTypeMapping TypeName="BDCLINICAModel.ConfigButton">
+              <MappingFragment StoreEntitySet="ConfigButton">
+                <ScalarProperty Name="ConfControlador" ColumnName="ConfControlador" />
+                <ScalarProperty Name="ConfFuncion" ColumnName="ConfFuncion" />
+                <ScalarProperty Name="ConfPadre" ColumnName="ConfPadre" />
+                <ScalarProperty Name="ConfButEstado" ColumnName="ConfButEstado" />
+                <ScalarProperty Name="ConfButName" ColumnName="ConfButName" />
+                <ScalarProperty Name="ConfButId" ColumnName="ConfButId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ConfigMenu">
+            <EntityTypeMapping TypeName="BDCLINICAModel.ConfigMenu">
+              <MappingFragment StoreEntitySet="ConfigMenu">
+                <ScalarProperty Name="ConfEstado" ColumnName="ConfEstado" />
+                <ScalarProperty Name="ConfButton" ColumnName="ConfButton" />
+                <ScalarProperty Name="ConfTipTrabaja" ColumnName="ConfTipTrabaja" />
+                <ScalarProperty Name="ConfId" ColumnName="ConfId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="ListButton" FunctionName="BDCLINICAModel.Store.ListButton">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BDCLINICAModel.ListButton_Result">
+                <ScalarProperty Name="ConfId" ColumnName="ConfId" />
+                <ScalarProperty Name="ConfTipTrabaja" ColumnName="ConfTipTrabaja" />
+                <ScalarProperty Name="ConfButton" ColumnName="ConfButton" />
+                <ScalarProperty Name="ConfEstado" ColumnName="ConfEstado" />
+                <ScalarProperty Name="ConfButId" ColumnName="ConfButId" />
+                <ScalarProperty Name="ConfButName" ColumnName="ConfButName" />
+                <ScalarProperty Name="ConfButEstado" ColumnName="ConfButEstado" />
+                <ScalarProperty Name="ConfPadre" ColumnName="ConfPadre" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

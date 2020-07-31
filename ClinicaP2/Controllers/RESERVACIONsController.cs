@@ -13,16 +13,19 @@ namespace ClinicaP2.Controllers
 {
     public class RESERVACIONsController : Controller
     {
-        private bdclinicEntities1 db = new bdclinicEntities1();
+        private BDCLINICAEntities db = new BDCLINICAEntities();
       
 
         // GET: RESERVACIONs
         public ActionResult Index()
         {
 
-            var rESERVACION = db.RESERVACION.Include(r => r.ESTADO).Include
-                (r => r.Medico).Include(r => r.Paciente).Include(r => r.PAYMET).Include(r => r.USUARIOS);
-            return View(rESERVACION.ToList());
+            //var rESERVACION = db.RESERVACION.Include(r => r.ESTADO).Include
+            //    (r => r.Medico).Include(r => r.Paciente).Include(r => r.PAYMET).Include(r => r.USUARIOS);
+
+            var consultas = from tra in db.Consulta select tra;
+
+            return View(consultas.ToList());
         }
 
 
@@ -30,16 +33,16 @@ namespace ClinicaP2.Controllers
         // GET: RESERVACIONs/Details/5
         public ActionResult Details(string id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            RESERVACION rESERVACION = db.RESERVACION.Find(id);
-            if (rESERVACION == null)
-            {
-                return HttpNotFound();
-            }
-            return View(rESERVACION);
+            //if (id == null)
+            //{
+            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            //}
+            //RESERVACION rESERVACION = db.RESERVACION.Find(id);
+            //if (rESERVACION == null)
+            //{
+            //    return HttpNotFound();
+            //}
+            return View();
         }
 
         // GET: RESERVACIONs/Create
@@ -53,102 +56,102 @@ namespace ClinicaP2.Controllers
         }
         public ActionResult Create()
         {
-            ViewBag.Codestado = new SelectList(db.ESTADO, "Codestado", "Name");
-            ViewBag.Codmed = new SelectList(db.Medico, "Codmed", "NomTra");
-            ViewBag.CodPac = new SelectList(db.Paciente, "CodPac", "NomPac");
-            ViewBag.CodPay = new SelectList(db.PAYMET, "CodPay", "Name");
-            ViewBag.CodUser = new SelectList(db.USUARIOS, "CodUser", "Usuario");
+            //ViewBag.Codestado = new SelectList(db.ESTADO, "Codestado", "Name");
+            //ViewBag.Codmed = new SelectList(db.Medico, "Codmed", "NomTra");
+            //ViewBag.CodPac = new SelectList(db.Paciente, "CodPac", "NomPac");
+            //ViewBag.CodPay = new SelectList(db.PAYMET, "CodPay", "Name");
+            //ViewBag.CodUser = new SelectList(db.USUARIOS, "CodUser", "Usuario");
             return View();
         }
         /* CREAMOS UNA ACCION QUE DEVUELVE UNA ESTRUCTURA JSON EN FUNCION A ESPECIALIDAD*/
-        public JsonResult GetMedicos(string CodEspe)
-        {
-            db.Configuration.ProxyCreationEnabled = false;
-            List<Medico> smedico = db.Medico.Where(x => x.CodEspe == CodEspe).ToList();
-            return Json(smedico, JsonRequestBehavior.AllowGet);
+        //public JsonResult GetMedicos(string CodEspe)
+        //{
+        //    //db.Configuration.ProxyCreationEnabled = false;
+        //    //List<Medico> smedico = db.Medico.Where(x => x.CodEspe == CodEspe).ToList();
+        //    return Json(smedico, JsonRequestBehavior.AllowGet);
 
 
-        }
+        //}
 
         // POST: RESERVACIONs/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(RESERVACION rESERVACION)
-        {
-            if (ModelState.IsValid)
-            {
-                //db.RESERVACION.Add(rESERVACION);
-                //db.SaveChanges();
-                db.SP_ADIRSERVAS(rESERVACION.Fecha, rESERVACION.CodPac, rESERVACION.Codmed,
-                    rESERVACION.precio, rESERVACION.CodPay, rESERVACION.Codestado, rESERVACION.CodUser);
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Create(RESERVACION rESERVACION)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        //db.RESERVACION.Add(rESERVACION);
+        //        //db.SaveChanges();
+        //        //db.SP_ADIRSERVAS(rESERVACION.Fecha, rESERVACION.CodPac, rESERVACION.Codmed,
+        //        //    rESERVACION.precio, rESERVACION.CodPay, rESERVACION.Codestado, rESERVACION.CodUser);
 
-                return RedirectToAction("Index");
-            }
+        //        return RedirectToAction("Index");
+        //    }
 
-            ViewBag.Codestado = new SelectList(db.ESTADO, "Codestado", "Name", rESERVACION.Codestado);
-            ViewBag.Codmed = new SelectList(db.Medico, "Codmed", "CodEspe", rESERVACION.Codmed);
-            ViewBag.CodPac = new SelectList(db.Paciente, "CodPac", "NomPac", rESERVACION.CodPac);
-            ViewBag.CodPay = new SelectList(db.PAYMET, "CodPay", "Name", rESERVACION.CodPay); 
-            ViewBag.CodUser = new SelectList(db.USUARIOS, "CodUser", "Usuario", rESERVACION.CodUser);
-            return View(rESERVACION);
-        }
+        //    //ViewBag.Codestado = new SelectList(db.ESTADO, "Codestado", "Name", rESERVACION.Codestado);
+        //    //ViewBag.Codmed = new SelectList(db.Medico, "Codmed", "CodEspe", rESERVACION.Codmed);
+        //    //ViewBag.CodPac = new SelectList(db.Paciente, "CodPac", "NomPac", rESERVACION.CodPac);
+        //    //ViewBag.CodPay = new SelectList(db.PAYMET, "CodPay", "Name", rESERVACION.CodPay); 
+        //    //ViewBag.CodUser = new SelectList(db.USUARIOS, "CodUser", "Usuario", rESERVACION.CodUser);
+        //    return View(rESERVACION);
+        //}
 
         // GET: RESERVACIONs/Edit/5
         public ActionResult Edit(string id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            RESERVACION rESERVACION = db.RESERVACION.Find(id);
-            if (rESERVACION == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.Codestado = new SelectList(db.ESTADO, "Codestado", "Name", rESERVACION.Codestado);
-            ViewBag.Codmed = new SelectList(db.Medico, "Codmed", "CodEspe", rESERVACION.Codmed);
-            ViewBag.CodPac = new SelectList(db.Paciente, "CodPac", "NomPac", rESERVACION.CodPac);
-            ViewBag.CodPay = new SelectList(db.PAYMET, "CodPay", "Name", rESERVACION.CodPay);
-            ViewBag.CodUser = new SelectList(db.USUARIOS, "CodUser", "Usuario", rESERVACION.CodUser);
-            return View(rESERVACION);
+            //if (id == null)
+            //{
+            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            //}
+            //RESERVACION rESERVACION = db.RESERVACION.Find(id);
+            //if (rESERVACION == null)
+            //{
+            //    return HttpNotFound();
+            //}
+            //ViewBag.Codestado = new SelectList(db.ESTADO, "Codestado", "Name", rESERVACION.Codestado);
+            //ViewBag.Codmed = new SelectList(db.Medico, "Codmed", "CodEspe", rESERVACION.Codmed);
+            //ViewBag.CodPac = new SelectList(db.Paciente, "CodPac", "NomPac", rESERVACION.CodPac);
+            //ViewBag.CodPay = new SelectList(db.PAYMET, "CodPay", "Name", rESERVACION.CodPay);
+            //ViewBag.CodUser = new SelectList(db.USUARIOS, "CodUser", "Usuario", rESERVACION.CodUser);
+            return View();
         }
 
         // POST: RESERVACIONs/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "CodReserva,Fecha,CodPac,Codmed,precio,CodPay,Codestado,CodUser")] RESERVACION rESERVACION)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(rESERVACION).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.Codestado = new SelectList(db.ESTADO, "Codestado", "Name", rESERVACION.Codestado);
-            ViewBag.Codmed = new SelectList(db.Medico, "Codmed", "CodEspe", rESERVACION.Codmed);
-            ViewBag.CodPac = new SelectList(db.Paciente, "CodPac", "NomPac", rESERVACION.CodPac);
-            ViewBag.CodPay = new SelectList(db.PAYMET, "CodPay", "Name", rESERVACION.CodPay);
-            ViewBag.CodUser = new SelectList(db.USUARIOS, "CodUser", "Usuario", rESERVACION.CodUser);
-            return View(rESERVACION);
-        }
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Edit([Bind(Include = "CodReserva,Fecha,CodPac,Codmed,precio,CodPay,Codestado,CodUser")] RESERVACION rESERVACION)
+        //{
+        //    //if (ModelState.IsValid)
+        //    //{
+        //    //    db.Entry(rESERVACION).State = EntityState.Modified;
+        //    //    db.SaveChanges();
+        //    //    return RedirectToAction("Index");
+        //    //}
+        //    //ViewBag.Codestado = new SelectList(db.ESTADO, "Codestado", "Name", rESERVACION.Codestado);
+        //    //ViewBag.Codmed = new SelectList(db.Medico, "Codmed", "CodEspe", rESERVACION.Codmed);
+        //    //ViewBag.CodPac = new SelectList(db.Paciente, "CodPac", "NomPac", rESERVACION.CodPac);
+        //    //ViewBag.CodPay = new SelectList(db.PAYMET, "CodPay", "Name", rESERVACION.CodPay);
+        //    //ViewBag.CodUser = new SelectList(db.USUARIOS, "CodUser", "Usuario", rESERVACION.CodUser);
+        //    return View(rESERVACION);
+        //}
 
         // GET: RESERVACIONs/Delete/5
         public ActionResult Delete(string id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            RESERVACION rESERVACION = db.RESERVACION.Find(id);
-            if (rESERVACION == null)
-            {
-                return HttpNotFound();
-            }
-            return View(rESERVACION);
+            //if (id == null)
+            //{
+            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            //}
+            //RESERVACION rESERVACION = db.RESERVACION.Find(id);
+            //if (rESERVACION == null)
+            //{
+            //    return HttpNotFound();
+            //}
+            return View();
         }
 
         // POST: RESERVACIONs/Delete/5
@@ -156,9 +159,9 @@ namespace ClinicaP2.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
-            RESERVACION rESERVACION = db.RESERVACION.Find(id);
-            db.RESERVACION.Remove(rESERVACION);
-            db.SaveChanges();
+            //RESERVACION rESERVACION = db.RESERVACION.Find(id);
+            //db.RESERVACION.Remove(rESERVACION);
+            //db.SaveChanges();
             return RedirectToAction("Index");
         }
 

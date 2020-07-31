@@ -17,18 +17,16 @@ namespace ClinicaP2.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Paciente()
         {
-            this.RESERVACION = new HashSet<RESERVACION>();
+            this.Consulta = new HashSet<Consulta>();
         }
     
-        public string CodPac { get; set; }
-        public string NomPac { get; set; }
-        public string ApePac { get; set; }
-        public string TelePac { get; set; }
-        public string DniPac { get; set; }
-        public string Genero { get; set; }
-        public string EstaPac { get; set; }
+        public int PacCodigo { get; set; }
+        public Nullable<int> PerCodigo { get; set; }
+        public Nullable<System.DateTime> PacFechaNacimiento { get; set; }
+        public Nullable<int> PacEstado { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<RESERVACION> RESERVACION { get; set; }
+        public virtual ICollection<Consulta> Consulta { get; set; }
+        public virtual Persona Persona { get; set; }
     }
 }

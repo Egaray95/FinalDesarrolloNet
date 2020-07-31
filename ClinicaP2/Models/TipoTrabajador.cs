@@ -12,18 +12,21 @@ namespace ClinicaP2.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class PAYMET
+    public partial class TipoTrabajador
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public PAYMET()
+        public TipoTrabajador()
         {
-            this.RESERVACION = new HashSet<RESERVACION>();
+            this.Trabajador = new HashSet<Trabajador>();
+            this.ConfigMenu = new HashSet<ConfigMenu>();
         }
     
-        public string CodPay { get; set; }
-        public string Name { get; set; }
+        public int TipCodigo { get; set; }
+        public string TipTipo { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<RESERVACION> RESERVACION { get; set; }
+        public virtual ICollection<Trabajador> Trabajador { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ConfigMenu> ConfigMenu { get; set; }
     }
 }
