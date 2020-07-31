@@ -20,8 +20,7 @@ namespace ClinicaP2.Controllers
         public ActionResult Index()
         {
 
-            //var rESERVACION = db.RESERVACION.Include(r => r.ESTADO).Include
-            //    (r => r.Medico).Include(r => r.Paciente).Include(r => r.PAYMET).Include(r => r.USUARIOS);
+            
 
             var consultas = from tra in db.Consulta select tra;
 
