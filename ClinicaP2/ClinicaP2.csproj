@@ -118,6 +118,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\ConsultasController.cs" />
     <Compile Include="Controllers\EspecialidadsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MedicosController.cs" />
@@ -267,6 +268,8 @@
     <Content Include="Views\Especialidads\ListMedicosporesp.cshtml" />
     <Content Include="Views\Especialidads\LisEspecialidadtoDoctor.cshtml" />
     <Content Include="Views\Medicos\login.cshtml" />
+    <Content Include="Views\Consultas\ListConsultaMedico.cshtml" />
+    <Content Include="Views\Consultas\DetailsConsulta.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

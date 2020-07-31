@@ -68,6 +68,7 @@ namespace ClinicaP2.Controllers
 
         public ActionResult ListMedicosporesp(int id)
         {
+            ViewBag.idesp = id;
             var lis = from f in db.Trabajador where f.EspCodigo == id select f;
 
             return View(lis.ToList());

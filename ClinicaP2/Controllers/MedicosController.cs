@@ -82,7 +82,7 @@ namespace ClinicaP2.Controllers
                 if (tra.TraContrasena.Trim() == clave.Trim())
                 {
                     Session["trabajador"] = tra;
-                    return RedirectToAction("index");
+                    return Redirect(Url.Content("~/Home/Index"));
                 }
                 else
                 {
@@ -91,5 +91,8 @@ namespace ClinicaP2.Controllers
             }
             return View();
         }
+
+
+
     }
 }
