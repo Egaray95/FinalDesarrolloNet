@@ -6,38 +6,60 @@
     ViewBag.Title = "ListMedicosporesp";
 }
 
-<h2 class="bg-info">Lista de trabajadores de especialidad</h2>
+
 
 
 @{
 
-    
+    int idespecialidad = ViewBag.idesp;
+
+    ClinicaP2.Models.BDCLINICAEntities bd = new ClinicaP2.Models.BDCLINICAEntities();
+
+    var esp = from tra in bd.Especialidad where tra.EspCodigo == idespecialidad select tra;
+
+    string nomesp = "";
+
+
+    foreach (var item in esp)
+    {
+        nomesp = item.EspEspecialidad;
+    }
+
+
+
+
+    <h2 class="bg-info">Lista de trabajadores de @nomesp</h2>
+
+
+    if (idespecialidad == 1)
+    {
+        <h1>@nomesp</h1>
+        <h2>La cardiología es la rama de la medicina encargada del estudio, diagnóstico y tratamiento de las enfermedades del corazón y del aparato circulatorio.</h2>
+
+    }
+    else if (idespecialidad == 2)
+    {
+<h1>@nomesp</h1>
+        <h2>
+            La odontología es la rama de las ciencias de la salud que se encarga del estudio, diagnóstico, prevención y tratamiento de las enfermedades de los dientes y, en general, de aquellas que afectan al aparato estomatognático.
+
+        </h2>
+    }
+    else if (idespecialidad == 3)
+    {
+
+<h1>@nomesp</h1>
+        <h2>
+            La odontología es la rama de las ciencias de la salud que se encarga del estudio, diagnóstico, prevención y tratamiento de las enfermedades de los dientes y, en general, de aquellas que afectan al aparato estomatognático.
+
+        </h2>
+    }
+
+
     foreach (var item in Model)
     {
 
-        if (item.EspCodigo == 1)
-        {
-            <h1>@item.Especialidad.EspEspecialidad</h1>
-            <h2>La cardiología es la rama de la medicina encargada del estudio, diagnóstico y tratamiento de las enfermedades del corazón y del aparato circulatorio.</h2>
 
-        }
-        else if (item.EspCodigo == 2)
-        {
-            <h1>@item.Especialidad.EspEspecialidad</h1>
-            <h2>
-                La odontología es la rama de las ciencias de la salud que se encarga del estudio, diagnóstico, prevención y tratamiento de las enfermedades de los dientes y, en general, de aquellas que afectan al aparato estomatognático.
-
-            </h2>
-        }
-        else if (item.EspCodigo == 3)
-        {
-
-            <h1>@item.Especialidad.EspEspecialidad</h1>
-            <h2>
-                La odontología es la rama de las ciencias de la salud que se encarga del estudio, diagnóstico, prevención y tratamiento de las enfermedades de los dientes y, en general, de aquellas que afectan al aparato estomatognático.
-
-            </h2>
-        }
 
         <br />
 
