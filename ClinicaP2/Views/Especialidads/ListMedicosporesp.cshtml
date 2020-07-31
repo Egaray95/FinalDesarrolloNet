@@ -39,7 +39,7 @@
     }
     else if (idespecialidad == 2)
     {
-<h1>@nomesp</h1>
+        <h1>@nomesp</h1>
         <h2>
             La odontología es la rama de las ciencias de la salud que se encarga del estudio, diagnóstico, prevención y tratamiento de las enfermedades de los dientes y, en general, de aquellas que afectan al aparato estomatognático.
 
@@ -48,22 +48,22 @@
     else if (idespecialidad == 3)
     {
 
-<h1>@nomesp</h1>
+        <h1>@nomesp</h1>
         <h2>
             La odontología es la rama de las ciencias de la salud que se encarga del estudio, diagnóstico, prevención y tratamiento de las enfermedades de los dientes y, en general, de aquellas que afectan al aparato estomatognático.
 
         </h2>
     }
 
+    <br />
 
+    <h2 align="center">MEDICOS</h2>
     foreach (var item in Model)
     {
 
 
 
-        <br />
 
-        <h2 align="center">MEDICOS</h2>
         <br />
         <p href="@Url.Action("ListMedicosporesp", "Especialidads", new { id = item.EspCodigo })">
             <img src="@Url.Content("~/Content/Images/"+item.TraCodigo+".jpg")" class="img-circle" height="150" width="200">
