@@ -43,5 +43,12 @@ namespace ClinicaP2.Controllers
             return View();
 
         }
+
+        public ActionResult logout()
+        {
+
+            Session["trabajador"] = null;
+            return RedirectToAction("index");
+        }
     }
 }
