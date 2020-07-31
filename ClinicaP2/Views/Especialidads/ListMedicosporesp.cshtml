@@ -1,56 +1,58 @@
 ﻿@model IEnumerable<ClinicaP2.Models.Trabajador>
 
 @{
+    /**/
+
     ViewBag.Title = "ListMedicosporesp";
 }
 
-<h2>Lista de trabajadores de especialidad</h2>
+<h2 class="bg-info">Lista de trabajadores de especialidad</h2>
 
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.TraHorasTrabajo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TraEstado)
-        </th>
+@{
 
-        <th>
-            @Html.DisplayNameFor(model => model.Especialidad.EspEspecialidad)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Persona.PerNombre)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TipoTrabajador.TipTipo)
-        </th>
-        <th></th>
-    </tr>
+    
+    foreach (var item in Model)
+    {
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.TraHorasTrabajo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TraEstado)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Especialidad.EspEspecialidad)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Persona.PerNombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TipoTrabajador.TipTipo)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.TraCodigo }) |
-            @Html.ActionLink("Details", "Details", new { id=item.TraCodigo }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.TraCodigo })
-        </td>
-    </tr>
+        if (item.EspCodigo == 1)
+        {
+            <h1>@item.Especialidad.EspEspecialidad</h1>
+            <h2>La cardiología es la rama de la medicina encargada del estudio, diagnóstico y tratamiento de las enfermedades del corazón y del aparato circulatorio.</h2>
+
+        }
+        else if (item.EspCodigo == 2)
+        {
+            <h1>@item.Especialidad.EspEspecialidad</h1>
+            <h2>
+                La odontología es la rama de las ciencias de la salud que se encarga del estudio, diagnóstico, prevención y tratamiento de las enfermedades de los dientes y, en general, de aquellas que afectan al aparato estomatognático.
+
+            </h2>
+        }
+        else if (item.EspCodigo == 3)
+        {
+
+            <h1>@item.Especialidad.EspEspecialidad</h1>
+            <h2>
+                La odontología es la rama de las ciencias de la salud que se encarga del estudio, diagnóstico, prevención y tratamiento de las enfermedades de los dientes y, en general, de aquellas que afectan al aparato estomatognático.
+
+            </h2>
+        }
+
+        <br />
+
+        <h2 align="center">MEDICOS</h2>
+        <br />
+        <p href="@Url.Action("ListMedicosporesp", "Especialidads", new { id = item.EspCodigo })">
+            <img src="@Url.Content("~/Content/Images/"+item.TraCodigo+".jpg")" class="img-circle" height="150" width="200">
+
+            <br />
+            @item.Persona.PerApellido @item.Persona.PerNombre
+            <br />
+            @item.Especialidad.EspEspecialidad
+            <br />
+            @item.TraHorasTrabajo horas semanales
+        </p>
+        <br />
+    }
 }
-
-</table>
