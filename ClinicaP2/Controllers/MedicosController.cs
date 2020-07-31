@@ -14,7 +14,7 @@ namespace ClinicaP2.Controllers
     {
         private BDCLINICAEntities db = new BDCLINICAEntities();
 
-        
+
         public ActionResult Index()
         {
 
@@ -26,9 +26,16 @@ namespace ClinicaP2.Controllers
         public ActionResult Create()
         {
             ViewBag.EspCodigo = new SelectList(db.Especialidad, "EspCodigo", "EspEspecialidad");
-          
+
             return View();
-        }       
+        } 
+        
+        public ActionResult login()
+        {
+            return View();
+        }
+
+
         [HttpPost]
         public ActionResult Create( Trabajador tra)
         {

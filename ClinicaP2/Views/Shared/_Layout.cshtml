@@ -7,6 +7,7 @@
 
     <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
     <link rel="stylesheet" href="~/Content/css/styles.css">
+    
 
     <title>@ViewBag.Title - Proyecto Clinica UTP</title>
     @Styles.Render("~/Content/css")
@@ -17,23 +18,27 @@
 
     <div class="wrapper hover_collapse">
         <div class="top_navbar">
-            <div class="logo">Clinica<span>JS</span></div>
 
-
-
-
-            <div class="menu">
+            <div class="menu" style="width: 40px;">
                 <div class="hamburger">
                     <i class="fas fa-bars"></i>
                 </div>
 
+            </div>
+
+
+
+
+            <div class="menu" style="height: 35px; padding-right: 10px; padding-left: 10px; width: 1550px;">
+                <div class="logo" style=" width: 191px;padding-left: 10px;">Clinica<span>UTP</span></div>
+
                 <div class="profile_wrap">
                     <div class="profile">
-                        <img src="profile.png" alt="profile_pic">
-                        <span class="name">Alvaro Mamani</span>
-                        <span class="icon">
-                            <i class="fas fa-angle-down"></i>
-                        </span>
+                        <span class="fas fa-user" aria-hidden="true"></span>
+                        <a href="@Url.Action("login", "Medicos")">
+                            Iniciar Sesión
+                        </a>
+
                     </div>
                 </div>
             </div>
@@ -49,16 +54,28 @@
 
                         ClinicaP2.Models.BDCLINICAEntities bd = new ClinicaP2.Models.BDCLINICAEntities();
 
+                        var sesion =0;
+                        int tipo_trabajador;
+
+                        if (sesion==0)
+                        {
+                            tipo_trabajador = 3;
+                        }
+                        else
+                        {
+                            tipo_trabajador = sesion;
+                        }
+
 
 
                         var query = from u in bd.ConfigMenu
                                     join ur in bd.ConfigButton on u.ConfButton equals ur.ConfButId
-                                    where u.ConfTipTrabaja == 1 && ur.ConfPadre == null
+                                    where u.ConfTipTrabaja == tipo_trabajador && ur.ConfPadre == null
 
-                                    select new 
+                                    select new
                                     {
-                                        nombre= ur.ConfButName,
-                                        codigopadre =ur.ConfButId
+                                        nombre = ur.ConfButName,
+                                        codigopadre = ur.ConfButId
                                     };
 
                         foreach (var item in query)
@@ -69,27 +86,30 @@
 
 
                             <li>
-                                                    <a href="#">
-                                                        <span class="icon"><i class="fas fa-chess"></i></span>
-                                                        <span class="text">@item.nombre</span>
+                                <a href="#">
+                                    <span class="icon"><i class="fas fa-chess"></i></span>
+                                    <span class="text">@item.nombre</span>
 
-                                                        @{
+                                    @{
 
-                                                            var listahijos = from a in bd.ConfigButton where a.ConfPadre == item.codigopadre select a;
+                                        var listahijos = from u in bd.ConfigMenu
+                                                         join ur in bd.ConfigButton on u.ConfButton equals ur.ConfButId
+                                                         where u.ConfTipTrabaja == tipo_trabajador && ur.ConfPadre == item.codigopadre
+                                                         select ur;
 
-                                                            foreach (var item2 in listahijos)
-                                                            {
-                                                                <ul>
-
-
-                                                                    @Html.ActionLink(item2.ConfButName, item2.ConfFuncion, item2.ConfControlador)
-
-                                                                </ul>
-                                                            }
-                                                        }
+                                        foreach (var item2 in listahijos)
+                                        {
+                                            <ul>
 
 
-                                                    </a>
+                                                @Html.ActionLink(item2.ConfButName, item2.ConfFuncion, item2.ConfControlador)
+
+                                            </ul>
+                                        }
+                                    }
+
+
+                                </a>
                             </li>
 
 
@@ -121,6 +141,7 @@
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
     <script src="~/Content/js/scripts.js"></script>
+   
 
 </body>
 </html>

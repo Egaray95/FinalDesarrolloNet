@@ -188,6 +188,12 @@
     <Content Include="Content\css\styles.css" />
     <Content Include="Content\Images\cardiología.jpg" />
     <Content Include="Content\Images\Dermatología.jpg" />
+    <Content Include="Content\Images\M001.jpg" />
+    <Content Include="Content\Images\M002.jpg" />
+    <Content Include="Content\Images\M003.jpg" />
+    <Content Include="Content\Images\M004.jpg" />
+    <Content Include="Content\Images\M005.jpg" />
+    <Content Include="Content\Images\M006.jpg" />
     <Content Include="Content\Images\medico general.jpg" />
     <Content Include="Content\Images\odontología.jpg" />
     <Content Include="Content\js\scripts.js" />
@@ -260,6 +266,7 @@
     <Content Include="Views\Shared\_SearchPartial.cshtml" />
     <Content Include="Views\Especialidads\ListMedicosporesp.cshtml" />
     <Content Include="Views\Especialidads\LisEspecialidadtoDoctor.cshtml" />
+    <Content Include="Views\Medicos\login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
