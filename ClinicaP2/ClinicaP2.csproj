@@ -122,7 +122,6 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MedicosController.cs" />
     <Compile Include="Controllers\PacientesController.cs" />
-    <Compile Include="Controllers\RESERVACIONsController.cs" />
     <Compile Include="Models\ConfigButton.cs">
       <DependentUpon>ModelClinicaUTPmejorado.tt</DependentUpon>
     </Compile>
@@ -265,11 +264,6 @@
     <Content Include="Views\Medicos\Details.cshtml" />
     <Content Include="Views\Medicos\Edit.cshtml" />
     <Content Include="Views\Medicos\Index.cshtml" />
-    <Content Include="Views\RESERVACIONs\Create.cshtml" />
-    <Content Include="Views\RESERVACIONs\Delete.cshtml" />
-    <Content Include="Views\RESERVACIONs\Details.cshtml" />
-    <Content Include="Views\RESERVACIONs\Edit.cshtml" />
-    <Content Include="Views\RESERVACIONs\Index.cshtml" />
     <Content Include="Views\Shared\_SearchPartial.cshtml" />
     <Content Include="Views\Especialidads\ListMedicosporesp.cshtml" />
     <Content Include="Views\Especialidads\LisEspecialidadtoDoctor.cshtml" />
