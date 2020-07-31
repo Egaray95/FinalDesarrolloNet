@@ -35,6 +35,8 @@ namespace ClinicaP2.Controllers
             return View();
         }
 
+  
+
 
         [HttpPost]
         public ActionResult Create( Trabajador tra)
@@ -55,6 +57,39 @@ namespace ClinicaP2.Controllers
 
             return RedirectToAction("index");
         }
+        [HttpPost]
+        public ActionResult login(string TraUsuario, string clave)
+        {
+            int cod = 0;
+            var codigo = from tr in db.Trabajador where tr.TraUsuario == TraUsuario
+                         select new
+                         {
+                             codigo = tr.TraCodigo
+                         };
+            foreach (var item in codigo)
+            {
+                cod = item.codigo;
+            }
 
+
+            Trabajador tra = db.Trabajador.Find(cod);
+            if (tra == null)
+            {
+                ViewBag.error = "Usuario no existe";
+            }
+            else
+            {
+                if (tra.TraContrasena.Trim() == clave.Trim())
+                {
+                    Session["trabajador"] = tra;
+                    return RedirectToAction("index");
+                }
+                else
+                {
+                    ViewBag.error = "Contraseña incorrecta";
+                }
+            }
+            return View();
+        }
     }
 }

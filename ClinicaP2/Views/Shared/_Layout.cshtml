@@ -14,7 +14,25 @@
     @Scripts.Render("~/bundles/modernizr")
 
 </head>
-<body>
+<body>@{ 
+
+    ClinicaP2.Models.BDCLINICAEntities bd = new ClinicaP2.Models.BDCLINICAEntities();
+
+    // bd.Trabajador cli = (clientesdep)Session["clientedep"];
+    ClinicaP2.Models.Trabajador tra = (ClinicaP2.Models.Trabajador)Session["trabajador"];
+    //int sesion = Convert.ToInt32(tra.TipoTrabajador);
+    int tipo_trabajador;
+
+    if (tra == null)
+    {
+        tipo_trabajador = 3;
+    }
+    else
+    {
+        tipo_trabajador = Convert.ToInt32(tra.TipoTrabajador.TipCodigo); 
+    }
+
+}
 
     <div class="wrapper hover_collapse">
         <div class="top_navbar">
@@ -32,12 +50,33 @@
             <div class="menu" style="height: 35px; padding-right: 10px; padding-left: 10px; width: 1550px;">
                 <div class="logo" style=" width: 191px;padding-left: 10px;">Clinica<span>UTP</span></div>
 
+
+
                 <div class="profile_wrap">
                     <div class="profile">
+
+
                         <span class="fas fa-user" aria-hidden="true"></span>
-                        <a href="@Url.Action("login", "Medicos")">
-                            Iniciar Sesión
-                        </a>
+
+                        @if (tra == null)
+                        {
+
+                            <a href="@Url.Action("login", "Medicos")">
+                                Iniciar Sesión
+                            </a>
+
+
+
+                        }
+                        else
+                        {
+                            @tra.Persona.PerApellido
+                            <a href="@Url.Action("logout", "Home")">
+                                Cerrar Sesión
+                            </a>
+                        }
+
+
 
                     </div>
                 </div>
@@ -52,19 +91,7 @@
                     @{
 
 
-                        ClinicaP2.Models.BDCLINICAEntities bd = new ClinicaP2.Models.BDCLINICAEntities();
 
-                        var sesion =0;
-                        int tipo_trabajador;
-
-                        if (sesion==0)
-                        {
-                            tipo_trabajador = 3;
-                        }
-                        else
-                        {
-                            tipo_trabajador = sesion;
-                        }
 
 
 

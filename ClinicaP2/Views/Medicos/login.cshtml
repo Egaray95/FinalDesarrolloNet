@@ -6,19 +6,25 @@
 
 <h2>login</h2>
 
+@using (Html.BeginForm())
+{
 <body class="text-center">
     <form class="form-signin text-center" >
         <img class="mb-4" src="/docs/4.5/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
         <h1 class="h3 mb-3 font-weight-normal">Por favor iniciar sesión</h1>
         <label for="inputEmail" class="sr-only">usuario</label>
-        <input type="email" id="inputEmail" class="form-control" placeholder="usuario" required="" autofocus="">
+        <input  id="inputEmail" class="form-control" placeholder="usuario" required="" autofocus="" name="TraUsuario">
         <label for="inputPassword" class="sr-only">contraseña</label>
-        <input type="password" id="inputPassword" class="form-control" placeholder="contraseña" required="">
-        <button class="btn btn-lg btn-primary btn-block" type="submit">@Html.ActionLink("Iniciar Sesión", "Edit", new { username = item.PerCodigo , passwp =asss })</button>
+        <input type="password" id="inputPassword" class="form-control" placeholder="contraseña" required="" name="clave">
+        @*<button class="btn btn-lg btn-primary btn-block" type="submit">@Html.ActionLink("Iniciar Sesión", "Edit", new { username = item.PerCodigo, passwp = asss })</button>*@
+        <input type="submit"class="btn btn-lg btn-primary btn-block" />
     </form>
 
 
 </body>
+
+}
+
 @*@using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
