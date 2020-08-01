@@ -44,7 +44,7 @@ namespace ClinicaP2.Controllers
             if (ModelState.IsValid)
             {
                
-                db.InsertEspecialidad(especialidad.EspEspecialidad, especialidad.EspPrecio);
+                db.InsertEspecialidad(especialidad.EspEspecialidad, especialidad.EspPrecio,especialidad.EspDescripcion);
                 return RedirectToAction("Index");
             }
 
@@ -69,7 +69,7 @@ namespace ClinicaP2.Controllers
         public ActionResult ListMedicosporesp(int id)
         {
             ViewBag.idesp = id;
-            var lis = from f in db.Trabajador where f.EspCodigo == id select f;
+            var lis = from f in db.Trabajador where f.EspCodigo == id && f.TraEstado==1 select f;
 
             return View(lis.ToList());
         }

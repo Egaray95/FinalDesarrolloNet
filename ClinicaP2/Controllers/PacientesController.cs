@@ -68,6 +68,73 @@ namespace ClinicaP2.Controllers
 
         }
 
+        public ActionResult CreatePac()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult CreatePac(Consulta consulta,int idtrabajador)
+        {
+            try
+            {
+                var pacientess = from pac in db.Paciente where pac.Persona.PerDni == consulta.Paciente.Persona.PerDni select pac;
+                int codigopaciente = 0;
+                foreach (var item in pacientess)
+                {
+                    codigopaciente = item.PacCodigo;
+                }
+
+
+                if (codigopaciente==0)
+                {
+
+                    int codigonuevopac = 0;
+                    db.insertPaciente(consulta.Paciente.Persona.PerNombre,
+                       consulta.Paciente.Persona.PerApellido,
+                       consulta.Paciente.Persona.PerDni,
+                       consulta.Paciente.Persona.PerRuc,
+                       consulta.Paciente.Persona.PerTelefono,
+                       consulta.Paciente.Persona.PerCorreo,
+                       consulta.Paciente.Persona.PerGenero,
+                       consulta.Paciente.PacFechaNacimiento);
+
+
+                    var query = from u in db.Paciente
+                                join ur in db.Persona on u.PerCodigo equals ur.PerCodigo
+                                where ur.PerDni ==consulta.Paciente.Persona.PerDni
+
+                                select new
+                                {
+                                    codigonuevo = u.PacCodigo
+                                };
+
+                    foreach (var item in query)
+                    {
+                        codigonuevopac = item.codigonuevo;
+                    }
+
+
+
+
+                    db.InsertConsulta(codigonuevopac, idtrabajador, consulta.ConsFecha);
+
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+
+                    db.InsertConsulta(codigopaciente, idtrabajador, consulta.ConsFecha);
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (Exception)
+            {
+
+                return HttpNotFound();
+            }
+        }
+
        
         public ActionResult Edit(string id)
         {

@@ -24,6 +24,7 @@ namespace ClinicaP2.Models
         public string EspEspecialidad { get; set; }
         public Nullable<int> EspEstado { get; set; }
         public Nullable<double> EspPrecio { get; set; }
+        public string EspDescripcion { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Trabajador> Trabajador { get; set; }

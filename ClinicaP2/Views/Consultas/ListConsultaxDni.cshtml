@@ -1,0 +1,54 @@
+﻿@model IEnumerable<ClinicaP2.Models.Consulta>
+
+@{
+    ViewBag.Title = "ListConsultaxDni";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h2>ListConsultaxDni</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ConsEstado)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ConsFecha)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Paciente.PacCodigo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Trabajador.TraUsuario)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ConsEstado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ConsFecha)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Paciente.PacCodigo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Trabajador.TraUsuario)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ConsCodigo }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ConsCodigo }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ConsCodigo })
+            </td>
+        </tr>
+    }
+
+</table>

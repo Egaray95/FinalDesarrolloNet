@@ -18,7 +18,7 @@ namespace ClinicaP2.Controllers
         public ActionResult Index()
         {
 
-            var medico = from tra in db.Trabajador where tra.EspCodigo != 1 select tra;
+            var medico = from tra in db.Trabajador where tra.TraEstado == 1 select tra;
 
             return View(medico.ToList());
         }

@@ -54,7 +54,7 @@ namespace ClinicaP2.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("InsertConsulta", codpacienteParameter, codtrabajadorParameter, fechaconsultaParameter);
         }
     
-        public virtual int InsertEspecialidad(string esepecialidad, Nullable<double> esprecio)
+        public virtual int InsertEspecialidad(string esepecialidad, Nullable<double> esprecio, string descripcion)
         {
             var esepecialidadParameter = esepecialidad != null ?
                 new ObjectParameter("esepecialidad", esepecialidad) :
@@ -64,7 +64,11 @@ namespace ClinicaP2.Models
                 new ObjectParameter("esprecio", esprecio) :
                 new ObjectParameter("esprecio", typeof(double));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("InsertEspecialidad", esepecialidadParameter, esprecioParameter);
+            var descripcionParameter = descripcion != null ?
+                new ObjectParameter("descripcion", descripcion) :
+                new ObjectParameter("descripcion", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("InsertEspecialidad", esepecialidadParameter, esprecioParameter, descripcionParameter);
         }
     
         public virtual int insertPaciente(string nombre, string apellido, string dni, string ruc, string telefono, string correo, Nullable<bool> genero, Nullable<System.DateTime> fechana)

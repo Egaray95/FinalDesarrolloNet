@@ -18,63 +18,40 @@
     var esp = from tra in bd.Especialidad where tra.EspCodigo == idespecialidad select tra;
 
     string nomesp = "";
+    string descripcion = "";
 
 
     foreach (var item in esp)
     {
         nomesp = item.EspEspecialidad;
+        descripcion = item.EspDescripcion;
     }
-
-
-
-
     <h2 class="bg-info">Lista de trabajadores de @nomesp</h2>
 
 
-    if (idespecialidad == 1)
-    {
-        <h1>@nomesp</h1>
-        <h2>La cardiología es la rama de la medicina encargada del estudio, diagnóstico y tratamiento de las enfermedades del corazón y del aparato circulatorio.</h2>
-
-    }
-    else if (idespecialidad == 2)
-    {
-        <h1>@nomesp</h1>
-        <h2>
-            La odontología es la rama de las ciencias de la salud que se encarga del estudio, diagnóstico, prevención y tratamiento de las enfermedades de los dientes y, en general, de aquellas que afectan al aparato estomatognático.
-
-        </h2>
-    }
-    else if (idespecialidad == 3)
-    {
-
-        <h1>@nomesp</h1>
-        <h2>
-            La odontología es la rama de las ciencias de la salud que se encarga del estudio, diagnóstico, prevención y tratamiento de las enfermedades de los dientes y, en general, de aquellas que afectan al aparato estomatognático.
-
-        </h2>
-    }
+    <h1>@nomesp</h1>
+    <h2>@descripcion</h2>
 
     <br />
 
     <h2 align="center">MEDICOS</h2>
     foreach (var item in Model)
     {
-
-
-
-
         <br />
-        <p href="@Url.Action("ListMedicosporesp", "Especialidads", new { id = item.EspCodigo })">
-            <img src="@Url.Content("~/Content/Images/"+item.TraCodigo+".jpg")" class="img-circle" height="150" width="200">
+        <div>
+                <img src="@Url.Content("~/Content/Images/"+item.TraCodigo+".jpg")" class="img-circle" height="150" width="200">
 
-            <br />
-            @item.Persona.PerApellido @item.Persona.PerNombre
-            <br />
-            @item.Especialidad.EspEspecialidad
-            <br />
-            @item.TraHorasTrabajo horas semanales
-        </p>
+                <br />
+                @item.Persona.PerApellido @item.Persona.PerNombre
+                <br />
+                @item.Especialidad.EspEspecialidad
+                <br />
+                @item.TraHorasTrabajo horas semanales
+                <br />
+                <a href="@Url.Action("CreatePac", "Pacientes", new { idtrabajador = item.TraCodigo })">Reservar Consulta</a>
+            </div>
+
+
         <br />
     }
 }

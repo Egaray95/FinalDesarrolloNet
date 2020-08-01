@@ -20,6 +20,15 @@ namespace ClinicaP2.Controllers
 
 
 
+        public ActionResult create()
+        {
+
+
+            return View();
+        }
+
+
+
         public ActionResult ListConsultaMedico()
         {
             var trabaja = (Trabajador)Session["Trabajador"];
@@ -37,6 +46,12 @@ namespace ClinicaP2.Controllers
             Consulta detalleconsulta = db.Consulta.Find(id);
 
             return View(detalleconsulta);
+        }
+
+
+       public ActionResult ListConsultaxDni()
+        {
+            return View(db.Consulta.ToList());
         }
     }
 }

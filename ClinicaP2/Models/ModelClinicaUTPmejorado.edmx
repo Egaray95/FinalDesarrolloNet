@@ -43,6 +43,7 @@
           <Property Name="EspEspecialidad" Type="varchar" MaxLength="50" />
           <Property Name="EspEstado" Type="int" />
           <Property Name="EspPrecio" Type="float" />
+          <Property Name="EspDescripcion" Type="varchar" MaxLength="1000" />
         </EntityType>
         <EntityType Name="HistClinico">
           <Key>
@@ -215,6 +216,7 @@
         <Function Name="InsertEspecialidad" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="esepecialidad" Type="varchar" Mode="In" />
           <Parameter Name="esprecio" Type="float" Mode="In" />
+          <Parameter Name="descripcion" Type="varchar" Mode="In" />
         </Function>
         <Function Name="insertPaciente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="nombre" Type="varchar" Mode="In" />
@@ -320,6 +322,7 @@
           <Property Name="EspEstado" Type="Int32" />
           <Property Name="EspPrecio" Type="Double" />
           <NavigationProperty Name="Trabajador" Relationship="Self.FK_Trabajador_Especialidad" FromRole="Especialidad" ToRole="Trabajador" />
+          <Property Name="EspDescripcion" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="HistClinico">
           <Key>
@@ -515,6 +518,7 @@
           <FunctionImport Name="InsertEspecialidad">
             <Parameter Name="esepecialidad" Mode="In" Type="String" />
             <Parameter Name="esprecio" Mode="In" Type="Double" />
+            <Parameter Name="descripcion" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="insertPaciente">
             <Parameter Name="nombre" Mode="In" Type="String" />
@@ -678,6 +682,7 @@
           <EntitySetMapping Name="Especialidad">
             <EntityTypeMapping TypeName="BDCLINICAModel.Especialidad">
               <MappingFragment StoreEntitySet="Especialidad">
+                <ScalarProperty Name="EspDescripcion" ColumnName="EspDescripcion" />
                 <ScalarProperty Name="EspCodigo" ColumnName="EspCodigo" />
                 <ScalarProperty Name="EspEspecialidad" ColumnName="EspEspecialidad" />
                 <ScalarProperty Name="EspEstado" ColumnName="EspEstado" />

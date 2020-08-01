@@ -270,6 +270,9 @@
     <Content Include="Views\Medicos\login.cshtml" />
     <Content Include="Views\Consultas\ListConsultaMedico.cshtml" />
     <Content Include="Views\Consultas\DetailsConsulta.cshtml" />
+    <Content Include="Views\Consultas\create.cshtml" />
+    <Content Include="Views\Consultas\ListConsultaxDni.cshtml" />
+    <Content Include="Views\Pacientes\CreatePac.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

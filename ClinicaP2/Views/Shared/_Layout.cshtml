@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="~/Content/css/styles.css">
     
 
-    <title>@ViewBag.Title - Proyecto Clinica UTP</title>
+    <title>@ViewBag.Title - Proyecto Clinica UTP  </title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
@@ -48,7 +48,11 @@
 
 
             <div class="menu" style="height: 35px; padding-right: 10px; padding-left: 10px; width: 1550px;">
-                <div class="logo" style=" width: 191px;padding-left: 10px;">Clinica<span>UTP</span></div>
+                <div class="logo" style=" width: 191px;padding-left: 10px;">
+                    <a href="@Url.Action("index", "Home")">
+                        Clinica<span>UTP</span>
+                    </a>
+                </div>
 
 
 
