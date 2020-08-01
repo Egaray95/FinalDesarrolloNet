@@ -35,8 +35,22 @@ namespace ClinicaP2.Controllers
             return View();
         }
 
-  
+        public ActionResult EspeDoc()
+        {
 
+            var especialidad = from esp in db.Especialidad where esp.EspEstado == 1 select esp;
+
+            return View(especialidad.ToList());
+        }
+        public ActionResult MedicoForespec(int id, string esp)
+        {
+            ViewBag.esp = esp;
+            var list = from c in db.Trabajador
+                       where c.EspCodigo == id
+                       select c;
+            return View(list.ToList());
+
+        }
 
         [HttpPost]
         public ActionResult Create( Trabajador tra)

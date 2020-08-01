@@ -78,9 +78,8 @@
             @esta
         </td>
         <td>
-            <p class="btn btn-success" > @Html.ActionLink("Editar", "Edit", new { id = item.PerCodigo }) </p>
-           
-            <p class="btn btn-danger"> @Html.ActionLink("Eliminar", "Delete", new { id = item.PerCodigo })</p>
+            <p class="btn btn-danger"> @Html.ActionLink("Ver Historial", "Historial", new { id = item.PacCodigo, name = item.Persona.PerNombre })</p>
+            <p class="btn btn-success"> @Html.ActionLink("Editar", "Edit", new { id = item.PerCodigo }) </p>
         </td>
     </tr>
 }

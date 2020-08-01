@@ -28,7 +28,7 @@ namespace ClinicaP2.Models
         public string PerRuc { get; set; }
         public string PerTelefono { get; set; }
         public string PerCorreo { get; set; }
-        public Nullable<bool> PerGenero { get; set; }
+        public bool PerGenero { get; set; }
         public Nullable<int> PerEstado { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

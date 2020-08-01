@@ -1,0 +1,21 @@
+﻿@model IEnumerable<ClinicaP2.Models.Especialidad>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="bg-info">Especialidades</h2>
+
+@{
+
+    foreach (var item in Model)
+    {
+        <a class="cold-md-12" href="@Url.Action("MedicoForespec", "Medicos", new { id = item.EspCodigo, esp = item.EspEspecialidad })">
+            <div>
+                <img src="@Url.Content("~/Content/Images/"+item.EspEspecialidad+".jpg")" class="img-rounded" height="100" width="150">
+                <p class="text-danger">@Html.DisplayFor(modelItem => item.EspEspecialidad)</p>
+            </div>
+        </a>
+    }
+}

@@ -135,7 +135,16 @@ namespace ClinicaP2.Controllers
             }
         }
 
-       
+        public ActionResult Historial(int id, string name)
+        {
+            ViewBag.name = name;
+            var list = from a in db.HistClinico
+                       where a.Consulta.CodPaciente == id
+                       select a;
+            return View(list.ToList());
+        }
+
+
         public ActionResult Edit(string id)
         {
             if (id == null)

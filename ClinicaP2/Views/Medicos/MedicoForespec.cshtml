@@ -1,0 +1,57 @@
+﻿@model IEnumerable<ClinicaP2.Models.Trabajador>
+
+    <h2>@ViewBag.esp</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            DOCTOR
+        </th>
+        <th>
+            APELLIDO
+        </th>
+        <th>
+            ESPECIALIDAD
+        </th>
+        <th>
+            CORREO
+        </th>
+        <th>
+            USUARIO
+        </th>
+        <th>
+            CONTRASEÑA
+        </th>
+        <th>
+            JORNADA DE HORAS
+        </th>
+
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Persona.PerNombre)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Persona.PerApellido)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Especialidad.EspEspecialidad)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Persona.PerCorreo)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.TraUsuario)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.TraContrasena)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.TraHorasTrabajo)
+    </td>
+</tr>
+}
+
+</table>
