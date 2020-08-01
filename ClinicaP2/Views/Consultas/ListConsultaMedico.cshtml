@@ -4,47 +4,67 @@
     ViewBag.Title = "ListConsultaMedico";
 }
 
-<h2>ListConsultaMedico</h2>
+<h2>Mis consultas</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+
+@{ 
+
+
+    string estado = "";
+
+
+}
+
+
+
+
+
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.ConsEstado)
+            N°
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ConsFecha)
+            Fecha de consulta
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Paciente.PacCodigo)
+            Paciente
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Trabajador.TraUsuario)
+            Estado
         </th>
-        <th></th>
+        <th>Detalle</th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.ConsEstado)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ConsFecha)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Paciente.PacCodigo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Trabajador.TraUsuario)
-        </td>
-        <td>
-            @Html.ActionLink("Detalle", "DetailsConsulta", new { id=item.ConsCodigo }) |
-         
-        </td>
-    </tr>
+    @foreach (var item in Model)
+    {
+
+        switch (item.ConsEstado)
+        {
+            case 1: estado = "Pendiente"; break;
+            case 2: estado = "Atendido"; break;
+            case 3: estado = "Suspendido"; break;
+}
+
+<tr>
+    <td>
+        @item.ConsCodigo
+    </td>
+    <td>
+        @item.ConsFecha
+    </td>
+    <td>
+        @item.Paciente.Persona.PerNombre
+    </td>
+    <td>
+      @estado
+    </td>
+    <td>
+        @Html.ActionLink("Detalle", "DetailsConsulta", new { id = item.ConsCodigo }) |
+
+
+    </td>
+</tr>
 }
 
 </table>

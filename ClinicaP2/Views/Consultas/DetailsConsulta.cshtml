@@ -4,47 +4,148 @@
     ViewBag.Title = "DetailsConsulta";
 }
 
-<h2>DetailsConsulta</h2>
+<h2>Detalle de la consulta</h2>
 
+
+@{ 
+
+    string genero = "";
+
+    if (Model.Paciente.Persona.PerGenero)
+    {
+        genero = "Masculino";
+
+    }
+    else
+    {
+        genero = "femenino";
+    }
+
+    TimeSpan tiempoDiferencia = (TimeSpan)  ( DateTime.Now - Model.Paciente.PacFechaNacimiento);
+
+    int edad = Convert.ToInt32( tiempoDiferencia.TotalDays / 365.25);
+
+
+
+}
 <div>
-    <h4>Consulta</h4>
+    <h4>Paciente</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.ConsEstado)
+            Nombre:
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ConsEstado)
+            @Html.DisplayFor(model => model.Paciente.Persona.PerNombre)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.ConsFecha)
+            Apellido:
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ConsFecha)
+            @Html.DisplayFor(model => model.Paciente.Persona.PerApellido)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Paciente.PacCodigo)
+            Teléfono:
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Paciente.PacCodigo)
+            @Html.DisplayFor(model => model.Paciente.Persona.PerTelefono)
+        </dd>
+
+
+        <dt>
+            Correo:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Paciente.Persona.PerCorreo)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Trabajador.TraUsuario)
+            Género:
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Trabajador.TraUsuario)
+           @genero
         </dd>
 
+        <dt>
+           Edad:
+        </dt>
+
+        <dd>
+           @edad
+        </dd>
     </dl>
 </div>
+
+
+@{ 
+
+    ClinicaP2.Models.BDCLINICAEntities bd = new ClinicaP2.Models.BDCLINICAEntities();
+
+    var listhistorialpaciente = from u in bd.HistClinico
+                                join ur in bd.Consulta on u.CodConsulta equals ur.ConsCodigo
+                                join urr in bd.Paciente on ur.CodPaciente equals urr.PacCodigo
+                                where urr.PacCodigo == Model.CodPaciente
+
+                                select u;
+
+
+
+}
+
+<div>
+    <h4>historial Médico</h4>
+    <hr />
+    <table class="table">
+        <tr>
+            <th>
+                Síntomas
+            </th>
+            <th>
+                Tratamiento
+            </th>
+            <th>
+                Exámenes
+            </th>
+            <th>
+                Observaciones
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in listhistorialpaciente)
+        {
+            <tr>
+                <td>
+                    @item.Histsintomas
+                </td>
+                <td>
+                    @item.HistTratamiento
+                </td>
+                <td>
+                    @item.HistExamenes
+                </td>
+                <td>
+                    @item.HistObservaciones
+                </td>
+                <td>
+                </td>
+            </tr>
+        }
+
+    </table>
+
+    <a href="@Url.Action("AtenderConsulta", "Consultas", new { codconsulta = Model.ConsCodigo })">Atender Consulta</a>
+</div>
+
+
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ConsCodigo }) |
-    @Html.ActionLink("Back to List", "Index")
+    @*@Html.ActionLink("Edit", "Edit", new { id = Model.ConsCodigo }) |*@
+    @Html.ActionLink("Back to List", "ListConsultaMedico")
 </p>

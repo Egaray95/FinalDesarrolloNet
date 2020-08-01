@@ -51,7 +51,20 @@ namespace ClinicaP2.Controllers
 
        public ActionResult ListConsultaxDni()
         {
-            return View(db.Consulta.ToList());
+            return View();
         }
+
+        public ActionResult AtenderConsulta()
+        {
+            return View();
+        }
+
+
+        //[HttpPost]
+        //public ActionResult AtenderConsulta(int codconsulta)
+        //{
+
+        //}
+
     }
 }

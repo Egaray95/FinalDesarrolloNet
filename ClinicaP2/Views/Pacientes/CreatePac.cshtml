@@ -19,18 +19,25 @@
         function mostrar(dato) {
             if (dato == "1") {
                 document.getElementById("nombre").style.display = "block";
-                document.getElementById("apellidos").style.display = "none";
-                document.getElementById("edad").style.display = "none";
+                document.getElementById("apellido").style.display = "block";
+                document.getElementById("dni").style.display = "block";
+                document.getElementById("ruc").style.display = "block";
+                document.getElementById("telefono").style.display = "block";
+                document.getElementById("correo").style.display = "block";
+                document.getElementById("genero").style.display = "block";
+                document.getElementById("fechanac").style.display = "block";
+                document.getElementById("consfecha").style.display = "block";
             }
             if (dato == "2") {
                 document.getElementById("nombre").style.display = "none";
-                document.getElementById("apellidos").style.display = "block";
-                document.getElementById("edad").style.display = "none";
-            }
-            if (dato == "3") {
-                document.getElementById("nombre").style.display = "none";
-                document.getElementById("apellidos").style.display = "none";
-                document.getElementById("edad").style.display = "block";
+                document.getElementById("apellido").style.display = "none";
+                document.getElementById("dni").style.display = "block";
+                document.getElementById("ruc").style.display = "none";
+                document.getElementById("telefono").style.display = "none";
+                document.getElementById("correo").style.display = "none";
+                document.getElementById("genero").style.display = "none";
+                document.getElementById("fechanac").style.display = "none";
+                document.getElementById("consfecha").style.display = "block";
             }
         }
 
@@ -56,7 +63,7 @@
             </div>
         </div>*@
 
-    <div class="form-group">
+    <div class="form-group" id="nombre">
         @Html.LabelFor(model => model.Paciente.Persona.PerNombre, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.Paciente.Persona.PerNombre, new { htmlAttributes = new { @class = "form-control" } })
@@ -64,7 +71,7 @@
         </div>
     </div>
 
-    <div class="form-group">
+    <div class="form-group" id="apellido">
         @Html.LabelFor(model => model.Paciente.Persona.PerApellido, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.Paciente.Persona.PerApellido, new { htmlAttributes = new { @class = "form-control" } })
@@ -72,7 +79,7 @@
         </div>
     </div>
 
-    <div class="form-group">
+    <div class="form-group" id="dni">
         @Html.LabelFor(model => model.Paciente.Persona.PerDni, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.Paciente.Persona.PerDni, new { htmlAttributes = new { @class = "form-control" } })
@@ -80,7 +87,7 @@
         </div>
     </div>
 
-    <div class="form-group">
+    <div class="form-group" id="ruc">
         @Html.LabelFor(model => model.Paciente.Persona.PerRuc, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.Paciente.Persona.PerRuc, new { htmlAttributes = new { @class = "form-control" } })
@@ -89,7 +96,7 @@
     </div>
 
 
-    <div class="form-group">
+    <div class="form-group" id="telefono">
         @Html.LabelFor(model => model.Paciente.Persona.PerTelefono, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.Paciente.Persona.PerTelefono, new { htmlAttributes = new { @class = "form-control" } })
@@ -98,7 +105,7 @@
     </div>
 
 
-    <div class="form-group">
+    <div class="form-group" id="correo">
         @Html.LabelFor(model => model.Paciente.Persona.PerCorreo, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.Paciente.Persona.PerCorreo, new { htmlAttributes = new { @class = "form-control" } })
@@ -107,7 +114,7 @@
     </div>
 
     @* GENERO PACIENTE  0=MUJER : 1=HOMBRE *@
-    <div class="form-group">
+    <div class="form-group" id="genero">
         @Html.LabelFor(model => model.Paciente.Persona.PerGenero, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @{
@@ -123,7 +130,7 @@
 
 
 
-    <div class="form-group">
+    <div class="form-group" id="fechanac">
         @Html.LabelFor(model => model.Paciente.PacFechaNacimiento, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.Paciente.PacFechaNacimiento, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
@@ -133,7 +140,7 @@
     </div>
 
 
-    <div class="form-group">
+    <div class="form-group" id="consfecha">
         @Html.LabelFor(model => model.ConsFecha, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.ConsFecha, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
