@@ -277,6 +277,7 @@
     <Content Include="Views\Medicos\EspeDoc.cshtml" />
     <Content Include="Views\Medicos\MedicoForespec.cshtml" />
     <Content Include="Views\Pacientes\Historial.cshtml" />
+    <Content Include="Views\Consultas\AtenderConsulta.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

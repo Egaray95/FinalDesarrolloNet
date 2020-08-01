@@ -49,7 +49,7 @@
           <Key>
             <PropertyRef Name="HistCodigo" />
           </Key>
-          <Property Name="HistCodigo" Type="int" Nullable="false" />
+          <Property Name="HistCodigo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CodConsulta" Type="int" />
           <Property Name="HistEstado" Type="int" />
           <Property Name="Histsintomas" Type="varchar" MaxLength="400" />
