@@ -53,10 +53,17 @@ namespace ClinicaP2.Controllers
         {
             return View();
         }
-
-        public ActionResult AtenderConsulta()
+        [HttpGet]
+        public ActionResult ListConsultaxDni(string busqueda = null)
         {
-            return View();
+
+            IQueryable<Consulta> resultado = db.Consulta;
+            if (!string.IsNullOrEmpty(busqueda))
+            {
+                resultado = resultado.Where(p =>
+               p.Paciente.Persona.PerDni.Contains(busqueda));
+            }
+            return View(resultado.ToList());
         }
 
 
