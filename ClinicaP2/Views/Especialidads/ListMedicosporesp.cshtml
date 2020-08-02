@@ -39,19 +39,22 @@
     {
         <br />
         <div>
-                <img src="@Url.Content("~/Content/Images/"+item.TraCodigo+".jpg")" class="img-circle" height="150" width="200">
+            <img src="@Url.Content("~/Content/Images/"+item.TraCodigo+".jpg")" class="img-circle" height="150" width="200">
 
-                <br />
-                @item.Persona.PerApellido @item.Persona.PerNombre
-                <br />
-                @item.Especialidad.EspEspecialidad
-                <br />
-                @item.TraHorasTrabajo horas semanales
-                <br />
-                <a href="@Url.Action("CreatePac", "Pacientes", new { idtrabajador = item.TraCodigo })">Reservar Consulta</a>
-            </div>
+            <br />
+            @item.Persona.PerApellido @item.Persona.PerNombre
+            <br />
+            @item.Especialidad.EspEspecialidad
+            <br />
+            @item.TraHorasTrabajo horas semanales
+            <br />
+            <a href="@Url.Action("CreatePac", "Pacientes", new { idtrabajador = item.TraCodigo })">Reservar Consulta</a>
+        </div>
 
 
         <br />
     }
+
+
+    @Html.ActionLink("Regresar", "LisEspecialidadtoDoctor")
 }

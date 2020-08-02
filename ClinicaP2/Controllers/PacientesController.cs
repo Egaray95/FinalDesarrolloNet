@@ -118,14 +118,15 @@ namespace ClinicaP2.Controllers
 
 
                     db.InsertConsulta(codigonuevopac, idtrabajador, consulta.ConsFecha);
-
-                    return RedirectToAction("Index");
+                    TempData["msg"] = "<script>alert('Consulta registrada Satisfactoriamente');</script>";
+                    return RedirectToAction("LisEspecialidadtoDoctor", "Especialidads");
                 }
                 else
                 {
 
                     db.InsertConsulta(codigopaciente, idtrabajador, consulta.ConsFecha);
-                    return RedirectToAction("Index");
+                    TempData["msg"] = "<script>alert('Consulta registrada Satisfactoriamente');</script>";
+                    return RedirectToAction("LisEspecialidadtoDoctor","Especialidads");
                 }
             }
             catch (Exception)
