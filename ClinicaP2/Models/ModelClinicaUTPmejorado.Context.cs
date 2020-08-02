@@ -183,5 +183,30 @@ namespace ClinicaP2.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ListButton_Result>("ListButton", tipTrabajadorParameter);
         }
+    
+        public virtual int AtenderConsulta(Nullable<int> codconsulta, string sintomas, string tratamiento, string examenes, string observaciones)
+        {
+            var codconsultaParameter = codconsulta.HasValue ?
+                new ObjectParameter("codconsulta", codconsulta) :
+                new ObjectParameter("codconsulta", typeof(int));
+    
+            var sintomasParameter = sintomas != null ?
+                new ObjectParameter("sintomas", sintomas) :
+                new ObjectParameter("sintomas", typeof(string));
+    
+            var tratamientoParameter = tratamiento != null ?
+                new ObjectParameter("tratamiento", tratamiento) :
+                new ObjectParameter("tratamiento", typeof(string));
+    
+            var examenesParameter = examenes != null ?
+                new ObjectParameter("examenes", examenes) :
+                new ObjectParameter("examenes", typeof(string));
+    
+            var observacionesParameter = observaciones != null ?
+                new ObjectParameter("observaciones", observaciones) :
+                new ObjectParameter("observaciones", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AtenderConsulta", codconsultaParameter, sintomasParameter, tratamientoParameter, examenesParameter, observacionesParameter);
+        }
     }
 }

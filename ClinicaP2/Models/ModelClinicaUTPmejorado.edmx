@@ -208,6 +208,13 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="AtenderConsulta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="codconsulta" Type="int" Mode="In" />
+          <Parameter Name="sintomas" Type="varchar" Mode="In" />
+          <Parameter Name="tratamiento" Type="varchar" Mode="In" />
+          <Parameter Name="examenes" Type="varchar" Mode="In" />
+          <Parameter Name="observaciones" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="InsertConsulta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="codpaciente" Type="int" Mode="In" />
           <Parameter Name="codtrabajador" Type="int" Mode="In" />
@@ -561,6 +568,13 @@
             <End Role="TipoTrabajador" EntitySet="TipoTrabajador" />
             <End Role="ConfigMenu" EntitySet="ConfigMenu" />
           </AssociationSet>
+          <FunctionImport Name="AtenderConsulta">
+            <Parameter Name="codconsulta" Mode="In" Type="Int32" />
+            <Parameter Name="sintomas" Mode="In" Type="String" />
+            <Parameter Name="tratamiento" Mode="In" Type="String" />
+            <Parameter Name="examenes" Mode="In" Type="String" />
+            <Parameter Name="observaciones" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="ListarMedicos_Result">
           <Property Type="Int32" Name="TraCodigo" Nullable="false" />
@@ -841,6 +855,7 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="AtenderConsulta" FunctionName="BDCLINICAModel.Store.AtenderConsulta" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

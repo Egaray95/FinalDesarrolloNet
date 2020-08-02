@@ -60,11 +60,48 @@ namespace ClinicaP2.Controllers
         }
 
 
-        //[HttpPost]
-        //public ActionResult AtenderConsulta(int codconsulta)
-        //{
+        [HttpPost]
+        public ActionResult AtenderConsulta(HistClinico histo , int codconsulta)
+        {
+            try
+            {
+                db.AtenderConsulta(codconsulta,histo.Histsintomas,histo.HistTratamiento,histo.HistExamenes,histo.HistObservaciones);
 
-        //}
+                return RedirectToAction("DetailsConsulta/"+codconsulta);
+
+
+
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+
+
+
+        }
+
+        [HttpGet]
+        public ActionResult ListConsultaxDni(string dni)
+        {
+
+            IQueryable<Consulta> resultado = db.Consulta;
+            if (string.IsNullOrEmpty(dni))
+            {
+                return View();
+            }
+            else
+            {
+                resultado = resultado.Where(p =>
+              p.Paciente.Persona.PerDni.Contains(dni));
+                return View(resultado.ToList());
+            }
+
+           
+        }
 
     }
 }

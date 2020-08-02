@@ -5,8 +5,15 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
-<h2>ListConsultaxDni</h2>
+<h2>Busqueda por Dni</h2>
+@using (@Html.BeginForm("ListConsultaxDni", "Consultas", FormMethod.Get))
+{
+<fieldset>
+    <legend>Buscar</legend>
+    @Html.Label("lblProducto", "DNI :")
+    @Html.TextBox("dni")
+    <input type="submit" value="Buscar" />
+</fieldset>}
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -28,40 +35,40 @@
         <th></th>
     </tr>
 
-    @{ 
+    @{
 
         if (Model == null)
         {
-       <tr><td>Ningun Dato encontrado</td></tr>
+            <tr><td>Ningun Dato encontrado</td></tr>
         }
         else
         {
 
             foreach (var item in Model)
             {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ConsEstado)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ConsFecha)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Paciente.PacCodigo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Trabajador.TraUsuario)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.ConsCodigo }) |
-                @Html.ActionLink("Details", "Details", new { id = item.ConsCodigo }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.ConsCodigo })
-            </td>
-        </tr>
-                }
-
-
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ConsEstado)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ConsFecha)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Paciente.PacCodigo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Trabajador.TraUsuario)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.ConsCodigo }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.ConsCodigo }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.ConsCodigo })
+                    </td>
+                </tr>
             }
+
+
         }
+    }
 
 </table>
