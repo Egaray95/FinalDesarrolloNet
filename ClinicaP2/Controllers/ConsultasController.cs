@@ -53,20 +53,6 @@ namespace ClinicaP2.Controllers
         {
             return View();
         }
-        [HttpGet]
-        public ActionResult ListConsultaxDni(string busqueda = null)
-        {
-
-            IQueryable<Consulta> resultado = db.Consulta;
-            if (!string.IsNullOrEmpty(busqueda))
-            {
-                resultado = resultado.Where(p =>
-               p.Paciente.Persona.PerDni.Contains(busqueda));
-            }
-            return View(resultado.ToList());
-        }
-
-
         [HttpPost]
         public ActionResult AtenderConsulta(HistClinico histo , int codconsulta)
         {
@@ -76,19 +62,12 @@ namespace ClinicaP2.Controllers
 
                 return RedirectToAction("DetailsConsulta/"+codconsulta);
 
-
-
-
             }
             catch (Exception)
             {
 
                 throw;
             }
-
-
-
-
         }
 
         [HttpGet]
